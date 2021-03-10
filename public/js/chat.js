@@ -743,6 +743,7 @@ socket.on('finishGame', (data) => {
 socket.on('showTeamInfo', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        pickedArea = undefined;
         document.getElementById('body').style.backgroundColor = "white";
         document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
         document.getElementById('restartPopup').style.display = 'none';
