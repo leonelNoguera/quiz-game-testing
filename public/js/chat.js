@@ -83,6 +83,7 @@ socket.on('showSpinner', (data) => {
     document.getElementById('divLogin').style.display = 'none';
     if ((data['roomCode'] == roomCode) && (document.getElementById('divGameFinished').style.display == 'none'))
     {console.log('Line 84.')
+        pickedArea = undefined;
         document.getElementById('lblArea').innerHTML = '';
         //document.getElementById('statusInfo').innerHTML = data['status'];
         started = true;
