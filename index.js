@@ -598,7 +598,7 @@ io.on('connection', (socket) => {
           {
             message['status'] = 'oneUser';
             game.rooms[index]['teams'][index2]['users'][0]['leader'] = false;
-            game.rooms[index]['teams'][index2]['users'][j]['rolledDice'] = false;
+            game.rooms[index]['teams'][index2]['users'][0]['rolledDice'] = false;
           }
           for (var j = 0; j < game.rooms[index]['teams'][index2]['users'].length; j++)
           {
