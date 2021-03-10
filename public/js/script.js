@@ -1,5 +1,6 @@
 function showTeamInfo(newLeader = false)
 {
+    document.getElementById('lblArea').innerHTML = '';
     document.getElementById('teamInfo').style.display = 'block';
     var html = '';
     var tmp = [];
@@ -104,6 +105,7 @@ function gameFinished()
 var data2;
 function restart()
 {
+    document.getElementById('lblArea').innerHTML = '';
     pickedArea = undefined;
     document.getElementById('body').style.backgroundColor = "white";
     document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
