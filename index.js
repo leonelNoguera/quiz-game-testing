@@ -533,6 +533,11 @@ io.on('connection', (socket) => {
   socket.on('questionArea2', (data) => {
     questionArea2(socket, data);
   });
+  socket.on('showTeamInfo', (data) => {
+    var message = JSON.parse(data);
+    socket.emit('showTeamInfo', message);
+    socket.broadcast.emit('showTeamInfo', message);
+  });
   socket.on('disconnect', () => {
     console.log(socket.id);
     var userInfo = game.userDisconected(socket.id);
@@ -593,8 +598,13 @@ io.on('connection', (socket) => {
           {
             message['status'] = 'oneUser';
             game.rooms[index]['teams'][index2]['users'][0]['leader'] = false;
-            game.rooms[index]['teams'][index2]['users'][0]['votes'] = 0;
-            game.rooms[index]['teams'][index2]['users'][0]['vote'] = false;
+            game.rooms[index]['teams'][index2]['users'][j]['rolledDice'] = false;
+          }
+          for (var j = 0; j < game.rooms[index]['teams'][index2]['users'].length; j++)
+          {
+            game.rooms[index]['teams'][index2]['users'][j]['votes'] = 0;
+            game.rooms[index]['teams'][index2]['users'][j]['vote'] = false;
+            game.rooms[index]['teams'][index2]['users'][j]['rolledDice'] = false;
           }
         }
         message['rooms'] = game.rooms;
@@ -935,8 +945,8 @@ function voteLeader(socket, data)
                 message['rooms'] = game.rooms;
                 message['status'] = 'Starting Game.';
                 //if (teamsWithPreviousLeaderDisconnected.indexOf(i) == -1)
-                if (!message['newLeader'])
-                {
+                //if (!message['newLeader'])
+                {console.log('Line 944.');
                   socket.emit('showSpinner', message);
                   socket.broadcast.emit('showSpinner', message);
                 }//Sino significa que se tiene que continuar con la pregunta pero con otro líder. Pendiente mostrar (leader).

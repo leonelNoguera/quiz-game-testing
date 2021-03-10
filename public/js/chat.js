@@ -53,15 +53,8 @@ socket.on('update', (data) => {//message['newTeam']
         else
         {//data['newTeam']
             if (connected && (data['teamName'] == teamName))
-            {console.log('Ya estaba conectado y viene otro.');
+            {//console.log('Ya estaba conectado y viene otro.');
                 teams = getTeams(data['rooms']);
-                /*document.getElementById('divLogin').style.display = 'none';
-                document.getElementById('loginFields').style.display = 'none';*/
-                //document.getElementById('lblPlease').innerHTML = 'PLEASE CHOOSE YOUR LEADER<br><br><br>';
-            }
-            //if (connected)
-            {
-                //showTeamInfo(false);
             }
         }
         for (var j = 0; j < teams.length; j++)
@@ -123,15 +116,15 @@ socket.on('showSpinner', (data) => {
         showGameInfo();
     }
 });
-socket.on('showArea1PartialResult', (data) => {console.log(data);
+socket.on('showArea1PartialResult', (data) => {//console.log(data);
     if ((data['roomCode'] == roomCode) && (document.getElementById('divGameFinished').style.display == 'none'))
-    {console.log('Line 115.');
+    {//console.log('Line 115.');
         area = data['area'];
         teams = getTeams(data['rooms']);
         for (var i = 0; i < teams.length; i++)
         {
             if ((teams[i]['teamName'] == data['teamName']) && (data['teamName'] == teamName) && (data['area'] == 1))
-            {console.log('Line 121.');
+            {//console.log('Line 121.');
                 document.getElementById('area3').style.display = 'none';
                 document.getElementById('area2').style.display = 'none';
                 document.getElementById('area1').style.display = 'block';
@@ -411,7 +404,7 @@ function showNextStep()
             document.getElementById('nextBtnDivArea1').style.display = 'none';
             document.getElementById('beforeBtnDivArea1').style.display = 'none';
         break;
-        case 'personalEvaluation':console.log('Line 297.');
+        case 'personalEvaluation'://console.log('Line 297.');
             /*document.getElementById('lblLightBoxArea1Header').innerHTML = '';
             document.getElementById('area1Table').style.display = 'none';
             document.getElementById('nextBtnDivArea1').innerHTML = '';
@@ -468,7 +461,7 @@ function showNextStep()
                 ` + finalAnswer + `<br><br>
                 YOUR SCORE FOR THE ANSWER:<br>
                 ` + score + `<br>`;//Pendiente la parte de los comentarios.
-            nextStep = 'personalEvaluation';console.log('Line 347.');
+            nextStep = 'personalEvaluation';//console.log('Line 347.');
             document.getElementById('beforeBtnDivArea1').innerHTML = '<i class="fas fa-angle-left fa-2x" onclick="showBeforeStep();"></i>';
             document.getElementById('beforeBtnDivArea1').style.display = 'block';
             beforeStep = 'detailedExplanationOfAnswers';
@@ -599,7 +592,7 @@ socket.on('leaderVotation', (data) => {
                     }
                 }
             }
-        }console.log('Line 252: ' + leader + ', ' + teamIndex + ', ' + data['teamName']);
+        }//console.log('Line 252: ' + leader + ', ' + teamIndex + ', ' + data['teamName']);
         if ((teamIndex != -1) && (data['teamName'] == teamName))
         {
             //beforeBtnDivArea1Td
@@ -691,9 +684,9 @@ socket.on('ro', (data) => {
     if ((data['roomCode'] == roomCode) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
         teams = getTeams(data['rooms']);
-        console.log(data);
+        //console.log(data);
         if (data['teamName'] == teamName)
-        {console.log(document.getElementById('spinner').style.display);
+        {//console.log(document.getElementById('spinner').style.display);
             document.getElementById('area3').style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
             document.getElementById('lblArea').innerHTML = 'RISKS & OPPORTUNITIES';
             area = data['area'];
@@ -745,6 +738,16 @@ socket.on('finishGame', (data) => {
             finished = true;
             gameFinished();
         }
+    }
+});
+socket.on('showTeamInfo', (data) => {
+    if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
+    {
+        document.getElementById('body').style.backgroundColor = "white";
+        document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
+        document.getElementById('restartPopup').style.display = 'none';
+        vote = false;
+        showTeamInfo(true);
     }
 });
 socket.on('userDisconnected', (data) => {console.log(data);

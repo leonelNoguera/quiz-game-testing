@@ -109,7 +109,16 @@ function restart()
     document.getElementById('restartPopup').style.display = 'none';
     if (data2['status'] == 'newLeader')
     {
-        showTeamInfo();
+        socket.emit('showTeamInfo', JSON.stringify({
+            "userName" : userName, 
+            "userSurname" : userSurname, 
+            "teamName" : data2['teamName'], 
+            "roomCode" : data2['roomCode'], 
+            'status': data2['status'], 
+            'rooms': data2['rooms']
+        }));
+        vote = false;
+        showTeamInfo(true);
     }
     else
     {
