@@ -104,6 +104,7 @@ function gameFinished()
 var data2;
 function restart()
 {
+    pickedArea = undefined;
     document.getElementById('body').style.backgroundColor = "white";
     document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
     document.getElementById('restartPopup').style.display = 'none';
