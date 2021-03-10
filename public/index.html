@@ -23,7 +23,7 @@
     <a href="" id="rulesLink" target="_blank" style="position: right; font-family: 'Quicksand', serif; color: #a48f8c; text-decoration:none;">RULES</a>
     <div id="divLogin">
         <div id="welcomeText">
-            <label style="font-family: 'Quicksand', serif; font-size: 400%;">WELCOME<br>TO THE GAME<br></label>
+            <label style="font-family: 'Quicksand', serif; font-size: 200%;">WELCOME<br>TO THE GAME<br></label>
             <label id="lblPlease" style="font-family: 'Quicksand', serif; font-size: 100%;">PLEASE JOIN THE TEAM<br><br><br></label>
         </div>
         <center id="loginFields" style="font-family: 'Quicksand', serif;">
@@ -63,8 +63,8 @@
         </div>-->
         <table>
             <tr>
-                <td id="beforeBtnDivArea1Td"><center id="beforeBtnDivArea1" style="padding-bottom: 10%; display: none;"><i class="fas fa-angle-left fa-2x" onclick="showNextStep();"></i></center></td>
-                <td id="nextBtnDivArea1Td"><center id="nextBtnDivArea1" style="padding-bottom: 10%; display: none;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></center></td>
+                <td id="beforeBtnDivArea1Td"><center id="beforeBtnDivArea1" style="position: absolute; padding-bottom: 1%; display: none;"><i class="fas fa-angle-left fa-2x" onclick="showNextStep();"></i></center></td>
+                <td id="nextBtnDivArea1Td"><center id="nextBtnDivArea1" style="padding-bottom: 1%; display: none;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></center></td>
             </tr>
         </table>
     </center>
@@ -81,7 +81,7 @@
                 <td><div id="area2AnswersDiv"></div></td>
             </tr>
         </table>
-        <div id="nextBtnDivArea2" style="padding-left: 90%; padding-bottom: 10%; display: none;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></div>
+        <div id="nextBtnDivArea2" style="padding-left: 90%; padding-bottom: 1%; display: none;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></div>
     </center>
     <center id="area3" style="display: none; font-family: 'Quicksand', serif; color: white; border-color: black;">
         <div id="area3Info"></div>
@@ -96,15 +96,19 @@
                 </div>
             </div>
         </div>-->
-        <div id="nextBtnDivArea3" style="padding-left: 90%; padding-bottom: 10%;"></div>
+        <div id="nextBtnDivArea3" style="padding-left: 90%; padding-bottom: 1%;"></div>
     </center>
     <div id="divGameFinished" style="display: none;">
         <div id="congratulationsText">
             <h1>CONGRATULATIONS! YOU</h1>
-            <h2>FINISHED THE GAME!</h2>
+            <h1>FINISHED THE GAME!</h1>
             <label>YOUR GAME SCORE:</label><br>
             <label id="teamScore2"></label>
         </div>
+    </div>
+    <div id="restartPopup">
+        <label id="lblUserDisconnected"></label><br>
+        <img id="restartBtn" src="./img/refresh black.png" onclick="restart();">
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/complete.ly.1.0.1.min.js"></script>

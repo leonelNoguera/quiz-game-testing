@@ -540,129 +540,67 @@ io.on('connection', (socket) => {
     if ((userInfo[0] != null) && (userInfo[1] != null))
     {
       var message = {
-        'type' : 'userDisconected', 
         'roomCode' : userInfo[0], 
         'userName' : userInfo[1]['userName'], 
-        'userSurname' : userInfo[1]['userSurname']
+        'userSurname' : userInfo[1]['userSurname'], 
+        'teamName' : undefined
       };console.log('Se desconectó: ' + message['userName'] + ' ' + message['userSurname']);
       index = game.searchRoomCode(userInfo[0], false);
       if (index != -1)
-      {
-        var type;
-        for (var i = 0; i < game.rooms[index]['users'].length; i++)
+      {console.log('Line 550.');
+        var aux = [];
+        for (var j = 0; j < game.rooms[index]['users'].length; j++)
         {
-          if ((game.rooms[index]['users'][i]['userName'] == message['userName']) && 
-            (game.rooms[index]['users'][i]['userSurname'] == message['userSurname']))
-          {//Se encontró el user en un room.
-            game.rooms[index]['users'][i] = null;
-            game.rooms[index]['usersIds'][i] = null;
-          }
-        }
-        var index2 = -1;
-        for (var i = 0; i < game.rooms[index]['teams'].length; i++)
-        {
-          for (var j = 0; j < game.rooms[index]['teams'][i]['users'].length; j++)
+          if (game.rooms[index]['users'][j] != null)
           {
-            if ((game.rooms[index]['teams'][i]['users'][j]['userName'] == message['userName']) && 
-                (game.rooms[index]['teams'][i]['users'][j]['userSurname'] == message['userSurname']))
-            {//Se encontró el user en un team.
-              if (game.rooms[index]['teams'][i]['users'][j]['leader'])
-              {console.log('Line 535');//Se desconectó el lider del team. Elejir otro lider.
-                if ((game.rooms[index]['teams'][i]['users'][j]['status'] == 'waitingAnsweringQuestionArea1') || 
-                  (game.rooms[index]['teams'][i]['users'][j]['status'] == 'answeringQuestionArea2'))
-                {console.log('status == ' + game.rooms[index]['teams'][i]['users'][j]['status']);//Está esperando que los otros respondan una pregunta del área 1 o respondiendo una pregunta del área 2.
-                  //Se tiene que habilitar la elección de otro lider.
-                  message['teamName'] = game.rooms[index]['teams'][i]['teamName'];
-                  console.log('Line 541: ' + message['teamName']);
-                  message['userName'] = '';
-                  message['userSurname'] = '';
-                  message['newLeader'] = true;
-                  type = 'update';//Ver qué hacer con la pregunta que debían responder y que pasará luego de volver a elejir al lider.
-                }
-                if (game.rooms[index]['teams'][i]['status'] == 'leaderVotation')
-                {//El lider desconectado estaba dando la respuesta final a una pregunta de área 1.
-                  message['teamName'] = game.rooms[index]['teams'][i]['teamName'];console.log('Line 548: ' + message['teamName']);
-                  message['userName'] = '';
-                  message['userSurname'] = '';
-                  message['newLeader'] = true;
-                  type = 'update';//Ver qué hacer con la pregunta que debían responder y que pasará luego de volver a elejir al lider.
-                }
-              }
-              else
-              {//Se desconectó un usuario común del team.
-                if (game.rooms[index]['teams'][i]['users'][j]['status'] == 'answeringQuestionArea1')
-                {//Estába por responder una pregunta del área 1.
-                  message['teamName'] = game.rooms[index]['teams'][i]['teamName'];
-                  message['userName'] = '';
-                  message['userSurname'] = '';
-                  type = 'allUsersVotation';
-                }
-                if (game.rooms[index]['teams'][i]['users'][j]['status'] == 'answeringQuestionArea2')
-                {//Estába por responder una pregunta del área 2.
-                  message['teamName'] = game.rooms[index]['teams'][i]['teamName'];
-                  message['question'] = '';
-                  message['answer'] = '';
-                  type = 'questionArea2';
-                }
-                if (game.rooms[index]['teams'][i]['users'][j]['status'] == 'voteLeader')
-                {//Pendiente reiniciar la votación desde aquí o desde emit('voteLeader'
-                  message['teamName'] = game.rooms[index]['teams'][i]['teamName'];
-                  message['userName'] = '';
-                  message['userSurname'] = '';
-                  type = 'update';
-                }
-              }
-              game.rooms[index]['teams'][i]['users'][j] = null;console.log('Line 578');
-              index2 = i;
-            }
+            aux.push(game.rooms[index]['users'][j]);
           }
         }
-        for (var i = 0; i < game.rooms[index]['teams'].length; i++)
-        {//Achicar array para que los desconectados no aparezcan como que no votaron.
-          if (game.rooms[index]['teams'][i]['teamName'] == message['teamName'])
-          {console.log('Line 586.');
-            var aux = [];
-            for (var j = 0; j < game.rooms[index]['teams'][i]['users'].length; j++)
+        game.rooms[index]['users'] = [...aux];
+
+        var index2 = game.searchTeamByUser(message['userName'], message['userSurname'], index);
+        if (index2 != -1)
+        {console.log('Line 563.');
+          message['teamName'] = game.rooms[index]['teams'][index2]['teamName'];
+          aux = [];
+          for (var j = 0; j < game.rooms[index]['teams'][index2]['users'].length; j++)
+          {
+            if ((game.rooms[index]['teams'][index2]['users'][j]['userName'] != message['userName']) && 
+              (game.rooms[index]['teams'][index2]['users'][j]['userSurname'] != message['userSurname']))
             {
-              if (game.rooms[index]['teams'][i]['users'][j] != null)
-              {
-                aux.push(game.rooms[index]['teams'][i]['users'][j]);
-              }
-              else
-              {
-                console.log('Line 596.');
-              }
+              aux.push(game.rooms[index]['teams'][index2]['users'][j]);
             }
-            game.rooms[index]['teams'][i]['users'] = [...aux];
-          }
-        }
-        for (var i = 0; i < game.rooms[index]['teams'].length; i++)
-        {//Achicar array para que los desconectados no aparezcan como que no votaron.
-          if (game.rooms[index]['teams'][i]['teamName'] == message['teamName'])
-          {console.log('Line 600.');
-            for (var j = 0; j < game.rooms[index]['teams'][i]['users'].length; j++)
+            else
             {
-              if (game.rooms[index]['teams'][i]['users'][j] == null)
+              if (game.rooms[index]['teams'][index2]['users'][j]['leader'])
               {
-                console.log('null...');
+                message['status'] = 'newLeader';
               }
             }
           }
+          game.rooms[index]['teams'][index2]['users'] = [...aux];
+
+          game.rooms[index]['teams'][index2]['sendedQuestions'] = {
+            'area1' : [], 
+            'area2' : [], 
+            'area3' : []
+          }; 
+          game.rooms[index]['teams'][index2]['scoreArea1'] = 0;
+          game.rooms[index]['teams'][index2]['scoreArea2'] = 0;
+          game.rooms[index]['teams'][index2]['scoreArea3'] = 0;
+          
+          if (game.rooms[index]['teams'][index2]['users'].length == 1)
+          {
+            message['status'] = 'oneUser';
+            game.rooms[index]['teams'][index2]['users'][0]['leader'] = false;
+            game.rooms[index]['teams'][index2]['users'][0]['votes'] = 0;
+            game.rooms[index]['teams'][index2]['users'][0]['vote'] = false;
+          }
         }
-        switch (type)
-        {
-          case 'allUsersVotation':
-            allUsersVotation(socket, JSON.stringify(message));
-            break;
-          case 'questionArea2':
-            questionArea2(socket, JSON.stringify(message));
-            break;
-          case 'update':
-            message['rooms'] = game.rooms;console.log('Line 624.');//area 1, llega aquí (aparéntemente sin usuario en null)
-            socket.emit('update', message);
-            socket.broadcast.emit('update', message);
-            break;
-        }
+        message['rooms'] = game.rooms;
+        console.log(message);
+        socket.emit('userDisconnected', message);
+        socket.broadcast.emit('userDisconnected', message);
       }
     }
 	});
@@ -713,6 +651,7 @@ io.on('connection', (socket) => {
     }
   });
 });
+
 function questionArea2(socket, data)
 {
   var message = JSON.parse(data);

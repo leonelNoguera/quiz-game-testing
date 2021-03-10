@@ -97,6 +97,7 @@ socket.on('showSpinner', (data) => {
         //updateUsersInfo();
         if (data['teamName'] == teamName)
         {
+            document.getElementById('restartPopup').style.display = 'none';
             document.getElementById('body').style.backgroundColor = "#ac0034";
             document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
         }
@@ -739,7 +740,6 @@ socket.on('finishGame', (data) => {
             document.getElementById('area1').style.display = 'none';
             document.getElementById('area2').style.display = 'none';
             document.getElementById('area3').style.display = 'none';
-            document.getElementById('submitAnswerButton').style.display = 'none';
             //document.getElementById('submitPersonalEvaluation').style.display = 'none';
             document.getElementById('divGameFinished').style.display = 'block';
             finished = true;
@@ -747,13 +747,22 @@ socket.on('finishGame', (data) => {
         }
     }
 });
-socket.on('error', (data) => {
-    /*if ((id == undefined) || (data['id'] == id))//Pendiente revisar.
+socket.on('userDisconnected', (data) => {console.log(data);
+    if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
-        document.getElementById(panelMessages).style.display = 'block';
-        showChat(data.type, data.user, data['error'], '', '');
-        userName = undefined;
-    }*/
+        teams = getTeams(data['rooms']);
+        data2 = data;
+        document.getElementById('teamInfo').style.display = 'none';
+        document.getElementById('gameInfo').style.display = 'none';
+        document.getElementById('spinner').style.display = 'none';
+        document.getElementById('area1').style.display = 'none';
+        document.getElementById('area2').style.display = 'none';
+        document.getElementById('area3').style.display = 'none';
+        document.getElementById('restartPopup').style.display = 'block';
+        document.getElementById('lblUserDisconnected').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' disconnected.';
+        document.getElementById('restartPopup').style.top = (document.documentElement.clientWidth * 0.3) + 'px';
+        document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';
+    }
 });
 function joinTeam(userName, userSurname, roomCode, index)
 {
@@ -803,22 +812,6 @@ function voteLeader(userNameVoting, userSurnameVoting, roomCode, teamIndex, user
         }
     }
 }
-/*function submitPersonalEvaluation()
-{
-    var question;
-    question = document.getElementById('question').innerHTML;
-    socket.emit('personalEvaluation', JSON.stringify({
-        "userName" : userName, 
-        "userSurname" : userSurname, 
-        "teamName" : teamName, 
-        "question" : question, 
-        "area" : area, 
-        "evaluation" : parseInt(document.getElementById('personalEvaluationRange').value) + 1, 
-        "roomCode" : roomCode
-    }));
-    document.getElementById('area1').style.display = 'none';
-    document.getElementById('submitPersonalEvaluation').style.display = 'none';
-}*/
 function login()
 {
     if ((!connected) && (userName === undefined) && (userSurname === undefined))
