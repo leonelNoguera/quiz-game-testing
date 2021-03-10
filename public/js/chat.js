@@ -74,27 +74,30 @@ socket.on('update', (data) => {//message['newTeam']
                 }
             }
         }
-        showTeamInfo(data['newLeader']);
+        if (((data['userName'] == userName) && (data['userSurname'] == userSurname)) || 
+            ((teamName != undefined) && (data['teamName'] == teamName))
+        )
+        {
+            showTeamInfo(data['newLeader']);
+        }
         //console.log('Teams:');
         //console.log(teams);
     }
 });
 socket.on('showSpinner', (data) => {
-    document.getElementById('divLogin').style.display = 'none';
-    if ((data['roomCode'] == roomCode) && (document.getElementById('divGameFinished').style.display == 'none'))
+    if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {console.log('Line 84.')
+        document.getElementById('divLogin').style.display = 'none';
         pickedArea = undefined;
         document.getElementById('lblArea').innerHTML = '';
         //document.getElementById('statusInfo').innerHTML = data['status'];
         started = true;
         teams = getTeams(data['rooms']);
         //updateUsersInfo();
-        if (data['teamName'] == teamName)
-        {
-            document.getElementById('restartPopup').style.display = 'none';
-            document.getElementById('body').style.backgroundColor = "#ac0034";
-            document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
-        }
+        document.getElementById('restartPopup').style.display = 'none';
+        document.getElementById('body').style.backgroundColor = "#ac0034";
+        document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
+        
         if ((data['userName'] == userName) && 
             (data['userSurname'] == userSurname))
         {
@@ -765,8 +768,8 @@ socket.on('userDisconnected', (data) => {console.log(data);
         document.getElementById('area3').style.display = 'none';
         document.getElementById('restartPopup').style.display = 'block';
         document.getElementById('lblUserDisconnected').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' disconnected.';
-        document.getElementById('restartPopup').style.top = (document.documentElement.clientWidth * 0.3) + 'px';
-        document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';
+        //document.getElementById('restartPopup').style.top = (document.documentElement.clientWidth * 0.3) + 'px';
+        //document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';
     }
 });
 function joinTeam(userName, userSurname, roomCode, index)
@@ -819,7 +822,7 @@ function voteLeader(userNameVoting, userSurnameVoting, roomCode, teamIndex, user
 }
 function login()
 {
-    if ((!connected) && (userName === undefined) && (userSurname === undefined))
+    if (!connected)
     {
         auxUserName = document.getElementById('nameInput').value;
         auxUserSurname = document.getElementById('surnameInput').value;

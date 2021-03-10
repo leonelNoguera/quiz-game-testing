@@ -132,13 +132,8 @@ io.on('connection', (socket) => {
   					if ((message['userName'] != undefined) && (message['userName'] != '') && 
               (message['userSurname'] != undefined) && (message['userSurname'] != ''))
   					{
-              //Pendiente ver si sobran datos en el JSON.
-  						game.rooms[index]['users'].push({'userName' : message['userName'], 'userSurname' : message['userSurname'], 'votes' : 0, 'vote' : message['vote']});
-  						/*if (game.rooms[index]['users'].length == maxUsers)//Pendiente usar el 'full' por cada team.
-  						{console.log('Line 132.');
-  							game.rooms[index]['full'] = true;
-  						}*/
-              game.rooms[index]['usersIds'].push(socket.id);
+              game.rooms[index]['users'].push({'userName' : message['userName'], 'userSurname' : message['userSurname'], 'votes' : 0, 'vote' : message['vote']});
+  						game.rooms[index]['usersIds'].push(socket.id);
   						message['usersInRoom'] = [...game.rooms[index]['users']];
   					}
   				}
@@ -169,16 +164,26 @@ io.on('connection', (socket) => {
       }
       else
       {console.log('Line 176: ' + game.rooms[index]['teams'][index2]['teamName']);
-        game.rooms[index]['teams'][index2]['users'].push({
-          'userName' : message['userName'], 
-          'userSurname' : message['userSurname'], 
-          'votes' : 0, 
-          'vote' : message['vote']
-        });
+        if (!game.rooms[index]['teams'][index2]['full'])
+        {
+          game.rooms[index]['teams'][index2]['users'].push({
+            'userName' : message['userName'], 
+            'userSurname' : message['userSurname'], 
+            'votes' : 0, 
+            'vote' : message['vote']
+          });
+        }
       }
-      message['rooms'] = game.rooms;
-      socket.emit('update', message);
-      socket.broadcast.emit('update', message);
+      //if ((index2 != -1) && (!game.rooms[index]['teams'][index2]['full']))
+      if (
+        ((index2 != -1) && (!game.rooms[index]['teams'][index2]['full'])) || 
+        (index2 == -1)
+      )
+      {
+        message['rooms'] = game.rooms;
+        socket.emit('update', message);
+        socket.broadcast.emit('update', message);
+      }
     }
 	});
   socket.on('voteLeader', (data) => {//console.log('Line 187.');//Pendiente asegurarse de que no pueda votar sin estar en ese team.
@@ -580,6 +585,7 @@ io.on('connection', (socket) => {
               if (game.rooms[index]['teams'][index2]['users'][j]['leader'])
               {
                 message['status'] = 'newLeader';
+                game.rooms[index]['teams'][index2]['full'] = false;
               }
             }
           }
@@ -950,21 +956,11 @@ function voteLeader(socket, data)
                   socket.emit('showSpinner', message);
                   socket.broadcast.emit('showSpinner', message);
                 }//Sino significa que se tiene que continuar con la pregunta pero con otro líder. Pendiente mostrar (leader).
-                //El otro usuario se queda trabajo en la evaluación personal.
-                //Pendiente ver que el nuevo lider no reciba esa pregunta hasta que le corresponda.
-                //Es necesario detener el bucle para que tire de a uno a la vez.
                 j = game.rooms[index]['teams'][i]['users'].length;
               }
             }
           }
-          //message['rooms'] = game.rooms;
         }
-        /*else
-        {
-          message['rooms'] = game.rooms;
-          socket.emit('voteLeader', message);
-          socket.broadcast.emit('voteLeader', message);
-        }*/
       }
       else
       {
@@ -989,8 +985,6 @@ function voteLeader(socket, data)
             }
           }
         }
-        /*socket.emit('voteLeader', message);
-        socket.broadcast.emit('voteLeader', message);*/
       }
     }
   }
