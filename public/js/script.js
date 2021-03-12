@@ -60,7 +60,7 @@ function showTeamInfo(newLeader = false)
                 if ((teams[userInTeamIndex]['users'].length > 1) && (indexLeaderElected == -1) && (!vote))
                 {//Se debe habilitar la elección de lider.
                     //document.getElementById('lblChooseLeader').innerHTML = 'PLASE CHOSE YOUR LEADER';
-                    html += '<br><button id="vl_' + userInTeamIndex + '_' + k + '" onclick="voteLeader(userName, userSurname, roomCode, ' + userInTeamIndex + ', ' + k + ', \'' + teams[userInTeamIndex]['users'][k]['userName'] + '\', \'' + teams[userInTeamIndex]['users'][k]['userSurname'] + '\', ' + newLeader + ');" style="background-color: #c5b3b1; display: \'block\'; border-radius: 12px; font-size: 100%;">VOTE FOR LEADER</button>';
+                    html += '<br><button class="voteLeaderBtn" id="vl_' + userInTeamIndex + '_' + k + '" onclick="voteLeader(userName, userSurname, roomCode, ' + userInTeamIndex + ', ' + k + ', \'' + teams[userInTeamIndex]['users'][k]['userName'] + '\', \'' + teams[userInTeamIndex]['users'][k]['userSurname'] + '\', ' + newLeader + ');">VOTE FOR LEADER</button>';
                 }
             }
             html += '</div>';
@@ -82,7 +82,7 @@ function showGameInfo()
                     if ((teams[j]['users'][k]['userName'] == userName) && 
                         (teams[j]['users'][k]['userSurname'] == userSurname))
                     {
-                        document.getElementById('gameInfo').innerHTML = '<div style="padding-right: 5%; padding-left: 5%; padding-top: 5%; padding-bottom: 5%;">DILEMMAS:<br>' + teams[j]['scoreArea1'] + '<br><br>KNOWLEDGE ABOUT US:<br>' + teams[j]['scoreArea2'] + '<br><br>RISKS & OPPORTUNITIES:<br>' + teams[j]['scoreArea3'] + '</div>';
+                        document.getElementById('gameInfo').innerHTML = '<div id="scores">DILEMMAS:<br>' + teams[j]['scoreArea1'] + '<br><br>KNOWLEDGE ABOUT US:<br>' + teams[j]['scoreArea2'] + '<br><br>RISKS & OPPORTUNITIES:<br>' + teams[j]['scoreArea3'] + '</div>';
                     }
                 }
             }
@@ -97,7 +97,7 @@ function gameFinished()
         {
             if (teams[j]['teamName'] == teamName)
             {
-                document.getElementById('gameInfo').innerHTML = '<div style="padding-right: 5%; padding-left: 5%; padding-top: 5%; padding-bottom: 5%;">DILEMMAS:<br>' + teams[j]['scoreArea1'] + '<br><br>KNOWLEDGE ABOUT US:<br>' + teams[j]['scoreArea2'] + '<br><br>RISKS & OPPORTUNITIES:<br>' + teams[j]['scoreArea3'] + '</div>';
+                document.getElementById('gameInfo').innerHTML = '<div id="scores">DILEMMAS:<br>' + teams[j]['scoreArea1'] + '<br><br>KNOWLEDGE ABOUT US:<br>' + teams[j]['scoreArea2'] + '<br><br>RISKS & OPPORTUNITIES:<br>' + teams[j]['scoreArea3'] + '</div>';
             }
         }
     }

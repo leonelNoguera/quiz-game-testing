@@ -1,89 +1,182 @@
+#logo{
+  position: absolute;
+  bottom: 8px;
+  right: 16px;  
+}
+
+#area1AnswersDiv{
+  text-align: center;
+  font-family: 'Quicksand';
+  font-size: 16px; 
+}
+
+#area1QuestionsDiv{
+  text-align: center;
+  font-family: 'Quicksand';
+  font-size: 16px;
+}
+
+#area1Table{
+  text-align: center;
+  font-family: 'Quicksand';
+  font-size: 16px;
+  table-layout: fixed;
+  columns: 300px 2;
+  border:none !important;
+}
+#nameInput{
+  text-align: center;
+  font-family: 'Quicksand';
+  font-size: 16px;
+  border-radius: 15px;
+  border: 2px solid #555555;
+  transition: 0.3s;
+  width: 180px;
+}
+#surnameInput{
+  text-align: center;
+  font-family: 'Quicksand';
+  font-size: 16px;
+  border-radius: 15px;
+  border: 2px solid #555555;
+  transition: 0.3s;
+  width: 180px;
+}
+
+#teamName{
+  text-align: center;
+  font-family: 'Quicksand';
+  font-size: 16px;
+  border-radius: 15px;
+  border: 2px solid #555555;
+  transition: 0.3s;
+  width: 180px;
+}
+#joinTeam{
+  font-family: 'Quicksand';
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+  border: 2px solid #555555;
+  transition: 0.3s;
+  cursor: pointer;
+  width: 196px;
+}
+#joinTeam:hover {
+  font-family: 'Quicksand';
+  font-size: 16px;
+  background-color: #555555;
+  color: white;
+  border-radius: 15px;
+  border: 2px solid #555555;
+  cursor: pointer;
+  width: 70px;
+}
+  
+#score {
+  font-size: 40px;
+}
+
 #welcomeText{
-	text-align: center;
+  text-align: center;
 }
 #teamsInfo{
-	text-align: center;
+  text-align: center;
 }
 #congratulationsText{
-	text-align: center;
+  text-align: center;
 }
 #area3 {
   text-align: center;
+  margin-left: auto; 
+  margin-right: auto;
   display: block;
-  position: absolute;
+  position: relative;
   z-index: 1;
-  padding-top: 2%;
-  top: 10%;
-  left: 7%;
-  width: 80%;
+  padding: 2%;
+  border-radius: 5px;
+  width: 70%;
   background-color: #c43f56;
   opacity: 0.8;
-  border: dotted;
+  border-width: 3px;
+  border-color: #771929;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 #spinner{
-    width:40%;
+  width:40%;
+  cursor: pointer;
 }
 /*------------------------------------*/
 #spinner{
-    width:617px;
-    height:617px;
+  width:617px;
+  height:617px;
 }
 #gameInfo {
-    background-color: white;
-    font-family: 'Quicksand', serif;
+  background-color: white;
+  font-family: 'Quicksand', serif;
   display: none;
   position: absolute;
   z-index: 1;
   left: 88%;
   text-align: right;
-  opacity: 0.7;
+  opacity: 0.5;
+
+
 }
 #area1 {
+  text-align: center;
+  margin-left: auto; 
+  margin-right: auto;
   display: block;
-  position: absolute;
+  position: relative;
   z-index: 1;
-  padding-top: 2%;
-  top: 10%;
-  left: 7%;
-  width: 80%;
-  /*background-color: #b64a58;*/
-  /*background-color: #ac0034;*/
+  padding: 2%;
+  border-radius: 5px;
+  width: 70%;
   background-color: #c43f56;
   opacity: 0.8;
-  border: dotted;
+  border-width: 3px;
+  border-color: #771929;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 #area2 {
-  display: block;
-  position: absolute;
+  text-align: center;
+  margin-left: auto; 
+  margin-right: auto;
+   display: block;
+  position: relative;
   z-index: 1;
-  padding-top: 2%;
-  top: 10%;
-  left: 7%;
-  width: 80%;
+  padding: 2%;
+  border-radius: 5px;
+  width: 70%;
   background-color: #c43f56;
   opacity: 0.8;
-  border: dotted;
+  border-width: 3px;
+  border-color: #771929;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700);
 
 body {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Quicksand', serif;
   font-weight: 300;
   font-size: 16px;
-  line-height: 1.4em;
+  
   color: #333;
   background: #eee;
 }
 
 input,
 button {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Quicksand', serif;
   font-weight: 300;
   font-size: 16px;
   border: 0;
   padding: 3px 5px;
   border-radius: 3px;
+  background: #fff;
 }
 
 h1 {
@@ -238,14 +331,57 @@ button.btnSend {
 }
 
 #restartPopup {
-    position: absolute;
-    z-index: 3;
-    display: none;
-    font-family: 'Quicksand', serif;
-    background-color: white;
-    border: dotted;
-    /*color: white;*/
+  position: absolute;
+  z-index: 30;
+  display: none;
+  color: #fff;
+  text-align: center;
+
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
 }
 #restartBtn {
   width: 20%;
+}
+
+#rulesLink {
+  position: right;
+  font-family: 'Quicksand', serif;
+  color: #a48f8c;
+  text-decoration:none;
+}
+
+.voteLeaderBtn {
+  background-color: #c5b3b1;
+  display: block;
+  border-radius: 12px;
+  font-size: 100%;
+}
+
+#scores {
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.lblOption {}
+
+.topic {
+  text-align: right;
+  font-family: Quicksand, serif;
+  font-size: 150%;
+  color: black;
+}
+
+.inputRadioOption {}
+
+.otherAnswers {
+  position: absolute;
+}
+
+#question {
+  
 }

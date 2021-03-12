@@ -1,24 +1,11 @@
 var socket = io();
-/* Variables */
-var id;
-var users = [];
-var selectedUser;
-var words;
-var timer;
-var socket;
-var oldname;
+
 var userName;
 var userSurname;
 var roomCode;
-var privateRoom = false;
-var typeTimer;
-//var clients = [];
-var dev = true;
-var unread = 0;
-var focus = true;
 var connected = false;
+
 var regex = /(&zwj;|&nbsp;)/g;
-var d;
 var teams = [];
 var area;
 var finished = false;
@@ -43,12 +30,6 @@ socket.on('update', (data) => {//message['newTeam']
                 document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
                 //document.getElementById('lblPlease').innerHTML = '<br><br><br>';
             }
-            /*if (data['teamName'] == teamName)
-            {
-                teams = getTeams(data['rooms']);
-                document.getElementById('teamInfo').style.display = 'block';
-            }*/
-            //showTeamInfo();
         }
         else
         {//data['newTeam']
@@ -98,26 +79,34 @@ socket.on('showSpinner', (data) => {
         document.getElementById('body').style.backgroundColor = "#ac0034";
         document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
         
-        if ((data['userName'] == userName) && 
-            (data['userSurname'] == userSurname))
+        /*if ((data['userName'] == userName) && 
+            (data['userSurname'] == userSurname))*/
         {
             document.getElementById('area3').style.display = 'none';
             document.getElementById('area2').style.display = 'none';
             document.getElementById('area1').style.display = 'none';
-            /*tmp_code*/
             document.getElementById('spinner').style.display = 'block';
-            /*socket.emit('spin', JSON.stringify({
-                userName: userName, 
-                userSurname: userSurname, 
-                roomCode: roomCode, 
-                teamName: teamName, 
-                area: 1
-            }));*/
-            /*tmp_code*/
         }
-        //showTeamInfo();
+        if ((data['userName'] == userName) && 
+            (data['userSurname'] == userSurname))
+        {
+            lockWheel = false;
+        }
+        else
+        {
+            lockWheel = true;
+        }
         document.getElementById('teamInfo').style.display = 'none';
         showGameInfo();
+    }
+});
+socket.on('startSpin', (data) => {
+    if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
+    {
+        if ((data['userName'] != userName) || (data['userSurname'] != userSurname))
+        {
+            spin(data['randomSpin']);
+        }
     }
 });
 socket.on('showArea1PartialResult', (data) => {//console.log(data);
@@ -149,31 +138,10 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
                         maxVotes = data['otherAnswers'][k]['votes'].length;
                     }
                 }
-                /*var html = '';
-                for (var j = 0; j < data['question']['options'].length; j++)
-                {//50/100 = 0.5
-                    var v = false;
-                    for (var k = 0; k < data['otherAnswers'].length; k++)
-                    {
-                        if (data['otherAnswers'][k]['answer'] == data['question']['options'][j]['option'])
-                        {
-                            html += '<hr style="width: ' + ((data['otherAnswers'][k]['votes'].length / maxVotes) * 100) + '%; height: 5%; color: white;"><br>';
-                            //'position: absolute; left: ' + document.getElementById('lbl_question_option_' + j).offsetLeft + 'px; top: ' + document.getElementById('lbl_question_option_' + j).offsetBottom + 'px;">';
-                            v = true;
-                            k = data['otherAnswers'].length;
-                        }
-                    }
-                    if (!v)
-                    {
-                        html += '<hr style="width: 0%; height: 5%; color: white;"><br>';
-                    }
-                }
-                console.log(html);  
-                document.getElementById('area1QuestionsDiv').innerHTML = html;*/
                 html = '';
                 for (var j = 0; j < data['question']['options'].length; j++)
                 {
-                    html += '<label id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
+                    html += '<label class="lblOption" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
                 }
                 document.getElementById('area1AnswersDiv').innerHTML = html;
                 for (var j = 0; j < data['question']['options'].length; j++)
@@ -183,15 +151,10 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
                         if (data['otherAnswers'][k]['answer'] == data['question']['options'][j]['option'])
                         {
                             //var usersList = [];
-                            var html = '<span id="lbl_question_option_" style="display:none; position: absolute; left: ' + document.getElementById('lbl_question_option_' + j).offsetLeft + 'px; top: ' + document.getElementById('lbl_question_option_' + j).offsetBottom + 'px;">';
+                            /*here*/var html = '<span class="otherAnswers" style="display:none; left: ' + document.getElementById('lbl_question_option_' + j).offsetLeft + 'px; top: ' + document.getElementById('lbl_question_option_' + j).offsetBottom + 'px;">';
                             for (var l = 0; l < data['otherAnswers'][k]['votes'].length; l++)
                             {//[{userName: message['userName'], userSurname: message['userSurname']}]
-                                //usersList.push(data['otherAnswers'][k]['votes'][l]['userName'] + ' ' + data['otherAnswers'][k]['votes'][l]['userSurname']);
                                 html += data['otherAnswers'][k]['votes'][l]['userName'] + ' ' + data['otherAnswers'][k]['votes'][l]['userSurname'] + '<br>';
-                                //.offsetBottom -> a la misma abajo
-                                //.offsetLeft -> a la izquierda
-                                //onmouseover
-                                //onmouseleave
                             }
                             html += '</span>';
                             document.getElementById('area1AnswersDiv').innerHTML += html;
@@ -250,6 +213,7 @@ socket.on('question', (data) => {
         {
             if ((teams[j]['teamName'] == data['teamName']) && (data['teamName'] == teamName))
             {
+                document.getElementById('spinner').style.display = 'none';
                 document.getElementById('area' + data['area']).style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
                 question = data['question']['question'];
                 var leader = false;
@@ -282,7 +246,7 @@ socket.on('question', (data) => {
                     document.getElementById('nextBtnDivArea1').style.display = 'none';
                     document.getElementById('beforeBtnDivArea1').style.display = 'none';
                     //document.getElementById('lblArea').innerHTML = 'DILEMMAS';
-                    document.getElementById('lblLightBoxArea1Header').innerHTML = 'Read the dilemma & chose the best answer individually.';
+                    document.getElementById('lblLightBoxArea1Header').innerHTML = 'READ THE DILEMMA & CHOOSE THE BEST ANSWER INDIVIDUALLY.';
                     nextStep = 'allUsersVotation';
                 }
                 if (data['area'] == 2)
@@ -316,9 +280,7 @@ socket.on('area2Question', (data) => {
     {
         document.getElementById('area2Info').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' IS ANSWERING THE QUESTION :';
         document.getElementById('area2Table').style.display = 'block';
-        //document.getElementById('area2QuestionsDiv').innerHTML = '<label style="color: transparent;">000000000000000000000000000000000000000000000000</label>';
         document.getElementById('area2QuestionsDiv').innerHTML = '<label id="question">' + data['question'] + '</label>';
-        //document.getElementById('area2QuestionsDiv').innerHTML += '<label style="color: transparent;">000000000000000000000000000000000000000000000000</label>';
         var html = '';
         for (var j = 0; j < data['options'].length; j++)
         {
@@ -352,9 +314,10 @@ function showBeforeStep()
             var html = '';
             for (var i = 0; i < options.length; i++)
             {
-                html += '<label id="lbl_question_option_' + i + '">' + options[i]['option'] + '</label><br>' + options[i]['score'] + ' ' + options[i]['response'] + '<br>';
+                //html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '</label><br>' + options[i]['score'] + ' ' + options[i]['response'] + '<br>';
+                html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '<br>' + options[i]['score'] + ' ' + options[i]['response'] + '<br></label>';
             }
-            html += '<label style="text-align: right; font-family: \'Quicksand\', serif; font-size: 150%; color: black;">' + topic + '</label><br><br>';
+            html += '<label class="topic">' + topic + '<br><br></label>';
             document.getElementById('personalEvaluation').innerHTML = html;
             document.getElementById('nextBtnDivArea1').style.display = 'block';
             document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
@@ -409,15 +372,7 @@ function showNextStep()
             document.getElementById('beforeBtnDivArea1').style.display = 'none';
         break;
         case 'personalEvaluation'://console.log('Line 297.');
-            /*document.getElementById('lblLightBoxArea1Header').innerHTML = '';
-            document.getElementById('area1Table').style.display = 'none';
-            document.getElementById('nextBtnDivArea1').innerHTML = '';
-            var evaluation = parseInt(document.getElementById('personalEvaluationRange').value) + 1;*/
-            //document.getElementById('personalEvaluation').innerHTML = 'THANK FOR YOUR ENGAGEMENT<br>PLEASE TAKE TURNS IN SPINING A WHELL';
-
-            //document.getElementById('submitPersonalEvaluation').style.display = 'block';
             nextStep = 'sendPersonalEvaluation';
-            //document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
             document.getElementById('nextBtnDivArea1').style.display = 'block';
             
             document.getElementById('lblLightBoxArea1Header').innerHTML = '';
@@ -509,7 +464,7 @@ function showNextStep()
             var html = '';
             for (var j = 0; j < options.length; j++)
             {
-                html += '<input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea2\').style.display = \'block\'; score = ' + j + ';">';
+                html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea2\').style.display = \'block\'; score = ' + j + ';">';
                 html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + options[j]['option'] + '</label><br>';
             }
             document.getElementById('area2AnswersDiv').innerHTML = html;
@@ -532,20 +487,6 @@ function showNextStep()
             document.getElementById('nextBtnDivArea3').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
         break;
     }
-    //Pendiente ver si es necesario ocultar la pregunta luego de enviar.
-    //document.getElementById('area1').style.display = 'none';
-    //document.getElementById('area2').style.display = 'none';
-    /*switch (nextStep)
-    {
-        case 'allUsersVotation':
-            submitAnswer('allUsersVotation');
-            document.getElementById('nextBtnDivArea1').innerHTML = '';
-        break;
-        case 'leaderVotation':
-            submitAnswer('allUsersVotation');
-            document.getElementById('nextBtnDivArea1').innerHTML = '';
-        break;
-    }*/
 }
 var finalAnswer;
 var score;
@@ -555,7 +496,6 @@ socket.on('detailedExplanationOfAnswers', (data) => {
     {
         document.getElementById('lblLightBoxArea1Header').innerHTML = 'DETAILED EXPLANATION OF ANSWERS';
         document.getElementById('area1Table').style.display = 'none';
-        //document.getElementById('nextBtnDivArea1').innerHTML = '';
         
         nextStep = 'showFinalAnswer';
         finalAnswer = data['finalAnswer'];
@@ -567,9 +507,9 @@ socket.on('detailedExplanationOfAnswers', (data) => {
         var html = '';
         for (var i = 0; i < data['options'].length; i++)
         {
-            html += '<label id="lbl_question_option_' + i + '">' + data['options'][i]['option'] + '</label><br>' + data['options'][i]['score'] + ' ' + data['options'][i]['response'] + '<br><br>';
+            html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + data['options'][i]['option'] + '<br>' + data['options'][i]['score'] + ' ' + data['options'][i]['response'] + '<br><br></label>';
         }
-        html += '<label style="text-align: right; font-family: \'Quicksand\', serif; font-size: 150%; color: black;">' + data['topic'] + '</label><br><br>';
+        html += '<label class="topic">' + data['topic'] + '<br><br></label>';
         document.getElementById('personalEvaluation').innerHTML = html;
         document.getElementById('nextBtnDivArea1').style.display = 'block';
         document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
@@ -599,75 +539,47 @@ socket.on('leaderVotation', (data) => {
         }//console.log('Line 252: ' + leader + ', ' + teamIndex + ', ' + data['teamName']);
         if ((teamIndex != -1) && (data['teamName'] == teamName))
         {
-            //beforeBtnDivArea1Td
-            //nextBtnDivArea1Td
             document.getElementById('personalEvaluation').innerHTML = '';
             document.getElementById('area1Table').style.display = 'block';
             document.getElementById('area1').style.display = 'block';
             document.getElementById('area1').style.backgroundColor = "#ac0034";
             document.getElementById('lblLightBoxArea1Header').innerHTML = 'NOW DISCUSS THE BEST MOST APPROPIATE ANSWER WITH THE TEAM & LEADER WILL SUBMIT THE FINAL DECISSION.';
-            document.getElementById('area1QuestionsDiv').innerHTML = '<label id="question">' + data['question']['question'] + '</label><br>';
+            document.getElementById('area1QuestionsDiv').innerHTML = '<label id="question">' + data['question']['question'] + '<br></label>';
             question = data['question']['question'];
             var html = '';
             for (var j = 0; j < data['question']['options'].length; j++)
             {
                 if (leader)
                 {
-                    //html += '<input type="radio" id="question_option_' + j + '" name="answer">';
-                    //html += '<input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').innerHTML = \'<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>\';">';
-                    html += '<input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
-                    html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
+                    html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
+                    html += '<label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '<br></label>';
                 }
                 else
                 {
-                    html += '<label id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
+                    html += '<label class="lblOption" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '<br></label>';
                 }
             }
             if (leader)
             {
-                //html += '<input type="radio" id="question_option_' + j + '" name="answer">';
-                //html += '<input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').innerHTML = \'<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>\';">';
-                html += '<input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
-                html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">no mutual agreement</label><br>';
-                //document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
+                html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
+                html += '<label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">no mutual agreement<br></label>';
                 document.getElementById('nextBtnDivArea1').style.display = 'none';
                 document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
                 document.getElementById('beforeBtnDivArea1').style.display = 'none';
                 document.getElementById('beforeBtnDivArea1').innerHTML = '<i class="fas fa-angle-left fa-2x" onclick="showBeforeStep();"></i>';
             }
             document.getElementById('area1AnswersDiv').innerHTML = html;
-            //document.getElementById('submitAnswerButton').style.display = 'block';
             nextStep = 'leaderVotation';
-            //answerType = 'leaderVotation';
         }
     }
 });
 socket.on('personalEvaluation', (data) => {
     if ((data['roomCode'] == roomCode) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
-        //document.getElementById('statusInfo').innerHTML = 'Personal evaluation.';
         teams = getTeams(data['rooms']);
         if (data['teamName'] == teamName)
         {
-            /*document.getElementById('area1').style.display = 'block';
-            document.getElementById('area1QuestionsDiv').innerHTML = '';
-            document.getElementById('area1QuestionsDiv').innerHTML = '<label id="question">' + data['question']['question'] + '</label><br>';
-            var html = '';
-            for (var j = 0; j < data['question']['options'].length; j++)
-            {
-                html += '<input type="radio" id="question_option_' + j + '" name="answer">';
-                html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
-            }
-            html += '<input type="radio" id="question_option_' + j + '" name="answer">';
-            html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">no mutual agreement</label><br>';
-            document.getElementById('area1AnswersDiv').innerHTML = html;
-            document.getElementById('submitAnswerButton').style.display = 'block';
-            answerType = 'leaderVotation';*/
-            /*var html = '<label id="question">' + data['question'] + '</label><br>';
-            html += '<label>Final answer</label><br>';
-            html += '<label>' + data['answer'] + '</label><br>';*/
             var html = 'Distant <input type="range" id="personalEvaluationRange" min="0" max="4"> Firm';
-
             //document.getElementById('submitPersonalEvaluation').style.display = 'block';
             nextStep = 'personalEvaluation';
             document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
@@ -680,7 +592,6 @@ socket.on('personalEvaluation', (data) => {
             document.getElementById('personalEvaluation').innerHTML = html;
             showGameInfo();
         }
-        //updateUsersInfo();
     }
 });
 var text;
@@ -691,6 +602,7 @@ socket.on('ro', (data) => {
         //console.log(data);
         if (data['teamName'] == teamName)
         {//console.log(document.getElementById('spinner').style.display);
+            document.getElementById('spinner').style.display = 'none';
             document.getElementById('area3').style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
             document.getElementById('lblArea').innerHTML = 'RISKS & OPPORTUNITIES';
             area = data['area'];
@@ -714,13 +626,6 @@ socket.on('ro', (data) => {
             }
             showGameInfo();
         }
-        /*if ((data['area'] == 2) && (data['userName'] == userName) && (data['userSurname'] == userSurname))
-        {
-            document.getElementById('area2').style.display = 'block';
-            document.getElementById('area2Table').style.display = 'none';
-            document.getElementById('area2Info').innerHTML = '<br><br>NOW PLEASE CHOOSE THE  RIGHT ANSWER';
-            document.getElementById('lblArea').innerHTML = 'KNOWLEDGE ABOUT US';
-        }*/
     }
 });
 socket.on('finishGame', (data) => {
@@ -768,8 +673,8 @@ socket.on('userDisconnected', (data) => {console.log(data);
         document.getElementById('area3').style.display = 'none';
         document.getElementById('restartPopup').style.display = 'block';
         document.getElementById('lblUserDisconnected').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' disconnected.';
-        //document.getElementById('restartPopup').style.top = (document.documentElement.clientWidth * 0.3) + 'px';
-        //document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';
+        document.getElementById('restartPopup').style.top = (document.documentElement.clientWidth * 0.3) + 'px';
+        document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';
     }
 });
 function joinTeam(userName, userSurname, roomCode, index)

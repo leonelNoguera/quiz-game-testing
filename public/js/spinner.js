@@ -1,3 +1,4 @@
+var lockWheel = true;
 var padding = {top:20, right:40, bottom:0, left:0},
     w = 617 - padding.left - padding.right,
     h = 617 - padding.top  - padding.bottom,
@@ -88,9 +89,21 @@ function sendArea()
         pickedArea = undefined;
     }
 }
-function spin(d){
+function spin(randomSpin = Math.random())
+{
     if (pickedArea == undefined)
     {
+        //var randomSpin = Math.random();
+        if (!lockWheel)
+        {
+            socket.emit('startSpin', JSON.stringify({
+                userName: userName, 
+                userSurname: userSurname, 
+                roomCode: roomCode, 
+                teamName: teamName, 
+                randomSpin: randomSpin
+            }));
+        }
         container.on("click", null);
         //all slices have been seen, all done
         console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
@@ -101,7 +114,7 @@ function spin(d){
         }
         var  ps       = 360/data.length,
              pieslice = Math.round(1440/data.length),
-             rng      = Math.floor((Math.random() * 1440) + 360);
+             rng      = Math.floor((randomSpin * 1440) + 360);
         rotation = (Math.round(rng / ps) * ps);
         picked = Math.round(data.length - (rotation % 360)/ps);
         picked = picked >= data.length ? (picked % data.length) : picked;
@@ -154,9 +167,17 @@ container.append("circle")
     .style({"fill":"#ac0034","cursor":"pointer"});
 
 document.getElementById('circle').onclick = function(){
-    spin();
+    if (!lockWheel)
+    {
+        spin();
+    }
 }
-
+document.getElementById('spinner').onclick = function(){
+    if (!lockWheel)
+    {
+        sendArea();
+    }
+}
 //spin text
 container.append("text")
     .attr("x", 0)
@@ -167,7 +188,10 @@ container.append("text")
     .style({"fill":"#f6adb6", "font-weight":"bold", "font-size":"260%", "cursor":"pointer"});
 
 document.getElementById('circleText').onclick = function(){
-    spin();
+    if (!lockWheel)
+    {
+        spin();
+    }
 }
 function rotTween(to) {
   var i = d3.interpolate(oldrotation % 360, rotation);
