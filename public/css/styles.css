@@ -376,10 +376,26 @@ button.btnSend {
 }
 
 .voteLeaderBtn {
-  background-color: #c5b3b1;
-  display: block;
-  border-radius: 12px;
-  font-size: 100%;
+font-family: 'Quicksand';
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+  border: 2px solid #555555;
+  transition: 0.3s;
+  cursor: pointer;
+  width: 196px;
+}
+
+.voteLeaderBtn:hover {
+  font-family: 'Quicksand';
+  font-size: 16px;
+  background-color: #555555;
+  color: white;
+  border-radius: 15px;
+  border: 2px solid #555555;
+  cursor: pointer;
+  width: 70px;
 }
 
 #scores {
@@ -408,6 +424,10 @@ button.btnSend {
 
 }
 
-.lblScore {}
+.lblScore {
+font-size: 80px;
+}
 
-.lblResponse {}
+.lblResponse {
+font-style: italic;
+}
