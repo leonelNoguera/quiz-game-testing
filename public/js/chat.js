@@ -190,14 +190,14 @@ socket.on('showResultArea2', (data) => {
                 if ((data['userName'] == userName) && (data['userSurname'] == userSurname))
                 {
                     //document.getElementById('area2Info').innerHTML = '<br><br>YOUR ANSWER IS ' + r + '!<br>YOUR SCORE:<br>' + data['score'];
-                    document.getElementById('area2Info').innerHTML = '<br><br>YOUR ANSWER IS ' + r + '!<br>YOUR SCORE:<br>' + score;
+                    document.getElementById('area2Info').innerHTML = '<br><br>YOUR ANSWER IS ' + r + '!<br>YOUR SCORE:<br><label class="lblScore">' + score + '</label>';
                     nextStep = 'showSpinner';
                     document.getElementById('nextBtnDivArea2').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
                     document.getElementById('nextBtnDivArea2').style.display = 'block';
                 }
                 else
                 {
-                    document.getElementById('area2Info').innerHTML = '<br><br>' + data['userName'] + ' ' + data['userSurname'] + ' ANSWER IS ' + r + '!<br>YOUR SCORE:<br>' + data['score'];
+                    document.getElementById('area2Info').innerHTML = '<br><br>' + data['userName'] + ' ' + data['userSurname'] + ' ANSWER IS ' + r + '!<br>YOUR SCORE:<br><label class="lblScore">' + data['score'] + '</label>';
                 }
             }
         }
@@ -295,7 +295,7 @@ socket.on('area2Question', (data) => {
 socket.on('area3Card', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
-        document.getElementById('area3Info').innerHTML = document.getElementById('area3Info').innerHTML = '<br><br>' + data['text'] + '<br>' + 'SCORE: ' + data['score'];
+        document.getElementById('area3Info').innerHTML = document.getElementById('area3Info').innerHTML = '<br><br>' + data['text'] + '<br>' + 'SCORE: <label class="lblScore">' + data['score'] + '</label>';
     }
 });
 function showBeforeStep()
@@ -308,7 +308,7 @@ function showBeforeStep()
                 YOUR FINAL ANSWER WAS:<br>
                 ` + finalAnswer + `<br><br>
                 YOUR SCORE FOR THE ANSWER:<br>
-                ` + score + `<br>`;//Pendiente la parte de los comentarios.
+                ` + '<label class="lblScore">' + score + '</label>' + `<br>`;//Pendiente la parte de los comentarios.
             nextStep = 'personalEvaluation';
             beforeStep = 'detailedExplanationOfAnswers';
         break;
@@ -318,7 +318,7 @@ function showBeforeStep()
             for (var i = 0; i < options.length; i++)
             {
                 //html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '</label><br>' + options[i]['score'] + ' ' + options[i]['response'] + '<br>';
-                html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '<br>' + options[i]['score'] + ' ' + options[i]['response'] + '<br></label>';
+                html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '<br>' + '<label class="lblScore">' + options[i]['score'] + '</label>' + ' ' + '<label class="lblResponse">' + options[i]['response'] + '</label>' + '<br></label>';
             }
             html += '<label class="topic">' + topic + '<br><br></label>';
             document.getElementById('personalEvaluation').innerHTML = html;
@@ -423,7 +423,7 @@ function showNextStep()
                 YOUR FINAL ANSWER WAS:<br>
                 ` + finalAnswer + `<br><br>
                 YOUR SCORE FOR THE ANSWER:<br>
-                ` + score + `<br>`;//Pendiente la parte de los comentarios.
+                ` + '<label class="lblScore">' + score + '</label>' + `<br>`;//Pendiente la parte de los comentarios.
             nextStep = 'personalEvaluation';//console.log('Line 347.');
             document.getElementById('beforeBtnDivArea1').innerHTML = '<i class="fas fa-angle-left fa-2x" onclick="showBeforeStep();"></i>';
             document.getElementById('beforeBtnDivArea1').style.display = 'block';
@@ -487,7 +487,7 @@ function showNextStep()
             }));
             //<div id="card"></div>
             //document.getElementById('cardContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + score;
-            document.getElementById('area3Info').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + score;
+            document.getElementById('area3Info').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
             nextStep = 'showSpinner';
             document.getElementById('nextBtnDivArea3').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
         break;
@@ -513,7 +513,7 @@ socket.on('detailedExplanationOfAnswers', (data) => {
         var html = '';
         for (var i = 0; i < data['options'].length; i++)
         {
-            html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + data['options'][i]['option'] + '<br>' + data['options'][i]['score'] + ' ' + data['options'][i]['response'] + '<br><br></label>';
+            html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + data['options'][i]['option'] + '<br>' + '<label class="lblScore">' + data['options'][i]['score'] + '</label>' + ' ' + '<label class="lblResponse">' + data['options'][i]['response'] + '</label>' + '<br><br></label>';
         }
         html += '<label class="topic">' + data['topic'] + '<br><br></label>';
         document.getElementById('personalEvaluation').innerHTML = html;

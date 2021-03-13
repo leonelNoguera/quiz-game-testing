@@ -21,7 +21,6 @@
   font-family: 'Quicksand';
   font-size: 16px;
   table-layout: fixed;
-  /*columns: 300px 2;*/
   border:none !important;
 }
 
@@ -30,7 +29,6 @@
   font-family: 'Quicksand';
   font-size: 16px;
   table-layout: fixed;
-  columns: 300px 2;
   border:none !important;
 }
 
@@ -94,10 +92,6 @@
   border: 2px solid #555555;
   cursor: pointer;
   width: 70px;
-}
-  
-#score {
-  font-size: 40px;
 }
 
 #welcomeText{
@@ -414,3 +408,6 @@ button.btnSend {
 
 }
 
+.lblScore {}
+
+.lblResponse {}
