@@ -179,7 +179,8 @@ socket.on('showResultArea2', (data) => {
             if ((teams[j]['teamName'] == data['teamName']) && (data['teamName'] == teamName))
             {
                 document.getElementById('area2Table').style.display = 'none';
-                score = options[score]['score'];
+                //score = options[scoreIndex]['score'];
+                score = options[data['scoreIndex']]['score'];
                 var r = 'INCORRECT';
                 //if (data['score'] > 0)
                 if (score > 0)
@@ -236,6 +237,7 @@ socket.on('question', (data) => {
                     document.getElementById('area1Table').style.display = 'block';
                     document.getElementById('area1QuestionsDiv').innerHTML = '<label id="question">' + data['question']['question'] + '</label>';
                     var html = '';
+                    options = data['question']['options'];
                     for (var j = 0; j < data['question']['options'].length; j++)
                     {
                         html += '<input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
@@ -269,6 +271,7 @@ socket.on('question', (data) => {
                     else
                     {
                         document.getElementById('area2Info').innerHTML = '<br><br>' + data['userName'] + ' ' + data['userSurname'] + ' WILL CHOOSE THE ANSWER';
+                        document.getElementById('nextBtnDivArea2').style.display = 'none';
                     }
                 }
             }
@@ -279,7 +282,7 @@ socket.on('area2Question', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
         document.getElementById('area2Info').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' IS ANSWERING THE QUESTION :';
-        document.getElementById('area2Table').style.display = 'block';
+        document.getElementById('area2Table').style.display = 'flex';
         document.getElementById('area2QuestionsDiv').innerHTML = '<label id="question">' + data['question'] + '</label>';
         var html = '';
         for (var j = 0; j < data['options'].length; j++)
@@ -338,7 +341,8 @@ function showNextStep()
         if (rads[i].checked)
         {
             //question = document.getElementById('question').innerHTML;
-            answer = document.getElementById('lbl_question_option_' + rads[i].id.split('_')[rads[i].id.split('_').length - 1]).innerHTML;
+            //answer = document.getElementById('lbl_question_option_' + rads[i].id.split('_')[rads[i].id.split('_').length - 1]).innerHTML;
+            answer = options[rads[i].id.split('_')[rads[i].id.split('_').length - 1]]['option'];
             i = rads.length;
         }
     }
@@ -433,7 +437,8 @@ function showNextStep()
                 "question" : question, 
                 "answer" : answer, 
                 "area" : area, 
-                "roomCode" : roomCode
+                "roomCode" : roomCode, 
+                "scoreIndex" : scoreIndex
             }));
             document.getElementById('nextBtnDivArea2').innerHTML = '';
         break;
@@ -459,12 +464,12 @@ function showNextStep()
                 "options" : options, 
                 "roomCode" : roomCode
             }));
-            document.getElementById('area2Table').style.display = 'block';
+            document.getElementById('area2Table').style.display = 'flex';
             document.getElementById('area2QuestionsDiv').innerHTML = '<label id="question">' + question + '</label>';
             var html = '';
             for (var j = 0; j < options.length; j++)
             {
-                html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea2\').style.display = \'block\'; score = ' + j + ';">';
+                html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea2\').style.display = \'block\'; scoreIndex = ' + j + ';">';
                 html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + options[j]['option'] + '</label><br>';
             }
             document.getElementById('area2AnswersDiv').innerHTML = html;
@@ -490,6 +495,7 @@ function showNextStep()
 }
 var finalAnswer;
 var score;
+var scoreIndex;
 var bestAnswerScore;
 socket.on('detailedExplanationOfAnswers', (data) => {
     if ((data['roomCode'] == roomCode) && (document.getElementById('divGameFinished').style.display == 'none'))
@@ -717,10 +723,10 @@ function voteLeader(userNameVoting, userSurnameVoting, roomCode, teamIndex, user
         for (var i = 0; i < teams[teamIndex]['users'].length; i++)
         {
             document.getElementById('vl_' + teamIndex + '_' + i).style.display = 'block';
-            document.getElementById('vl_' + teamIndex + '_' + i).innerHTML = 'Vote for leader';
+            document.getElementById('vl_' + teamIndex + '_' + i).innerHTML = 'VOTE FOR LEADER';
             if (i == userIndex)
             {
-                document.getElementById('vl_' + teamIndex + '_' + i).innerHTML = 'Confirm';
+                document.getElementById('vl_' + teamIndex + '_' + i).innerHTML = 'CONFIRM';
             }
         }
     }

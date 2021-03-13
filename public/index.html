@@ -18,13 +18,14 @@
     <!--<img id="spinnerArrow" src="./img/Asset 2.png" style="position: absolute; left: 10%; width: 3%;">
     document.getElementById('spinnerArrow').style.left = document.getElementById('spinner').offsetLeft;-->
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <div id="gameInfo" style=""></div>
+    <div id="gameInfo"></div>
     <br>
-    <a href="" id="rulesLink" target="_blank" style="position: right; font-family: 'Quicksand', serif; color: #a48f8c; text-decoration:none;">RULES</a>
+    <a href="" id="rulesLink" target="_blank">RULES</a>
     <div id="divLogin">
         <div id="welcomeText">
-            <label style="font-family: 'Quicksand', serif; font-size: 200%;">WELCOME<br>TO THE GAME<br></label>
-            <label id="lblPlease" style="font-family: 'Quicksand', serif; font-size: 100%;">PLEASE JOIN THE TEAM<br><br><br></label>
+            <br>
+            <label style="font-family: 'Quicksand', serif; font-size: 400%;">WELCOME<br>TO THE VALUE GAME<br></label>
+            <label id="lblPlease" style="font-family: 'Quicksand', serif; font-size: 100%;">PLEASE JOIN THE TEAM<br><br><br><br><br><br></label>
         </div>
         <center id="loginFields" style="font-family: 'Quicksand', serif;">
             <label id="lblName">NAME</label><br>
@@ -39,14 +40,14 @@
             <button id="joinTeam" onclick="login();">JOIN</button>
         </center>
     </div>
-    <center id="teamInfo" style="font-family: 'Quicksand', serif; /*border: dotted; width: 25%;*/ display: none;"></center>
+    <center id="teamInfo" style="font-family: 'Quicksand', serif; display: none;"></center>
     <div id="teamScore"></div>
     <center><label id="lblArea" style="font-family: 'Quicksand', serif;"></label></center>
-    <center><div id="spinner" style="font-family: 'Quicksand'; font-size: 110%; display: none;" onclick="sendArea();"></div></center>
-    <center id="area1" style="display: none; font-family: 'Quicksand', serif; color: white; border-color: black;">
+    <center><div id="spinner" style="font-family: 'Quicksand'; font-size: 110%; display: none;" onclick="//sendArea();"></div></center>
+    <center id="area1">
         <div id="area1Info"></div>
         <label id="lblLightBoxArea1Header"></label><hr>
-        <table id="area1Table" style="text-align: center;" rules="cols">
+        <table id="area1Table" rules="cols">
             <tr>
                 <td id="area1LblQuestion">QUESTION</td>
                 <td id="area1LblAnswers">ANSWERS</td>
@@ -57,10 +58,6 @@
             </tr>
         </table>
         <div id="personalEvaluation"></div>
-        <!--<div style="display: flex;">
-            <div id="beforeBtnDivArea1" style="padding-left: 5%; padding-bottom: 1%; display: none;"><i class="fas fa-angle-left fa-2x" onclick="showNextStep();"></i></div>
-            <div id="nextBtnDivArea1" style="padding-right: 5%; padding-bottom: 1%; display: none;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></div>
-        </div>-->
         <table>
             <tr>
                 <td id="beforeBtnDivArea1Td"><center id="beforeBtnDivArea1" style="position: absolute; padding-bottom: 1%; display: none;"><i class="fas fa-angle-left fa-2x" onclick="showNextStep();"></i></center></td>
@@ -69,18 +66,18 @@
         </table>
     </center>
     <center><button id="submitPersonalEvaluation" style="display: none;" onclick="submitPersonalEvaluation();">SUBMIT</button></center>
-    <center id="area2" style="display: none; font-family: 'Quicksand', serif; color: white; border-color: black;">
+    <center id="area2">
         <div id="area2Info"></div>
-        <table id="area2Table" style="text-align: center; position: relative;" rules="cols">
-            <tr>
-                <td id="area2LblQuestion" style="/*width: 70%;*/">QUESTION</td>
-                <td id="area2LblAnswers" style="/*width: 30%;*/">ANSWERS</td>
-            </tr>
-            <tr>
-                <td><br><div id="area2QuestionsDiv"></div></td>
-                <td><div id="area2AnswersDiv"></div></td>
-            </tr>
-        </table>
+        <div id="area2Table" style="display: none;">
+            <div id="area2QuestionColumn">
+                <label id="area2LblQuestion">QUESTION</label><br>
+                <div id="area2QuestionsDiv"></div>
+            </div>
+            <div id="area2AnswersColumn">
+                <label id="area2LblAnswers">ANSWERS</label><br>
+                <div id="area2AnswersDiv"></div>
+            </div>
+        </div>
         <div id="nextBtnDivArea2" style="padding-left: 90%; padding-bottom: 1%; display: none;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></div>
     </center>
     <center id="area3" style="display: none; font-family: 'Quicksand', serif; color: white; border-color: black;">
@@ -102,13 +99,16 @@
         <div id="congratulationsText">
             <h1>CONGRATULATIONS! YOU</h1>
             <h1>FINISHED THE GAME!</h1>
-            <label>YOUR GAME SCORE:</label><br>
-            <label id="teamScore2"></label>
         </div>
     </div>
     <div id="restartPopup">
-        <label id="lblUserDisconnected"></label><br>
-        <img id="restartBtn" src="./img/refresh black.png" onclick="restart();">
+        <label id="lblUserDisconnected"></label>
+        Click to continue!
+        <br>
+        <img id="restartBtn" src="./img/refresh white.png" onclick="restart();">
+    </div>
+    <div id="logo">
+        <img src="img/logo-white.png" alt="Change Partners">
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/complete.ly.1.0.1.min.js"></script>
