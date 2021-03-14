@@ -109,10 +109,10 @@ button {
   transform: rotateY( 180deg );
 }
 .container:first-child #card #front {
-  background: #228653;
+  background: #c43f56;
 }
 .container:first-child #card #back {
-  background: #007539;
+  background: #c43f56;
 }
 
 .content {
