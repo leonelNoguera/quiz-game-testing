@@ -14,7 +14,7 @@
     <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 </head>
-<body id="body" style="background-image: url('./img/1.png');background-size: cover;" onload="document.getElementById('rulesLink').href = location + 'rules/';/*document.getElementById('spinner').style.display = 'block';document.getElementById('divLogin').style.display = 'none';*/">
+<body id="body" style="background-image: url('./img/1.png');background-size: cover;" onload="document.getElementById('rulesLink').href = location + 'rules/';document.getElementById('area3').style.height = (document.documentElement.clientHeight * 0.6) + 'px';">
     <!--<img id="spinnerArrow" src="./img/Asset 2.png" style="position: absolute; left: 10%; width: 3%;">
     document.getElementById('spinnerArrow').style.left = document.getElementById('spinner').offsetLeft;-->
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -82,19 +82,19 @@
     </center>
     <center id="area3" style="display: none; font-family: 'Quicksand', serif; color: white; border-color: black;">
         <div id="area3Info"></div>
-        <!--<div class="wrapper cards">
+        <div class="wrapper cards">
             <div class="container">
                 <div id="card">
-                  <div class="front" id="frontCard"></div>
-                  <div class="back">
-                    <div class="content" id="backCard">
-                    </div>
-                  </div>
+                    <div id="front" onclick="flip('back')"></div>
+                    <div id="back" onclick="flip('front')"></div>
                 </div>
             </div>
-        </div>-->
+        </div>
         <div id="nextBtnDivArea3" style="padding-left: 90%; padding-bottom: 1%;"></div>
+        <div id="emptySpace"></div>
     </center>
+    
+    
     <div id="divGameFinished" style="display: none;">
         <div id="congratulationsText">
             <h1>CONGRATULATIONS! YOU</h1>
@@ -120,7 +120,7 @@
     <script src="js/chat.js"></script>
     <script src="js/script.js"></script>
     <script src="js/spinner.js"></script>
-    <!--<script src="js/card.js"></script>-->
+    <script src="js/card.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 </body>
 </html>
