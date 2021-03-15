@@ -323,7 +323,7 @@ function showBeforeStep()
             for (var i = 0; i < options.length; i++)
             {
                 //html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '</label><br>' + options[i]['score'] + ' ' + options[i]['response'] + '<br>';
-                html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '<br>' + '<label class="lblScore">' + options[i]['score'] + '</label>' + ' ' + '<label class="lblResponse">' + options[i]['response'] + '</label>' + '<br></label>';
+                html += '<label class="lblOption" id="lbl_question_option_' + i + '">' + options[i]['option'] + '<br>' + '<label class="lblScore">' + options[i]['score'] + '</label>' + '<br>' + '<label class="lblResponse">' + options[i]['response'] + '</label>' + '<br></label>';
             }
             html += '<label class="topic">' + topic + '<br><br></label>';
             document.getElementById('personalEvaluation').innerHTML = html;
@@ -347,7 +347,7 @@ function showNextStep()
         {
             //question = document.getElementById('question').innerHTML;
             //answer = document.getElementById('lbl_question_option_' + rads[i].id.split('_')[rads[i].id.split('_').length - 1]).innerHTML;
-            answer = options[parseInt(rads[i].id.split('_')[rads[i].id.split('_').length - 1])]['option'];
+            answer = options[rads[i].id.split('_')[rads[i].id.split('_').length - 1]]['option'];
             i = rads.length;
         }
     }
