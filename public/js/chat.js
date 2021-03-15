@@ -347,7 +347,7 @@ function showNextStep()
         {
             //question = document.getElementById('question').innerHTML;
             //answer = document.getElementById('lbl_question_option_' + rads[i].id.split('_')[rads[i].id.split('_').length - 1]).innerHTML;
-            answer = options[rads[i].id.split('_')[rads[i].id.split('_').length - 1]]['option'];
+            answer = options[parseInt(rads[i].id.split('_')[rads[i].id.split('_').length - 1])]['option'];
             i = rads.length;
         }
     }
