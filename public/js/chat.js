@@ -298,6 +298,8 @@ socket.on('area3Card', (data) => {
         userPlay = true;
         flip('back', false);
         document.getElementById('back').innerHTML = '<br><br>' + data['text'] + '<br>' + 'SCORE: <label class="lblScore">' + data['score'] + '</label>';
+        document.getElementById('back').innerHTML += '<div id="nextBtnDivArea3" style="padding-left: 90%; padding-bottom: 1%;"></div>';
+        document.getElementById('nextBtnDivArea3').style.display = 'none';
     }
 });
 function showBeforeStep()
@@ -443,6 +445,7 @@ function showNextStep()
                 "scoreIndex" : scoreIndex
             }));
             document.getElementById('nextBtnDivArea2').innerHTML = '';
+            //document.getElementById('nextBtnDivArea2').style.display = 'none';
         break;
         case 'showSpinner':
             socket.emit('showSpinner', JSON.stringify({
@@ -454,7 +457,7 @@ function showNextStep()
                 document.getElementById('nextBtnDivArea1').style.display = 'none';
                 document.getElementById('beforetBtnDivArea1').style.display = 'none';
                 document.getElementById('nextBtnDivArea2').style.display = 'none';
-                document.getElementById('nextBtnDivArea3').style.display = 'none';
+                //document.getElementById('nextBtnDivArea3').style.display = 'none';
             }catch{}
         break;
         case 'area2Question':
@@ -476,6 +479,7 @@ function showNextStep()
             }
             document.getElementById('area2AnswersDiv').innerHTML = html;
             nextStep = 'questionArea2';
+            document.getElementById('nextBtnDivArea2').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
             document.getElementById('nextBtnDivArea2').style.display = 'none';
         break;
         case 'area3Card':
@@ -613,6 +617,7 @@ socket.on('ro', (data) => {
         //console.log(data);
         if (data['teamName'] == teamName)
         {//console.log(document.getElementById('spinner').style.display);
+            flip('front');
             document.getElementById('spinner').style.display = 'none';
             document.getElementById('area3').style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
             document.getElementById('lblArea').innerHTML = 'RISKS & OPPORTUNITIES';
@@ -635,7 +640,7 @@ socket.on('ro', (data) => {
             }
             else
             {
-
+                //document.getElementById('nextBtnDivArea3').style.display = 'none';
                 //document.getElementById('area3Info').innerHTML = '<br><br>' + data['userName'] + ' ' + data['userSurname'] + ' WILL OPEN THE<br>CARD<br>&<br>SEE THE RESULT';
                 document.getElementById('front').innerHTML = '<br><br>' + data['userName'] + ' ' + data['userSurname'] + ' WILL OPEN THE<br>CARD<br>&<br>SEE THE RESULT';
             }

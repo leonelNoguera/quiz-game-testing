@@ -236,7 +236,8 @@ button {
   padding: 2%;
   border-radius: 5px;
   width: 70%;
-  background-color: #c43f56;
+  /*background-color: #c43f56;*/
+  background-color: transparent;
   opacity: 0.8;
   border-width: 3px;
   border-color: #771929;
@@ -348,7 +349,7 @@ font-family: 'Quicksand';
   border: 2px solid #555555;
   transition: 0.3s;
   cursor: pointer;
-  width: 200px;
+  width: 196px;
 }
 
 .voteLeaderBtn:hover {
@@ -359,7 +360,7 @@ font-family: 'Quicksand';
   border-radius: 15px;
   border: 2px solid #555555;
   cursor: pointer;
-  width: 190px;
+  width: 150px;
 }
 
 #scores {
@@ -388,10 +389,6 @@ font-family: 'Quicksand';
 
 }
 
-.lblScore {
-font-size: 300%;
-}
+.lblScore {}
 
-.lblResponse {
-font-style: italic;
-}
+.lblResponse {}
