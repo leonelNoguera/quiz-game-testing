@@ -64,8 +64,9 @@ arcs.append("text").attr("transform", function(d){
 var pickedArea;
 function sendArea()
 {
-    if (pickedArea != undefined)
+    if ((!lockWheel) && (pickedArea != undefined))
     {
+        lockWheel = true;
         socket.emit('spin', JSON.stringify({
             userName: userName, 
             userSurname: userSurname, 

@@ -67,26 +67,8 @@ socket.on('update', (data) => {//message['newTeam']
 });
 socket.on('showSpinner', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
-    {console.log('Line 84.')
-        document.getElementById('divLogin').style.display = 'none';
+    {
         pickedArea = undefined;
-        document.getElementById('lblArea').innerHTML = '';
-        //document.getElementById('statusInfo').innerHTML = data['status'];
-        started = true;
-        teams = getTeams(data['rooms']);
-        //updateUsersInfo();
-        document.getElementById('restartPopup').style.display = 'none';
-        document.getElementById('body').style.backgroundColor = "#ac0034";
-        document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
-        
-        /*if ((data['userName'] == userName) && 
-            (data['userSurname'] == userSurname))*/
-        {
-            document.getElementById('area3').style.display = 'none';
-            document.getElementById('area2').style.display = 'none';
-            document.getElementById('area1').style.display = 'none';
-            document.getElementById('spinner').style.display = 'block';
-        }
         if ((data['userName'] == userName) && 
             (data['userSurname'] == userSurname))
         {
@@ -96,6 +78,21 @@ socket.on('showSpinner', (data) => {
         {
             lockWheel = true;
         }
+        document.getElementById('divLogin').style.display = 'none';
+        document.getElementById('lblArea').innerHTML = '';
+        //document.getElementById('statusInfo').innerHTML = data['status'];
+        started = true;
+        teams = getTeams(data['rooms']);
+        //updateUsersInfo();
+        document.getElementById('restartPopup').style.display = 'none';
+        document.getElementById('body').style.backgroundColor = "#ac0034";
+        document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
+        
+        document.getElementById('area3').style.display = 'none';
+        document.getElementById('area2').style.display = 'none';
+        document.getElementById('area1').style.display = 'none';
+        document.getElementById('spinner').style.display = 'block';
+
         document.getElementById('teamInfo').style.display = 'none';
         showGameInfo();
     }
