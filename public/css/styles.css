@@ -278,6 +278,19 @@ button {
   border-color: #771929;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
+
+#area1BtnsTable {
+  display: flex;
+  table-layout: fixed;
+}
+
+#beforeBtnDivArea1 {
+  width: 100%;
+}
+#nextBtnDivArea1 {
+  width: 100%;
+}
+
 #area2 {
   display: none;
   font-family: 'Quicksand', serif;

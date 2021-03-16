@@ -58,12 +58,14 @@
             </tr>
         </table>
         <div id="personalEvaluation"></div>
-        <table>
-            <tr>
-                <td id="beforeBtnDivArea1Td"><center id="beforeBtnDivArea1" style="position: absolute; padding-bottom: 1%; display: none;"><i class="fas fa-angle-left fa-2x" onclick="showNextStep();"></i></center></td>
-                <td id="nextBtnDivArea1Td"><center id="nextBtnDivArea1" style="padding-bottom: 1%; display: none;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></center></td>
-            </tr>
-        </table>
+        <div id="area1BtnsTable" style="display: flex; table-layout: fixed;">
+            <div id="beforeBtnDivArea1">
+                <i class="fas fa-angle-left fa-2x" onclick="showBeforeStep();"></i>
+            </div>
+            <div id="nextBtnDivArea1">
+                <i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>
+            </div>
+        </div>
     </center>
     <center><button id="submitPersonalEvaluation" style="display: none;" onclick="submitPersonalEvaluation();">SUBMIT</button></center>
     <center id="area2">
@@ -86,7 +88,6 @@
             <div class="container">
                 <div id="card">
                     <div id="front" onclick="flip('back')"></div>
-                    <!--<div id="back"></div>-->
                     <div id="back">
                         <div id="backContent"></div>
                         <div id="nextBtnDivArea3" style="padding-left: 90%; padding-bottom: 1%;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></div>
@@ -94,7 +95,6 @@
                 </div>
             </div>
         </div>
-        <!--<div id="nextBtnDivArea3" style="padding-left: 90%; padding-bottom: 1%;"></div>-->
         <div id="emptySpace"></div>
     </center>
     
