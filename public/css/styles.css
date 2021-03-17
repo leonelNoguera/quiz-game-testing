@@ -130,13 +130,22 @@ button {
 #area1AnswersDiv{
   text-align: center;
   font-family: 'Quicksand';
-  font-size: 16px; 
+  font-size: 16px;
+  width: 100%;
 }
 
 #area1QuestionsDiv{
   text-align: center;
   font-family: 'Quicksand';
   font-size: 16px;
+  width: 100%;
+}
+
+#area1QuestionColumn {
+  width: 100%;
+}
+#area1AnswersColumn {
+  width: 100%;
 }
 
 #area1Table{
@@ -277,6 +286,17 @@ button {
   border-width: 3px;
   border-color: #771929;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+}
+
+#area1LabelsTable {
+  display: flex;
+}
+
+#area1LblQuestion {
+  width: 100%;
+}
+#area1LblAnswers {
+  width: 100%;
 }
 
 #area1BtnsTable {

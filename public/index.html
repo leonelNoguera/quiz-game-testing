@@ -43,22 +43,20 @@
     <center id="teamInfo" style="font-family: 'Quicksand', serif; display: none;"></center>
     <div id="teamScore"></div>
     <center><label id="lblArea" style="font-family: 'Quicksand', serif;"></label></center>
-    <center><div id="spinner" style="font-family: 'Quicksand'; font-size: 110%; display: none;" onclick="//sendArea();"></div></center>
+    <center><div id="spinner" style="font-family: 'Quicksand'; font-size: 110%; display: none;"></div></center>
     <center id="area1">
         <div id="area1Info"></div>
         <label id="lblLightBoxArea1Header"></label><hr>
-        <table id="area1Table" rules="cols">
-            <tr>
-                <td id="area1LblQuestion">QUESTION</td>
-                <td id="area1LblAnswers">ANSWERS</td>
-            </tr>
-            <tr>
-                <td><br><div id="area1QuestionsDiv"></div></td>
-                <td><div id="area1AnswersDiv"></div></td>
-            </tr>
-        </table>
+        <div id="area1LabelsTable">
+            <div id="area1LblQuestion">QUESTION</div>
+            <div id="area1LblAnswers">ANSWERS</div>
+        </div>
+        <div id="area1Table">
+            <div id="area1QuestionColumn"></div>
+            <div id="area1AnswersColumn"></div>
+        </div>
         <div id="personalEvaluation"></div>
-        <div id="area1BtnsTable" style="display: flex; table-layout: fixed;">
+        <div id="area1BtnsTable">
             <div id="beforeBtnDivArea1">
                 <i class="fas fa-angle-left fa-2x" onclick="showBeforeStep();"></i>
             </div>
@@ -67,7 +65,6 @@
             </div>
         </div>
     </center>
-    <center><button id="submitPersonalEvaluation" style="display: none;" onclick="submitPersonalEvaluation();">SUBMIT</button></center>
     <center id="area2">
         <div id="area2Info"></div>
         <div id="area2Table" style="display: none;">
