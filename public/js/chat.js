@@ -7,12 +7,16 @@ var connected = false;
 
 var regex = /(&zwj;|&nbsp;)/g;
 var teams = [];
+var users = [];
 var area;
 var finished = false;
 var vote = false;
 //var answerType;
 var question;
 var options;
+var scoreArea1 = 0;
+var scoreArea2 = 0;
+var scoreArea3 = 0;
 socket.on('update', (data) => {//message['newTeam']
     if ((data['userName'] != undefined) && (data['userSurname'] != undefined) && (document.getElementById('divGameFinished').style.display == 'none'))
     {//Pendiente modificar para ser más parecido a los otros y que muestre los equipos desde el principio como en otras ocasiones.
@@ -23,7 +27,8 @@ socket.on('update', (data) => {//message['newTeam']
                 document.getElementById('divLogin').style.display = 'block';
                 document.getElementById('loginFields').style.display = 'none';
                 roomCode = data['roomCode'];
-                teams = getTeams(data['rooms']);
+                //teams = getTeams(data['rooms']);
+                users = data['users'];
                 teamName = data['teamName'];
                 connected = true;
                 document.getElementById('body').style.backgroundColor = "white";
@@ -35,20 +40,22 @@ socket.on('update', (data) => {//message['newTeam']
         {//data['newTeam']
             if (connected && (data['teamName'] == teamName))
             {//console.log('Ya estaba conectado y viene otro.');
-                teams = getTeams(data['rooms']);
+                //teams = getTeams(data['rooms']);
+                users = data['users'];
             }
         }
-        for (var j = 0; j < teams.length; j++)
+        //for (var j = 0; j < teams.length; j++)
         {
-            if ((teams[j]['teamName'] == data['teamName']) && (data['teamName'] == teamName))
+            //if ((teams[j]['teamName'] == data['teamName']) && (data['teamName'] == teamName))
             {
                 var leader = false;
-                for (var k = 0; k < teams[j]['users'].length; k++)
+                //for (var k = 0; k < teams[j]['users'].length; k++)
+                for (var k = 0; k < users.length; k++)
                 {
-                    if ((teams[j]['users'][k]['userName'] == userName) && 
-                        (teams[j]['users'][k]['userSurname'] == userSurname) && 
-                        (!teams[j]['users'][k]['vote']) && 
-                        (!teams[j]['users'][k]['leader']))
+                    if ((users[k]['userName'] == userName) && 
+                        (users[k]['userSurname'] == userSurname) && 
+                        (!users[k]['vote']) && 
+                        (!users[k]['leader']))
                     {//Ver que no sea el lider.
                         vote = false;
                     }
@@ -59,12 +66,32 @@ socket.on('update', (data) => {//message['newTeam']
             ((teamName != undefined) && (data['teamName'] == teamName))
         )
         {
-            showTeamInfo(data['newLeader']);
+            /*scoreArea1 = data['scoreArea1'];
+            scoreArea2 = data['scoreArea2'];
+            scoreArea3 = data['scoreArea3'];*/
+            if (!started)
+            {
+                showTeamInfo(data['newLeader']);
+            }
+            else
+            {
+                showTeamInfo(data['newLeader'], 'teamInfo2');
+            }
         }
         //console.log('Teams:');
         //console.log(teams);
     }
 });
+socket.on('continueNewLeader', (data) => {
+    if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
+    {
+        $("#area1").prop('disabled', false);
+        $("#area2").prop('disabled', false);
+        $("#area3").prop('disabled', false);
+        document.getElementById('teamInfo2').style.display = 'none';
+    }
+});
+var started = false;
 socket.on('showSpinner', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
@@ -675,9 +702,36 @@ socket.on('showTeamInfo', (data) => {
 });
 socket.on('userDisconnected', (data) => {console.log(data);
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
-    {
-        teams = getTeams(data['rooms']);
-        data2 = data;
+    {console.log(data);
+        status = data['status'];
+        users = data['users'];
+        /*if (status == 'newLeader')
+        {
+            showTeamInfo(false, 'teamInfo2');
+        }*/
+        //if (status == 'newLeader')
+        {
+            if (started)
+            {
+                showTeamInfo((status == 'newLeader'), 'teamInfo2');
+            }
+            else
+            {console.log('712.');
+                showTeamInfo((status == 'newLeader'), 'teamInfo');
+            }
+        }
+        /*if (status == 'oneUser')
+        {
+            if (started)
+            {
+                showTeamInfo(false, 'teamInfo2');
+            }
+            else
+            {
+                showTeamInfo(false, 'teamInfo');
+            }
+        }*/
+        /*data2 = data;
         document.getElementById('teamInfo').style.display = 'none';
         document.getElementById('gameInfo').style.display = 'none';
         document.getElementById('spinner').style.display = 'none';
@@ -687,7 +741,7 @@ socket.on('userDisconnected', (data) => {console.log(data);
         document.getElementById('restartPopup').style.display = 'block';
         document.getElementById('lblUserDisconnected').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' disconnected.';
         document.getElementById('restartPopup').style.top = (document.documentElement.clientWidth * 0.3) + 'px';
-        document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';
+        document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';*/
     }
 });
 function joinTeam(userName, userSurname, roomCode, index)
@@ -700,40 +754,39 @@ function joinTeam(userName, userSurname, roomCode, index)
         roomCode: roomCode
     }));
 }
-function voteLeader(userNameVoting, userSurnameVoting, roomCode, teamIndex, userIndex, userNameVoted, userSurnameVoted, newLeader = false)
+var status = 'starting';
+function voteLeader(userNameVoting, userSurnameVoting, roomCode, userIndex, userNameVoted, userSurnameVoted, newLeader = false)
 {console.log('newLeader == ' + newLeader);
-    console.log('vl_' + teamIndex + '_' + userIndex);
-    console.log(document.getElementById('vl_' + teamIndex + '_' + userIndex).innerHTML);
-    if (document.getElementById('vl_' + teamIndex + '_' + userIndex).innerHTML.toLowerCase() != 'vote for leader')
+    console.log('vl_' + userIndex);
+    console.log(document.getElementById('vl_' + userIndex).innerHTML);
+    if (document.getElementById('vl_' + userIndex).innerHTML.toLowerCase() != 'vote for leader')
     {
-        for (var i = 0; i < teams[teamIndex]['users'].length; i++)
+        for (var i = 0; i < users.length; i++)
         {
-            //console.log('vl_' + teamIndex + '_' + i);
-            document.getElementById('vl_' + teamIndex + '_' + i).style.display = 'none';
+            document.getElementById('vl_' + i).style.display = 'none';
         }
-        //console.log(userNameVoting, userSurnameVoting, roomCode, teamIndex, userNameVoted, userSurnameVoted);
         vote = true;
         //Pendiente ver por qué el último que vota no recibe la información sobre quién es el líder.
         socket.emit('voteLeader', JSON.stringify({
-            type: 'voteLeader',
             newLeader: newLeader,
+            status: status,
             userNameVoted: userNameVoted, 
             userSurnameVoted: userSurnameVoted, 
             userNameVoting: userNameVoting, 
             userSurnameVoting: userSurnameVoting, 
-            teamName: teams[teamIndex]['teamName'], 
+            teamName: teamName, 
             roomCode: roomCode
         }));
     }
     else
     {
-        for (var i = 0; i < teams[teamIndex]['users'].length; i++)
+        for (var i = 0; i < users.length; i++)
         {
-            document.getElementById('vl_' + teamIndex + '_' + i).style.display = 'block';
-            document.getElementById('vl_' + teamIndex + '_' + i).innerHTML = 'VOTE FOR LEADER';
+            document.getElementById('vl_' + i).style.display = 'block';
+            document.getElementById('vl_' + i).innerHTML = 'VOTE FOR LEADER';
             if (i == userIndex)
             {
-                document.getElementById('vl_' + teamIndex + '_' + i).innerHTML = 'CONFIRM';
+                document.getElementById('vl_' + i).innerHTML = 'CONFIRM';
             }
         }
     }

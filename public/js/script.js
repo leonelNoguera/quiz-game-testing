@@ -1,14 +1,17 @@
-function showTeamInfo(newLeader = false)
+function showTeamInfo(newLeader = false, element = 'teamInfo')
 {
-    document.getElementById('lblArea').innerHTML = '';
-    document.getElementById('teamInfo').style.display = 'block';
+    if (element == 'teamInfo')
+    {
+        document.getElementById('lblArea').innerHTML = '';
+    }
+    document.getElementById(element).style.display = 'block';
     var html = '';
     var tmp = [];
-    var userInTeamIndex = -1;
-    console.log(teams);
-    if (teams.length)
+    //var userInTeamIndex = -1;
+    console.log(users);
+    //if (users.length)
     {
-        for (var j = 0; j < teams.length; j++)
+        /*for (var j = 0; j < teams.length; j++)
         {
             for (var k = 0; k < teams[j]['users'].length; k++)
             {
@@ -18,71 +21,86 @@ function showTeamInfo(newLeader = false)
                     userInTeamIndex = j;
                 }
             }
-        }
-        if (userInTeamIndex != -1)
+        }*/
+        //if (userInTeamIndex != -1)
         {console.log('Line 40.');
-            html += '<label>TEAM<br>"' + teams[userInTeamIndex]['teamName'] + '"<br></label>';
+            html += '<label>TEAM<br>"' + teamName + '"<br></label>';
             var indexLeaderElected = -1;
-            for (var k = 0; k < teams[userInTeamIndex]['users'].length; k++)
+            for (var k = 0; k < users.length; k++)
             {
-                if (teams[userInTeamIndex]['users'][k]['leader'])
+                if (users[k]['leader'])
                 {
                     indexLeaderElected = k;
-                    if (teams[userInTeamIndex]['users'][k]['status'] == 'waitingAnsweringQuestionArea1')
+                    /*if (users[k]['status'] == 'waitingAnsweringQuestionArea1')
                     {
                         document.getElementById('area1').style.display = 'none';
                         document.getElementById('area2').style.display = 'none';
                         document.getElementById('area3').style.display = 'none';
-                    }
+                    }*/
                 }
             }
-            if (teams[userInTeamIndex]['users'].length == 1)
+            if (element == 'teamInfo')
             {
-                document.getElementById('lblPlease').innerHTML = '<br><br><br>';
-            }
-            if (teams[userInTeamIndex]['users'].length > 1)
-            {
-                document.getElementById('lblPlease').innerHTML = 'PLEASE CHOOSE YOUR LEADER<br><br><br>';
-                showGameInfo();
-            }
-            for (var k = 0; k < teams[userInTeamIndex]['users'].length; k++)
-            {
-                html += '<br>' + teams[userInTeamIndex]['users'][k]['userName'] + ' ' + teams[userInTeamIndex]['users'][k]['userSurname'];
-                if ((teams[userInTeamIndex]['users'][k]['userName'] == userName) && 
-                    (teams[userInTeamIndex]['users'][k]['userSurname'] == userSurname))
+                if (users.length == 1)
                 {
+                    document.getElementById('lblPlease').innerHTML = '<br><br><br>';
+                }
+                if (users.length > 1)
+                {
+                    document.getElementById('lblPlease').innerHTML = 'PLEASE CHOOSE YOUR LEADER<br><br><br>';
+                    showGameInfo();
+                }
+            }
+            for (var k = 0; k < users.length; k++)
+            {
+                html += '<br>' + users[k]['userName'] + ' ' + users[k]['userSurname'];
+                if ((users[k]['userName'] == userName) && 
+                    (users[k]['userSurname'] == userSurname))
+                {
+                    if (!users[k]['voteLeader'])
+                    {
+                        vote = false;
+                    }
                     html += ' (you)';
                 }
-                if (k == indexLeaderElected)
+                //if (k == indexLeaderElected)
+                if (users[k]['leader'])
                 {
                     html += ' (leader)';
                 }
-                if ((teams[userInTeamIndex]['users'].length > 1) && (indexLeaderElected == -1) && (!vote))
+                if ((users.length > 1) && (indexLeaderElected == -1) && (!vote))
                 {//Se debe habilitar la elección de lider.
                     //document.getElementById('lblChooseLeader').innerHTML = 'PLASE CHOSE YOUR LEADER';
-                    html += '<br><button class="voteLeaderBtn" id="vl_' + userInTeamIndex + '_' + k + '" onclick="voteLeader(userName, userSurname, roomCode, ' + userInTeamIndex + ', ' + k + ', \'' + teams[userInTeamIndex]['users'][k]['userName'] + '\', \'' + teams[userInTeamIndex]['users'][k]['userSurname'] + '\', ' + newLeader + ');">VOTE FOR LEADER</button>';
+                    html += '<br><button class="voteLeaderBtn" id="vl_' + k + '" onclick="voteLeader(userName, userSurname, roomCode, ' + k + ', \'' + users[k]['userName'] + '\', \'' + users[k]['userSurname'] + '\', ' + newLeader + ');">VOTE FOR LEADER</button>';
                 }
             }
             html += '</div>';
         }
     }
-    document.getElementById('teamInfo').innerHTML = html;
+    document.getElementById(element).innerHTML = html;
+    if (element == 'teamInfo2')
+    {
+        $("#area1").prop('disabled', true);
+        $("#area2").prop('disabled', true);
+        $("#area3").prop('disabled', true);
+        document.getElementById(element).innerHTML = '<br>PLEASE CHOOSE YOUR LEADER<br><br>' + document.getElementById(element).innerHTML;
+    }
 }
 function showGameInfo()
 {
     document.getElementById('gameInfo').style.display = 'block';
-    if (teams != undefined)
+    //if (teams != undefined)
     {
-        for (var j = 0; j < teams.length; j++)
+        //for (var j = 0; j < teams.length; j++)
         {
-            if (teams[j]['teamName'] == teamName)
+            //if (teams[j]['teamName'] == teamName)
             {
-                for (var k = 0; k < teams[j]['users'].length; k++)
+                for (var k = 0; k < users.length; k++)
                 {
-                    if ((teams[j]['users'][k]['userName'] == userName) && 
-                        (teams[j]['users'][k]['userSurname'] == userSurname))
+                    /*if ((users[k]['userName'] == userName) && 
+                        (users[k]['userSurname'] == userSurname))*/
                     {
-                        document.getElementById('gameInfo').innerHTML = '<div id="scores">DILEMMAS:<br>' + teams[j]['scoreArea1'] + '<br><br>KNOWLEDGE ABOUT US:<br>' + teams[j]['scoreArea2'] + '<br><br>RISKS & OPPORTUNITIES:<br>' + teams[j]['scoreArea3'] + '</div>';
+    document.getElementById('gameInfo').innerHTML = '<div id="scores">DILEMMAS:<br>' + scoreArea1 + '<br><br>KNOWLEDGE ABOUT US:<br>' + scoreArea2 + '<br><br>RISKS & OPPORTUNITIES:<br>' + scoreArea3 + '</div>';
                     }
                 }
             }
@@ -97,7 +115,7 @@ function gameFinished()
         {
             if (teams[j]['teamName'] == teamName)
             {
-                document.getElementById('gameInfo').innerHTML = '<div id="scores">DILEMMAS:<br>' + teams[j]['scoreArea1'] + '<br><br>KNOWLEDGE ABOUT US:<br>' + teams[j]['scoreArea2'] + '<br><br>RISKS & OPPORTUNITIES:<br>' + teams[j]['scoreArea3'] + '</div>';
+                document.getElementById('gameInfo').innerHTML = '<div id="scores">DILEMMAS:<br>' + scoreArea1 + '<br><br>KNOWLEDGE ABOUT US:<br>' + scoreArea2 + '<br><br>RISKS & OPPORTUNITIES:<br>' + scoreArea3 + '</div>';
             }
         }
     }

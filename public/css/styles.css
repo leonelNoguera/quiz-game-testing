@@ -143,11 +143,9 @@ button {
 
 #area1QuestionColumn {
   width: 100%;
-  text-align: right;
 }
 #area1AnswersColumn {
   width: 100%;
-  text-align: left;
 }
 
 #area1Table{
@@ -167,15 +165,13 @@ button {
 }
 
 #area2QuestionColumn {
-  width: 100%;
-  text-align: right;
+  width: 100%
 }
 #area2LblQuestion {}
 #area2QuestionsDiv {}
 
 #area2AnswersColumn {
-  width: 100%;
-  text-align: left;
+  width: 100%
 }
 #area2LblAnswers {}
 #area2AnswersDiv {}
@@ -197,6 +193,29 @@ button {
   border: 2px solid #555555;
   transition: 0.3s;
   width: 180px;
+}
+
+#teamInfo {
+  font-family: 'Quicksand', serif;
+  display: none;
+}
+
+#teamInfo2 {
+  font-family: 'Quicksand', serif;
+  display: none;
+  color: white;
+  background-color: #c43f56;
+  text-align: center;
+  margin-left: auto; 
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+  padding: 2%;
+  border-radius: 5px;
+  width: 50%;
+  opacity: 0.9;
+  border-width: 3px;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #teamName{
@@ -253,7 +272,7 @@ button {
 }
 #spinner{
   width:40%;
-  /*cursor: pointer;*/
+  cursor: pointer;
 }
 /*------------------------------------*/
 #spinner{
@@ -421,8 +440,6 @@ font-family: 'Quicksand';
 
 }
 
-.lblScore {
-  font-size: 300%;
-}
+.lblScore {}
 
 .lblResponse {}
