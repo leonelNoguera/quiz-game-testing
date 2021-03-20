@@ -294,7 +294,7 @@ button {
 #area1 {
   display: none;
   font-family: 'Quicksand', serif;
-  color: white;
+  color: black;
   
   text-align: center;
   margin-left: auto; 
@@ -304,7 +304,7 @@ button {
   padding: 2%;
   border-radius: 5px;
   width: 70%;
-  background-color: #c43f56;
+  background-color: #eee;
   opacity: 0.8;
   border-width: 3px;
   border-color: #771929;
@@ -337,7 +337,7 @@ button {
 #area2 {
   display: none;
   font-family: 'Quicksand', serif;
-  color: white;
+  color: black;
 
   text-align: center;
   margin-left: auto; 
@@ -347,7 +347,7 @@ button {
   padding: 2%;
   border-radius: 5px;
   width: 70%;
-  background-color: #c43f56;
+  background-color: #eee;
   opacity: 0.8;
   border-width: 3px;
   border-color: #771929;
@@ -440,6 +440,8 @@ font-family: 'Quicksand';
 
 }
 
-.lblScore {}
+.lblScore {
+font-size: 300%;
+}
 
 .lblResponse {}
