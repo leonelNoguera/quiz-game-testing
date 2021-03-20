@@ -17,7 +17,7 @@ var options;
 var scoreArea1 = 0;
 var scoreArea2 = 0;
 var scoreArea3 = 0;
-socket.on('update', (data) => {//message['newTeam']
+socket.on('update', (data) => {console.log(data);
     if ((data['userName'] != undefined) && (data['userSurname'] != undefined) && (document.getElementById('divGameFinished').style.display == 'none'))
     {//Pendiente modificar para ser más parecido a los otros y que muestre los equipos desde el principio como en otras ocasiones.
         if ((data['userName'] == userName) && (data['userSurname'] == userSurname))
@@ -48,7 +48,7 @@ socket.on('update', (data) => {//message['newTeam']
         {
             //if ((teams[j]['teamName'] == data['teamName']) && (data['teamName'] == teamName))
             {
-                var leader = false;
+                //var leader = false;
                 //for (var k = 0; k < teams[j]['users'].length; k++)
                 for (var k = 0; k < users.length; k++)
                 {
@@ -65,7 +65,7 @@ socket.on('update', (data) => {//message['newTeam']
         if (((data['userName'] == userName) && (data['userSurname'] == userSurname)) || 
             ((teamName != undefined) && (data['teamName'] == teamName))
         )
-        {
+        {console.log(started);
             /*scoreArea1 = data['scoreArea1'];
             scoreArea2 = data['scoreArea2'];
             scoreArea3 = data['scoreArea3'];*/
@@ -147,7 +147,6 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
                 document.getElementById('area1').style.display = 'block';
                 document.getElementById('area1QuestionColumn').innerHTML = '';
                 document.getElementById('area1AnswersColumn').innerHTML = '';
-                
                 //document.getElementById('area1VotingResultsLeftDiv').innerHTML = '<label id="question">' + data['question']['question'] + '</label>';
                 //<hr style="width:50%;text-align:left;margin-left:0"> 
                 /*game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['otherAnswers'].push({
