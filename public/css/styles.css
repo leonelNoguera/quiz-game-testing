@@ -236,7 +236,7 @@ button {
   border: 2px solid #555555;
   transition: 0.3s;
   cursor: pointer;
-  width: 196px;
+  width: 210px;
 }
 #joinTeam:hover {
   font-family: 'Quicksand';
@@ -246,7 +246,7 @@ button {
   border-radius: 15px;
   border: 2px solid #555555;
   cursor: pointer;
-  width: 70px;
+  width: 190px;
 }
 
 #welcomeText{
