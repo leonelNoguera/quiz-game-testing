@@ -103,7 +103,10 @@ socket.on('showSpinner', (data) => {
         }
         else
         {
-            lockWheel = true;
+            if ((data['status'] == undefined) || (data['status'] != 'onlyWheel'))
+            {
+                lockWheel = true;
+            }
         }
         document.getElementById('divLogin').style.display = 'none';
         document.getElementById('lblArea').innerHTML = '';
@@ -222,6 +225,8 @@ socket.on('showResultArea2', (data) => {
                 {
                     document.getElementById('area2Info').innerHTML = '<br><br>' + data['userName'] + ' ' + data['userSurname'] + ' ANSWER IS ' + r + '!<br>YOUR SCORE:<br><label class="lblScore">' + data['score'] + '</label>';
                 }
+                scoreArea2 += score;
+                showGameInfo();
             }
         }
     }
@@ -252,7 +257,7 @@ socket.on('question', (data) => {
                 }
                 //if ((data['area'] == 1) && (!leader))
                 if (data['area'] == 1)
-                {
+                {//Pendiente label 'DILEMMAS' arriba de la caja para los usuarios que no giraron la rueda en ese turno.
                     document.getElementById('area3').style.display = 'none';
                     document.getElementById('area2').style.display = 'none';
                     document.getElementById('area1').style.display = 'block';
@@ -324,6 +329,8 @@ socket.on('area3Card', (data) => {
         userPlay = false;
         document.getElementById('nextBtnDivArea3').style.display = 'none';
         document.getElementById('backContent').innerHTML = '<br><br>' + data['text'] + '<br>' + 'SCORE: <label class="lblScore">' + data['score'] + '</label>';
+        scoreArea3 += score;
+        showGameInfo();
         //document.getElementById('back').innerHTML = '<br><br>' + data['text'] + '<br>' + 'SCORE: <label class="lblScore">' + data['score'] + '</label>';
         /*document.getElementById('back').innerHTML += '<div id="nextBtnDivArea3" style="padding-left: 90%; padding-bottom: 1%;"><i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i></div>';
         document.getElementById('nextBtnDivArea3').style.display = 'none';*/
@@ -342,6 +349,8 @@ function showBeforeStep()
                 ` + '<label class="lblScore">' + score + '</label>' + `<br>`;//Pendiente la parte de los comentarios.
             nextStep = 'personalEvaluation';
             beforeStep = 'detailedExplanationOfAnswers';
+            scoreArea1 = scoreTotal;
+            showGameInfo();
         break;
         case 'detailedExplanationOfAnswers':
             document.getElementById('lblLightBoxArea1Header').innerHTML = 'DETAILED EXPLANATION OF ANSWERS';
@@ -456,6 +465,8 @@ function showNextStep()
             document.getElementById('beforeBtnDivArea1').innerHTML = '<i class="fas fa-angle-left fa-2x" onclick="showBeforeStep();"></i>';
             document.getElementById('beforeBtnDivArea1').style.display = 'block';
             beforeStep = 'detailedExplanationOfAnswers';
+            scoreArea1 = scoreTotal;
+            showGameInfo();
         break;
         case 'questionArea2':
             socket.emit('questionArea2', JSON.stringify({
@@ -526,6 +537,7 @@ function showNextStep()
 }
 var finalAnswer;
 var score;
+var scoreTotal;
 var scoreIndex;
 var bestAnswerScore;
 socket.on('detailedExplanationOfAnswers', (data) => {
@@ -538,6 +550,7 @@ socket.on('detailedExplanationOfAnswers', (data) => {
         nextStep = 'showFinalAnswer';
         finalAnswer = data['finalAnswer'];
         score = data['score'];
+        scoreTotal = data['scoreTotal'];
         bestAnswerScore = data['bestAnswerScore'];
         options = data['options'];
         topic = data['topic'];
@@ -648,7 +661,7 @@ socket.on('ro', (data) => {
             document.getElementById('area2').style.display = 'none';
             document.getElementById('area3').style.display = 'block';
             text = data['ro']['text'];
-            score = data['ro']['score'];
+            score = data['ro']['score'];//console.log('chat.js, line 654: score == ' + score);
             if ((data['userName'] == userName) && (data['userSurname'] == userSurname))
             {
                 userPlay = true;

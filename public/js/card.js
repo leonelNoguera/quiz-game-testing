@@ -22,6 +22,8 @@ function flip(next = 'back', showBtn = true)
         document.getElementById('nextBtnDivArea3').style.display = 'block';
         document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
         nextStep = 'showSpinner';
+        scoreArea3 += score;
+        showGameInfo();
       }
       else
       {

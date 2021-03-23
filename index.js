@@ -86,9 +86,9 @@ io.on('connection', (socket) => {
           "area" : area, 
           "evaluation" : parseInt(document.getElementById('personalEvaluationRange').value) + 1, 
           "roomCode" : roomCode*/
-          console.log(message['question']);
+          //console.log(message['question']);
           for (var j = 0; j < game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']].length; j++)
-          {console.log(game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['question'], message['question']);
+          {//console.log(game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['question'], message['question']);
             if (game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['question'] == message['question'])
             {console.log('Line 589.');//Pregunta actual encontrada en sendedQuestions.
               //game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['finalAnswer']
@@ -100,28 +100,37 @@ io.on('connection', (socket) => {
               });
             }
           }
+          var usersConnected = 0;
+          for (var j = 0; j < game.rooms[index]['teams'][i]['users'].length; j++)
+          {
+            if (game.rooms[index]['teams'][i]['users'][j]['connected'])
+            {
+              usersConnected += 1;
+            }
+          }
+          
           message['rooms'] = game.rooms;
           var size = game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']].length;
           console.log('Line 616.');
           console.log(size, game.questions['area' + message['area']].length);
-          console.log(game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][size - 1]['evaluation'].length, game.rooms[index]['teams'][i]['users'].length);
-          
+          console.log(game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][size - 1]['evaluation'].length, usersConnected);
+          //game.rooms[index]['teams'][i]['users'].length
           if ((size == game.questions['area' + message['area']].length) && 
-              (game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][size - 1]['evaluation'].length == game.rooms[index]['teams'][i]['users'].length))
+              (game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][size - 1]['evaluation'].length == usersConnected))
           {//Todos los usuarios evaluaron hasta la última pregunta. //Juego terminado.
             socket.emit('finishGame', message);
             socket.broadcast.emit('finishGame', message);
           }
           else
           {
-            if (game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][size - 1]['evaluation'].length == game.rooms[index]['teams'][i]['users'].length)
+            if (game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][size - 1]['evaluation'].length == usersConnected)
             {//Todos los usuarios evaluaron hasta la pregunta actual. Siguiente pregunta.
               //Hay que lanzar el dado.
               //Reiniciar si lanzaron todos.
               var allUsersRolled = true;
               for (var j = 0; j < game.rooms[index]['teams'][i]['users'].length; j++)
               {
-                if (!game.rooms[index]['teams'][i]['users'][j]['rolledDice'])
+                if (game.rooms[index]['teams'][i]['users'][j]['connected'] && (!game.rooms[index]['teams'][i]['users'][j]['rolledDice']))
                 {
                   allUsersRolled = false;
                   j = game.rooms[index]['teams'][i]['users'].length;
@@ -132,12 +141,18 @@ io.on('connection', (socket) => {
                 for (var j = 0; j < game.rooms[index]['teams'][i]['users'].length; j++)
                 {
                   game.rooms[index]['teams'][i]['users'][j]['rolledDice'] = false;
+                  game.rooms[index]['teams'][i]['users'][j]['status'] = 'wheel';
                 }
               }
               for (var j = 0; j < game.rooms[index]['teams'][i]['users'].length; j++)
               {
-                if (!game.rooms[index]['teams'][i]['users'][j]['rolledDice'])
+                if (game.rooms[index]['teams'][i]['users'][j]['connected'] && (!game.rooms[index]['teams'][i]['users'][j]['rolledDice']))
                 {console.log('Line 508.');
+                  for (var k = 0; k < game.rooms[index]['teams'][i]['users'].length; k++)
+                  {
+                    game.rooms[index]['teams'][i]['users'][k]['status'] = 'onlyWheel';
+                  }
+                  game.rooms[index]['teams'][i]['users'][j]['status'] = 'wheel';
                   message['userName'] = game.rooms[index]['teams'][i]['users'][j]['userName'];
                   message['userSurname'] = game.rooms[index]['teams'][i]['users'][j]['userSurname'];
                   message['rooms'] = game.rooms;

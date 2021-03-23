@@ -70,6 +70,7 @@ function showTeamInfo(newLeader = false, element = 'teamInfo')
                 }
                 if ((users.length > 1) && (indexLeaderElected == -1) && (!vote))
                 {//Se debe habilitar la elección de lider.
+                    //Pendiente ver por qué no aparece el botón para votar al u2 en el u3.
                     //document.getElementById('lblChooseLeader').innerHTML = 'PLASE CHOSE YOUR LEADER';
                     html += '<br><button class="voteLeaderBtn" id="vl_' + k + '" onclick="voteLeader(userName, userSurname, roomCode, ' + k + ', \'' + users[k]['userName'] + '\', \'' + users[k]['userSurname'] + '\', ' + newLeader + ');">VOTE FOR LEADER</button>';
                 }
@@ -89,23 +90,7 @@ function showTeamInfo(newLeader = false, element = 'teamInfo')
 function showGameInfo()
 {
     document.getElementById('gameInfo').style.display = 'block';
-    //if (teams != undefined)
-    {
-        //for (var j = 0; j < teams.length; j++)
-        {
-            //if (teams[j]['teamName'] == teamName)
-            {
-                for (var k = 0; k < users.length; k++)
-                {
-                    /*if ((users[k]['userName'] == userName) && 
-                        (users[k]['userSurname'] == userSurname))*/
-                    {
     document.getElementById('gameInfo').innerHTML = '<div id="scores">DILEMMAS:<br>' + scoreArea1 + '<br><br>KNOWLEDGE ABOUT US:<br>' + scoreArea2 + '<br><br>RISKS & OPPORTUNITIES:<br>' + scoreArea3 + '</div>';
-                    }
-                }
-            }
-        }
-    }
 }
 function gameFinished()
 {
