@@ -279,6 +279,9 @@ button {
   width:617px;
   height:617px;
 }
+
+#lblWheelInfo {}
+
 #gameInfo {
   background-color: white;
   font-family: 'Quicksand', serif;
@@ -441,7 +444,7 @@ font-family: 'Quicksand';
 }
 
 .lblScore {
-font-size: 300%;
+  font-size: 300%;
 }
 
 .lblResponse {}

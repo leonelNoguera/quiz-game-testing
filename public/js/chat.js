@@ -95,6 +95,7 @@ var started = false;
 socket.on('showSpinner', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('lblWheelInfo').innerHTML = '<br>' + data['userName'] + ' ' + data['userSurname'] + ' spins the wheel';
         pickedArea = undefined;
         if ((data['userName'] == userName) && 
             (data['userSurname'] == userSurname))
@@ -242,6 +243,7 @@ socket.on('question', (data) => {
         {
             if ((teams[j]['teamName'] == data['teamName']) && (data['teamName'] == teamName))
             {
+                document.getElementById('lblWheelInfo').innerHTML = '';
                 document.getElementById('spinner').style.display = 'none';
                 document.getElementById('area' + data['area']).style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
                 question = data['question']['question'];
@@ -377,13 +379,13 @@ function showNextStep()
     var answer;
     var rads = document.getElementsByName('answer');
     for (var i = 0; i < rads.length; i++)
-    {
+    {//El rads tiene más length que lo que tiene el área 2 (3).
         if (rads[i].checked)
         {
             var index = parseInt(rads[i].id.split('_')[rads[i].id.split('_').length - 1]);
             if (index != options.length)//no mutual ...
             {
-                answer = options[index]['option'];
+                answer = options[index]['option'];//Error (es área 2 en pantalla pero lo toma como área 1): 
             }
             else
             {
@@ -478,7 +480,7 @@ function showNextStep()
                 "area" : area, 
                 "roomCode" : roomCode, 
                 "scoreIndex" : scoreIndex
-            }));
+            }));console.log('chat.js, line 481: scoreIndex == ' + scoreIndex);
             document.getElementById('nextBtnDivArea2').style.display = 'none';
         break;
         case 'showSpinner':
@@ -653,6 +655,7 @@ socket.on('ro', (data) => {
         teams = getTeams(data['rooms']);
         if (data['teamName'] == teamName)
         {
+            document.getElementById('lblWheelInfo').innerHTML = '';
             document.getElementById('spinner').style.display = 'none';
             document.getElementById('area3').style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
             document.getElementById('lblArea').innerHTML = 'RISKS & OPPORTUNITIES';
@@ -691,6 +694,7 @@ socket.on('finishGame', (data) => {
             teams = getTeams(data['rooms']);
             document.getElementById('teamInfo').style.display = 'none';
             document.getElementById('gameInfo').style.display = 'none';
+            document.getElementById('lblWheelInfo').innerHTML = '';
             document.getElementById('spinner').style.display = 'none';
             document.getElementById('area1').style.display = 'none';
             document.getElementById('area2').style.display = 'none';
@@ -704,6 +708,8 @@ socket.on('finishGame', (data) => {
 socket.on('showTeamInfo', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('area1AnswersColumn').innerHTML = '';
+        document.getElementById('area2AnswersDiv').innerHTML = '';
         pickedArea = undefined;
         document.getElementById('body').style.backgroundColor = "white";
         document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
