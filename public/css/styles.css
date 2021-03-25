@@ -236,7 +236,7 @@ button {
   border: 2px solid #555555;
   transition: 0.3s;
   cursor: pointer;
-  width: 210px;
+  width: 196px;
 }
 #joinTeam:hover {
   font-family: 'Quicksand';
@@ -246,7 +246,7 @@ button {
   border-radius: 15px;
   border: 2px solid #555555;
   cursor: pointer;
-  width: 190px;
+  width: 90px;
 }
 
 #welcomeText{
@@ -403,7 +403,7 @@ font-family: 'Quicksand';
   border: 2px solid #555555;
   transition: 0.3s;
   cursor: pointer;
-  width: 196px;
+  width: 210px;
 }
 
 .voteLeaderBtn:hover {
@@ -414,7 +414,7 @@ font-family: 'Quicksand';
   border-radius: 15px;
   border: 2px solid #555555;
   cursor: pointer;
-  width: 150px;
+  width: 190px;
 }
 
 #scores {
