@@ -116,7 +116,7 @@ socket.on('showSpinner', (data) => {
         teams = getTeams(data['rooms']);
         //updateUsersInfo();
         document.getElementById('restartPopup').style.display = 'none';
-        document.getElementById('body').style.backgroundColor = "#eee";
+        document.getElementById('body').style.backgroundColor = "#ac0034";
         document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
         
         document.getElementById('area3').style.display = 'none';
