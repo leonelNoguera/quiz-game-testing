@@ -177,8 +177,8 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
                     {
                         if (data['otherAnswers'][k]['answer'] == data['question']['options'][j]['option'])
                         {
-                            //var usersList = [];
-                            /*here*/var html = '<span class="otherAnswers" style="display:none; left: ' + document.getElementById('lbl_question_option_' + j).offsetLeft + 'px; top: ' + document.getElementById('lbl_question_option_' + j).offsetBottom + 'px;">';
+                            //var usersList = [];//Pendiente revisar esta parte.
+                            var html = '<span class="otherAnswers" style="display:none; left: ' + document.getElementById('lbl_question_option_' + j).offsetLeft + 'px; top: ' + document.getElementById('lbl_question_option_' + j).offsetBottom + 'px;">';
                             for (var l = 0; l < data['otherAnswers'][k]['votes'].length; l++)
                             {//[{userName: message['userName'], userSurname: message['userSurname']}]
                                 html += data['otherAnswers'][k]['votes'][l]['userName'] + ' ' + data['otherAnswers'][k]['votes'][l]['userSurname'] + '<br>';
@@ -270,8 +270,10 @@ socket.on('question', (data) => {
                     options = data['question']['options'];
                     for (var j = 0; j < data['question']['options'].length; j++)
                     {
-                        html += '<input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
-                        html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
+                        html += '<tr>';
+                        html += '<td><input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';"></td>';
+                        html += '<td><label id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label></td>';
+                        html += '</tr><tr></tr>';
                     }
                     document.getElementById('area1AnswersColumn').innerHTML = html;
                     //document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
@@ -542,9 +544,13 @@ var score;
 var scoreTotal;
 var scoreIndex;
 var bestAnswerScore;
+var leaderName;
+var leaderSurname;
 socket.on('detailedExplanationOfAnswers', (data) => {
     if ((data['roomCode'] == roomCode) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        leaderName = data['userName'];
+        leaderSurname = data['userSurname'];
         document.getElementById('lblLightBoxArea1Header').innerHTML = 'DETAILED EXPLANATION OF ANSWERS';
         document.getElementById('area1Table').style.display = 'none';
         document.getElementById('area1LabelsTable').style.display = 'none';
@@ -597,25 +603,29 @@ socket.on('leaderVotation', (data) => {
             document.getElementById('area1').style.display = 'block';
             document.getElementById('area1').style.backgroundColor = "#ac0034";
             document.getElementById('lblLightBoxArea1Header').innerHTML = 'NOW DISCUSS THE BEST MOST APPROPIATE ANSWER WITH THE TEAM & LEADER WILL SUBMIT THE FINAL DECISSION.';
-            document.getElementById('area1QuestionColumn').innerHTML = '<label id="question">' + data['question']['question'] + '<br></label>';
+            document.getElementById('area1QuestionColumn').innerHTML = '<label id="question">' + data['question']['question'] + '</label>';
             question = data['question']['question'];
             var html = '';
             for (var j = 0; j < data['question']['options'].length; j++)
             {
                 if (leader)
                 {
-                    html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
-                    html += '<label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '<br></label>';
+                    html += '<tr>';
+                    html += '<td><input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';"></td>';
+                    html += '<td><label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label></td>';
+                    html += '</tr><tr></tr>';
                 }
                 else
                 {
-                    html += '<label class="lblOption" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '<br></label>';
+                    html += '<label class="lblOption" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '<br><br></label>';
                 }
             }
             if (leader)
             {
-                html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';">';
-                html += '<label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">no mutual agreement<br></label>';
+                html += '<tr>';
+                html += '<td><input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';"></td>';
+                html += '<td><label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">no mutual agreement</label></td>';
+                html += '</tr><tr></tr>';
                 document.getElementById('nextBtnDivArea1').style.display = 'none';
                 document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
                 document.getElementById('beforeBtnDivArea1').style.display = 'none';

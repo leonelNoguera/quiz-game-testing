@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
 	var addedUser = false;
   socket.on('adminLogin', (data) => {
     var message = JSON.parse(data);
-    if (message['password'] == 'Password123')/*tmp_code*/
+    if (message['password'] == 'Password123')
     {
       admin = socket.id;
       message['password'] = undefined;
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
 	socket.on('update', (data) => {
 		login.update(data, socket);
 	});
-  socket.on('voteLeader', (data) => {//console.log('Line 187.');//Pendiente asegurarse de que no pueda votar sin estar en ese team.
+  socket.on('voteLeader', (data) => {
     voting.voteLeader(socket, data);
   });
   socket.on('spin', (data) => {console.log(data);
@@ -68,8 +68,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('area2Question', JSON.parse(data));
   });
   socket.on('area3Card', (data) => {
-    var message = JSON.parse(data);
-    socket.broadcast.emit('area3Card', message);
+    socket.broadcast.emit('area3Card', JSON.parse(data));
   });
   socket.on('personalEvaluation', (data) => {//input range
     var message = JSON.parse(data);
@@ -108,7 +107,6 @@ io.on('connection', (socket) => {
               usersConnected += 1;
             }
           }
-          
           message['rooms'] = game.rooms;
           var size = game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']].length;
           console.log('Line 616.');
