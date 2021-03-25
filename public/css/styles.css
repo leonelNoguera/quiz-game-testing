@@ -152,6 +152,8 @@ button {
   margin: 10px;
 }
 
+
+
 #area1Table{
   text-align: center;
   font-family: 'Quicksand';
@@ -169,13 +171,17 @@ button {
 }
 
 #area2QuestionColumn {
-  width: 100%
+  width: 100%;
+  text-align: right;
+  margin: 10px;
 }
 #area2LblQuestion {}
 #area2QuestionsDiv {}
 
 #area2AnswersColumn {
-  width: 100%
+  width: 100%;
+  text-align: left;
+  margin: 10px;
 }
 #area2LblAnswers {}
 #area2AnswersDiv {}
@@ -277,14 +283,21 @@ button {
 #spinner{
   width:40%;
   cursor: pointer;
-}
-/*------------------------------------*/
-#spinner{
   width:617px;
   height:617px;
+  transition: 0.3s;
+}
+/*------------------------------------*/
+#spinner:hover{
+  width:650px;
+  height:650px;
 }
 
-#lblWheelInfo {}
+#lblWheelInfo {
+text-transform: uppercase;
+color: #000;
+  margin-right: 55%;
+}
 
 #gameInfo {
   background-color: white;
@@ -390,6 +403,7 @@ button.btnSend {
 #restartBtn {
   width: 20%;
 }
+
 
 #rulesLink {
   position: right;
