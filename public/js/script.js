@@ -108,7 +108,8 @@ function gameFinished()
 var data2;
 function restart()
 {
-    document.getElementById('lblArea').innerHTML = '';
+    window.location = window.location;
+    /*document.getElementById('lblArea').innerHTML = '';
     pickedArea = undefined;
     document.getElementById('body').style.backgroundColor = "white";
     document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
@@ -140,7 +141,7 @@ function restart()
             document.getElementById('divLogin').style.display = 'block';
             showTeamInfo();
         }
-    }
+    }*/
 }
 function getTeams(rooms)
 {

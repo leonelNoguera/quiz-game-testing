@@ -127,12 +127,12 @@ button {
   right: 16px;  
 }
 
-/*#area1AnswersDiv{
-  text-align: left;
+#area1AnswersDiv{
+  text-align: center;
   font-family: 'Quicksand';
   font-size: 16px;
   width: 100%;
-}*/
+}
 
 #area1QuestionsDiv{
   text-align: center;
@@ -147,9 +147,12 @@ button {
   margin: 10px;
 }
 #area1AnswersColumn {
+  width: 100%;
   text-align: left;
-  padding-left: 2%;
+  margin: 10px;
 }
+
+
 
 #area1Table{
   text-align: center;
@@ -243,7 +246,7 @@ button {
   border: 2px solid #555555;
   transition: 0.3s;
   cursor: pointer;
-  width: 210px;
+  width: 196px;
 }
 #joinTeam:hover {
   font-family: 'Quicksand';
@@ -255,8 +258,6 @@ button {
   cursor: pointer;
   width: 90px;
 }
-
-
 
 #welcomeText{
   text-align: center;
@@ -293,8 +294,8 @@ button {
 }
 
 #lblWheelInfo {
-  text-transform: uppercase;
-  color: #000;
+text-transform: uppercase;
+color: #000;
   margin-right: 55%;
 }
 
@@ -393,7 +394,7 @@ button.btnSend {
   display: none;
   color: #fff;
   text-align: center;
-  background-color: black;
+
   top: 50%;
   left: 50%;
   margin-right: -50%;
@@ -402,6 +403,7 @@ button.btnSend {
 #restartBtn {
   width: 20%;
 }
+
 
 #rulesLink {
   position: right;
@@ -464,16 +466,3 @@ font-family: 'Quicksand';
 }
 
 .lblResponse {}
-
-#beforeBtnDivArea1 {
-
-}
-#nextBtnDivArea1 {
-
-}
-#nextBtnDivArea2 {
-
-}
-#nextBtnDivArea3 {
-
-}
