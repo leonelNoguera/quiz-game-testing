@@ -154,7 +154,8 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
                 var html = '';
                 for (var j = 0; j < data['question']['options'].length; j++)
                 {
-                    html += '<label class="lblOption" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
+                    //html += '<label class="lblOption" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br>';
+                    html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '<br></div><br>';
                 }
                 document.getElementById('area1AnswersColumn').innerHTML = html;
                 for (var j = 0; j < data['question']['options'].length; j++)
@@ -258,7 +259,7 @@ socket.on('question', (data) => {
                         //html += '<tr>';
                         //html += '<td><input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';"></td>';
                         //html += '<td><label onclick="optionSelected(1, ' + j + ');" id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label></td>';
-                        html += '<label onclick="optionSelected(1, ' + j + ');" id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br><br>';
+                        html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '" onclick="optionSelected(1, ' + j + ');">' + data['question']['options'][j]['option'] + '<br></div><br>';
                         //html += '</tr><tr></tr>';
                     }
                     document.getElementById('area1AnswersColumn').innerHTML = html;
@@ -306,7 +307,8 @@ socket.on('area2Question', (data) => {
         var html = '';
         for (var j = 0; j < data['options'].length; j++)
         {
-            html += '<label id="lbl_question_option_' + j + '">' + data['options'][j]['option'] + '</label><br><br>';
+            //html += '<label id="lbl_question_option_' + j + '">' + data['options'][j]['option'] + '</label><br><br>';
+            html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '">' + data['options'][j]['option'] + '<br></div><br>';
         }
         document.getElementById('area2AnswersDiv').innerHTML = html;
     }
@@ -500,7 +502,8 @@ function showNextStep()
             {
                 //html += '<input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea2\').style.display = \'block\'; scoreIndex = ' + j + ';">';
                 //html += '<label id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + options[j]['option'] + '</label><br>';
-                html += '<label onclick="optionSelected(2, ' + j + ');" id="lbl_question_option_' + j + '">' + options[j]['option'] + '</label><br><br>';
+                //html += '<label onclick="optionSelected(2, ' + j + ');" id="lbl_question_option_' + j + '">' + options[j]['option'] + '</label><br><br>';
+                html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '" onclick="optionSelected(2, ' + j + ');">' + options[j]['option'] + '<br></div><br>';
             }
             document.getElementById('area2AnswersDiv').innerHTML = html;
             nextStep = 'questionArea2';
@@ -601,7 +604,8 @@ socket.on('leaderVotation', (data) => {
                     html += '<td><input type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';"></td>';
                     html += '<td><label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label></td>';
                     html += '</tr><tr></tr>';*/
-                    html += '<label onclick="optionSelected(1, ' + j + ');" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br><br>';
+                    //html += '<label onclick="optionSelected(1, ' + j + ');" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '</label><br><br>';
+                    html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '" onclick="optionSelected(1, ' + j + ');">' + data['question']['options'][j]['option'] + '<br></div><br>';
                 }
                 else
                 {
@@ -614,7 +618,8 @@ socket.on('leaderVotation', (data) => {
                 html += '<td><input class="inputRadioOption" type="radio" id="question_option_' + j + '" name="answer" onchange="document.getElementById(\'nextBtnDivArea1\').style.display = \'block\';"></td>';
                 html += '<td><label class="lblOption" id="lbl_question_option_' + j + '" for=question_option_' + j + '">no mutual agreement</label></td>';
                 html += '</tr><tr></tr>';*/
-                html += '<label onclick="optionSelected(1, ' + j + ');" id="lbl_question_option_' + j + '">no mutual agreement</label><br>';
+                //html += '<label onclick="optionSelected(1, ' + j + ');" id="lbl_question_option_' + j + '">no mutual agreement</label><br>';
+                html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '" onclick="optionSelected(1, ' + j + ');">no mutual agreement</div><br>';
                 document.getElementById('nextBtnDivArea1').style.display = 'none';
                 document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
                 document.getElementById('beforeBtnDivArea1').style.display = 'none';

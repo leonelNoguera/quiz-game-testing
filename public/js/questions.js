@@ -12,9 +12,10 @@ function optionSelected(area, index)
     }
     for (var i = 0; i < options.length; i++)
     {
-		document.getElementById('lbl_question_option_' + i).style.backgroundColor = document.getElementById('area' + area).style.backgroundColor;
+		//document.getElementById('lbl_question_option_' + i).style.backgroundColor = document.getElementById('area' + area).style.backgroundColor;
+		document.getElementById('lbl_question_option_' + i).className = '';
     }
-    try{document.getElementById('lbl_question_option_' + options.length).style.backgroundColor = document.getElementById('area' + area).style.backgroundColor;}catch{}
+    try{document.getElementById('lbl_question_option_' + options.length).className = '';}catch{}
     if (answer == aux)
     {
     	answer = '';
@@ -23,6 +24,7 @@ function optionSelected(area, index)
     else
     {
 		document.getElementById('nextBtnDivArea' + area).style.display = 'block';
-    	document.getElementById('lbl_question_option_' + index).style.backgroundColor = '#0000ff';
+    	//document.getElementById('lbl_question_option_' + index).style.backgroundColor = '#0000ff';
+    	document.getElementById('lbl_question_option_' + index).className = 'optionSelected';
     }
 }
