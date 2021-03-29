@@ -130,6 +130,7 @@ function spin(randomSpin = Math.random())
                 oldrotation = rotation;
                 /* Get the result value from object "data" */
                 pickedArea = data[picked].value;
+                try{document.getElementById('circleInfo').innerHTML = 'CLICK TO OPEN "' + ['DILEMMAS', 'KNOWLEDGE ABOUT US', 'RISKS & OPPORTUNITIES'][pickedArea - 1] + '"'}catch{}
                 /* Comment the below line for restrict spin to sngle time */
                 //container.on("click", spin);
             });
