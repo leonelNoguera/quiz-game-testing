@@ -39,8 +39,8 @@ button {
   position: relative;
   float: left;
   width: 48%;
-  height: 260px;
-  margin: 10px 0 10px 4%;
+  height: 500px;
+  margin: 10px 10px 10px 4%;
   background: #fff;/*verde*/
   /* Set the depth of the elements */
   -webkit-perspective: 800px;
@@ -52,7 +52,7 @@ button {
 
 .container:first-child {
   background: transparent;
-  margin-left: 30%;
+  margin-left: 25%;
   /*padding-bottom: 10%;*/
 }
 
@@ -83,6 +83,8 @@ button {
 #card #front,
 #card #back {
   display: block;
+  margin-left: auto;
+  margin-right: 80%;
   height: 100%;
   width: 100%;
   text-align: center;
@@ -101,6 +103,7 @@ button {
   text-align: center;
 }
 #card #front {
+  cursor: pointer;
 }
 #card #back {
   -webkit-transform: rotateY( 180deg );
@@ -109,10 +112,10 @@ button {
   transform: rotateY( 180deg );
 }
 .container:first-child #card #front {
-  background: #c43f56;
+  background: #eee;
 }
 .container:first-child #card #back {
-  background: #c43f56;
+  background: #eee;
 }
 
 .content {
@@ -125,6 +128,13 @@ button {
   position: absolute;
   bottom: 8px;
   right: 16px;  
+}
+
+#area1AnswersDiv{
+  text-align: center;
+  font-family: 'Quicksand';
+  font-size: 16px;
+  width: 100%;
 }
 
 #area1QuestionsDiv{
@@ -140,25 +150,12 @@ button {
   margin: 10px;
 }
 #area1AnswersColumn {
+  width: 100%;
   text-align: left;
-  padding-left: 2%;
+  margin: 10px;
 }
 
-.optionSelected {
-  background-color: #bb1111;
-  opacity: 0.5;
-  border-radius: 15px;
-  border: 2px solid #555555;
-}
 
-.optionNoSelected {}
-
-.overInfo {
-  background-color: #bb1111;
-  opacity: 0.8;
-  border-radius: 15px;
-  border: 2px solid #555555;
-}
 
 #area1Table{
   text-align: center;
@@ -252,7 +249,7 @@ button {
   border: 2px solid #555555;
   transition: 0.3s;
   cursor: pointer;
-  width: 210px;
+  width: 196px;
 }
 #joinTeam:hover {
   font-family: 'Quicksand';
@@ -265,8 +262,6 @@ button {
   width: 90px;
 }
 
-
-
 #welcomeText{
   text-align: center;
 }
@@ -278,14 +273,15 @@ button {
 }
 #area3 {
   text-align: center;
+  font-color: #000;
   margin-left: auto; 
   margin-right: auto;
   display: block;
   position: relative;
   z-index: 1;
   padding: 2%;
-  border-radius: 5px;
-  width: 70%;
+  border-radius: 10px;
+  width: 50%;
   /*background-color: #c43f56;*/
 }
 #spinner{
@@ -296,15 +292,17 @@ button {
   transition: 0.3s;
 }
 /*------------------------------------*/
-#spinner:hover{
-  width:650px;
-  height:650px;
-}
+
 
 #lblWheelInfo {
-  text-transform: uppercase;
-  color: #000;
-  margin-right: 55%;
+text-transform: uppercase;
+color: #000;
+  margin-right: 2%;
+  padding-bottom: 70px;
+  border-width: 3px;
+  border-color: #771929;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: -1;
 }
 
 #gameInfo {
@@ -402,7 +400,7 @@ button.btnSend {
   display: none;
   color: #fff;
   text-align: center;
-  background-color: black;
+
   top: 50%;
   left: 50%;
   margin-right: -50%;
@@ -411,6 +409,7 @@ button.btnSend {
 #restartBtn {
   width: 20%;
 }
+
 
 #rulesLink {
   position: right;
@@ -449,14 +448,29 @@ font-family: 'Quicksand';
   padding-bottom: 5%;
 }
 
+.lblOption {}
+
 .topic {
   text-align: right;
   font-family: Quicksand, serif;
-  font-size: 150%;
+  font-size: 100%;
   color: black;
 }
 
-.inputRadioOption {}
+
+
+.inputRadioOption {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.inputRadioOption:hover {
+  background: black;
+  
+}
+
+
+
 
 .otherAnswers {
   position: absolute;
@@ -470,17 +484,226 @@ font-family: 'Quicksand';
   font-size: 300%;
 }
 
-.lblResponse {}
+.lblResponse {
+transform: italic;
+}
+
+
+
+#teamInfo2{
+  background: white;
+  
+}
+
+
+
 
 #beforeBtnDivArea1 {
-
+  cursor: pointer;
+  transition: 0.2s;
 }
+#beforeBtnDivArea1:hover {
+  color: red;
+}
+
+
 #nextBtnDivArea1 {
-
+  cursor: pointer;
+  transition: 0.2s;
 }
+#nextBtnDivArea1:hover {
+  color: red;
+}
+
+
 #nextBtnDivArea2 {
-
+  cursor: pointer;
+  transition: 0.2s;
 }
+#nextBtnDivArea2:hover {
+  color: red;
+}
+
+
 #nextBtnDivArea3 {
-
+  cursor: pointer;
+  transition: 0.2s;
 }
+#nextBtnDivArea3:hover {
+  color: red;
+}
+
+
+
+
+#lbl_question_option_0{
+  transition: 0.2s;
+}
+#lbl_question_option_0:hover{
+  color: red;
+}
+
+#lbl_question_option_1{
+  transition: 0.2s;
+}
+#lbl_question_option_1:hover{
+  color: red;
+}
+
+#lbl_question_option_2{
+  transition: 0.2s;
+}
+#lbl_question_option_2:hover{
+  color: red;
+}
+
+#lbl_question_option_3{
+  transition: 0.2s;
+}
+#lbl_question_option_3:hover{
+  color: red;
+}
+
+#lbl_question_option_4{
+  transition: 0.2s;
+}
+#lbl_question_option_4:hover{
+  color: red;
+}
+
+#lbl_question_option_5{
+  transition: 0.2s;
+}
+#lbl_question_option_5:hover{
+  color: red;
+}
+
+
+
+
+#question_option_0{
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#question_option_0:hover{
+  background: red;
+}
+
+#question_option_1{
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#question_option_1:hover{
+  background: red;
+}
+
+#question_option_2{
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#question_option_3:hover{
+  background: red;
+}
+
+#question_option_4{
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#question_option_4:hover{
+  background: red;
+}
+
+#question_option_5{
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#question_option_5:hover{
+  background: red;
+}
+
+
+
+
+#lblArea{
+  font-size: 300%;
+  color: #000;
+  
+  text-decoration: none;
+  text-transform: uppercase;
+  
+  display: inline-block;
+  position: relative;
+  
+  -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.3) 30%, #000 50%, rgba(0,0,0,.3) 70%);
+  -webkit-mask-size: 200%;
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  from { -webkit-mask-position: 150%; }
+  to { -webkit-mask-position: -50%; }
+}
+
+
+
+
+
+#lblLightBoxArea1Header{
+  text-decoration: none;
+  text-transform: uppercase;
+  
+  display: inline-block;
+  position: relative;
+  
+  -webkit-mask-image: linear-gradient(-75deg, rgba(255,255,255,.4) 30%, #eee 50%, rgba(255,255,255,.4) 70%);
+  -webkit-mask-size: 200%;
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  from { -webkit-mask-position: 150%; }
+  to { -webkit-mask-position: -50%; }
+}
+
+
+
+.area1 .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 105%;
+}
+
+
+
+#circleText{
+  text-decoration: none;
+  text-transform: uppercase;
+  
+  display: inline-block;
+  position: relative;
+  
+  -webkit-mask-image: linear-gradient(-75deg, rgba(255,255,255,.4) 30%, #eee 50%, rgba(255,255,255,.4) 70%);
+  -webkit-mask-size: 200%;
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  from { -webkit-mask-position: 150%; }
+  to { -webkit-mask-position: -50%; }
+}
+
