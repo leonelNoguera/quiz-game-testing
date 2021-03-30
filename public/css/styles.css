@@ -435,6 +435,10 @@ font-family: 'Quicksand';
 }
 
 .lblOption {}
+.lblOptionFinal {
+  color: white;
+  background-color: black;
+}
 
 .topic {
   text-align: right;
