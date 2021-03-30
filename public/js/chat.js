@@ -95,6 +95,7 @@ var started = false;
 socket.on('showSpinner', (data) => {
     if ((data['roomCode'] == roomCode) && (data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        step = 'wheel';
         document.getElementById('lblWheelInfo').innerHTML = '<br>' + data['userName'] + ' ' + data['userSurname'] + ' spins the wheel';
         pickedArea = undefined;
         if ((data['userName'] == userName) && 
@@ -158,7 +159,7 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
                     html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '">' + data['question']['options'][j]['option'] + '<br></div><br>';
                 }
                 document.getElementById('area1AnswersColumn').innerHTML = html;
-                for (var j = 0; j < data['question']['options'].length; j++)
+                /*for (var j = 0; j < data['question']['options'].length; j++)
                 {
                     for (var k = 0; k < data['otherAnswers'].length; k++)
                     {
@@ -175,7 +176,7 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
                             k = data['otherAnswers'].length;
                         }
                     }
-                }
+                }*/
             }
         }
     }
@@ -593,6 +594,7 @@ socket.on('leaderVotation', (data) => {
             document.getElementById('area1').style.display = 'block';
             document.getElementById('area1').style.backgroundColor = "#ac0034";
             document.getElementById('lblLightBoxArea1Header').innerHTML = 'NOW DISCUSS THE BEST MOST APPROPIATE ANSWER WITH THE TEAM & LEADER WILL SUBMIT THE FINAL DECISSION.';
+            step = 'selectingFinalAnswer';
             document.getElementById('area1QuestionColumn').innerHTML = '<label id="question">' + data['question']['question'] + '</label>';
             question = data['question']['question'];
             var html = '';

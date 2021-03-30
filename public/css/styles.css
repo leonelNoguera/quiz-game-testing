@@ -130,20 +130,6 @@ button {
   right: 16px;  
 }
 
-#area1AnswersDiv{
-  text-align: center;
-  font-family: 'Quicksand';
-  font-size: 16px;
-  width: 100%;
-}
-
-#area1QuestionsDiv{
-  text-align: center;
-  font-family: 'Quicksand';
-  font-size: 16px;
-  width: 100%;
-}
-
 #area1QuestionColumn {
   width: 100%;
   text-align: right;
@@ -154,8 +140,6 @@ button {
   text-align: left;
   margin: 10px;
 }
-
-
 
 #area1Table{
   text-align: center;
@@ -272,11 +256,13 @@ button {
   text-align: center;
 }
 #area3 {
+  display: none;
+  font-family: 'Quicksand', serif;
   text-align: center;
-  font-color: #000;
+  border-color: black;
+  color: black;
   margin-left: auto; 
   margin-right: auto;
-  display: block;
   position: relative;
   z-index: 1;
   padding: 2%;
@@ -469,9 +455,6 @@ font-family: 'Quicksand';
   
 }
 
-
-
-
 .otherAnswers {
   position: absolute;
 }
@@ -488,15 +471,10 @@ font-family: 'Quicksand';
 transform: italic;
 }
 
-
-
 #teamInfo2{
   background: white;
   
 }
-
-
-
 
 #beforeBtnDivArea1 {
   cursor: pointer;
@@ -506,7 +484,6 @@ transform: italic;
   color: red;
 }
 
-
 #nextBtnDivArea1 {
   cursor: pointer;
   transition: 0.2s;
@@ -514,7 +491,6 @@ transform: italic;
 #nextBtnDivArea1:hover {
   color: red;
 }
-
 
 #nextBtnDivArea2 {
   cursor: pointer;
@@ -533,101 +509,15 @@ transform: italic;
   color: red;
 }
 
-
-
-
-#lbl_question_option_0{
-  transition: 0.2s;
-}
-#lbl_question_option_0:hover{
-  color: red;
-}
-
-#lbl_question_option_1{
-  transition: 0.2s;
-}
-#lbl_question_option_1:hover{
-  color: red;
-}
-
-#lbl_question_option_2{
-  transition: 0.2s;
-}
-#lbl_question_option_2:hover{
-  color: red;
-}
-
-#lbl_question_option_3{
-  transition: 0.2s;
-}
-#lbl_question_option_3:hover{
-  color: red;
-}
-
-#lbl_question_option_4{
-  transition: 0.2s;
-}
-#lbl_question_option_4:hover{
-  color: red;
-}
-
-#lbl_question_option_5{
-  transition: 0.2s;
-}
-#lbl_question_option_5:hover{
-  color: red;
-}
-
-
-
-
-#question_option_0{
+.optionSelected {
+  transition: 0.4s;
+  color: white;
+  background-color: black;
   cursor: pointer;
-  transition: 0.2s;
 }
-
-#question_option_0:hover{
-  background: red;
-}
-
-#question_option_1{
+.optionNoSelected {
   cursor: pointer;
-  transition: 0.2s;
 }
-
-#question_option_1:hover{
-  background: red;
-}
-
-#question_option_2{
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#question_option_3:hover{
-  background: red;
-}
-
-#question_option_4{
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#question_option_4:hover{
-  background: red;
-}
-
-#question_option_5{
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#question_option_5:hover{
-  background: red;
-}
-
-
-
 
 #lblArea{
   font-size: 300%;

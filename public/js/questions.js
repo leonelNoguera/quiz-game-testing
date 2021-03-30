@@ -1,3 +1,4 @@
+var step = '';
 function optionSelected(area, index)
 {
 	//Pendiente deseleccionar las otras opciones por medio de CSS.
@@ -25,6 +26,14 @@ function optionSelected(area, index)
     {
 		document.getElementById('nextBtnDivArea' + area).style.display = 'block';
     	//document.getElementById('lbl_question_option_' + index).style.backgroundColor = '#0000ff';
+    	/*if (step == 'selectingFinalAnswer')
+    	{
+    		document.getElementById('lbl_question_option_' + index).className = 'finalAnswerSelected';
+    	}
+    	else
+    	{
+    		document.getElementById('lbl_question_option_' + index).className = 'optionSelected';
+    	}*/
     	document.getElementById('lbl_question_option_' + index).className = 'optionSelected';
     }
 }
