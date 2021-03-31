@@ -104,7 +104,7 @@ button {
 }
 #card #front {
   cursor: pointer;
-  transition: o.2s;
+  transition: 0.2s;
 }
 #front: hover {
   cursor: pointer;
@@ -135,13 +135,6 @@ button {
   right: 16px;  
 }
 
-#area1AnswersDiv{
-  text-align: center;
-  font-family: 'Quicksand';
-  font-size: 16px;
-  width: 100%;
-}
-
 #area1QuestionsDiv{
   text-align: center;
   font-family: 'Quicksand';
@@ -158,9 +151,9 @@ button {
   width: 100%;
   text-align: left;
   margin: 10px;
+  font-family: 'Quicksand';
+  font-size: 16px;
 }
-
-
 
 #area1Table{
   text-align: center;
@@ -281,7 +274,7 @@ button {
   font-color: #000;
   margin-left: auto; 
   margin-right: auto;
-  display: block;
+  display: none;
   position: relative;
   z-index: 1;
   padding: 2%;
@@ -297,7 +290,6 @@ button {
   transition: 0.3s;
 }
 /*------------------------------------*/
-
 
 #lblWheelInfo {
 text-transform: uppercase;
@@ -478,9 +470,6 @@ font-family: 'Quicksand';
   
 }
 
-
-
-
 .otherAnswers {
   position: absolute;
 }
@@ -497,12 +486,6 @@ font-family: 'Quicksand';
 transform: italic;
 }
 
-
-
-
-
-
-
 #beforeBtnDivArea1 {
   cursor: pointer;
   transition: 0.2s;
@@ -511,7 +494,6 @@ transform: italic;
   color: red;
 }
 
-
 #nextBtnDivArea1 {
   cursor: pointer;
   transition: 0.2s;
@@ -519,7 +501,6 @@ transform: italic;
 #nextBtnDivArea1:hover {
   color: red;
 }
-
 
 #nextBtnDivArea2 {
   cursor: pointer;
@@ -538,111 +519,19 @@ transform: italic;
   color: red;
 }
 
-
-
-
-#lbl_question_option_0{
-  transition: 0.2s;
-}
-#lbl_question_option_0:hover{
-  color: red;
-}
-
-#lbl_question_option_1{
-  transition: 0.2s;
-}
-#lbl_question_option_1:hover{
-  color: red;
-}
-
-#lbl_question_option_2{
-  transition: 0.2s;
-}
-#lbl_question_option_2:hover{
-  color: red;
-}
-
-#lbl_question_option_3{
-  transition: 0.2s;
-}
-#lbl_question_option_3:hover{
-  color: red;
-}
-
-#lbl_question_option_4{
-  transition: 0.2s;
-}
-#lbl_question_option_4:hover{
-  color: red;
-}
-
-#lbl_question_option_5{
-  transition: 0.2s;
-}
-#lbl_question_option_5:hover{
-  color: red;
-}
-
-
-
 .optionSelected {
+  transition: 0.2s;
+  color: red;
   background-color: grba(255, 255, 255, 0.8);
-  opacity: 0.5;
+  cursor: pointer;
   padding: 2px;
 }
-
-.optionNoSelected {}
-
-
-
-
-#question_option_0{
-  cursor: pointer;
-  transition: 0.2s;
+.optionSelected:hover {
+  color: red;
 }
-
-#question_option_0:hover{
-  background: red;
+.optionNoSelected:hover {
+  color: red;
 }
-
-#question_option_1{
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#question_option_1:hover{
-  background: red;
-}
-
-#question_option_2{
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#question_option_3:hover{
-  background: red;
-}
-
-#question_option_4{
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#question_option_4:hover{
-  background: red;
-}
-
-#question_option_5{
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#question_option_5:hover{
-  background: red;
-}
-
-
-
 
 #lblArea{
   font-size: 300%;
@@ -721,4 +610,3 @@ transform: italic;
   from { -webkit-mask-position: 150%; }
   to { -webkit-mask-position: -50%; }
 }
-
