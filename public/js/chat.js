@@ -66,9 +66,9 @@ socket.on('update', (data) => {console.log(data);
             ((teamName != undefined) && (data['teamName'] == teamName))
         )
         {console.log(started);
-            /*scoreArea1 = data['scoreArea1'];
+            scoreArea1 = data['scoreArea1'];
             scoreArea2 = data['scoreArea2'];
-            scoreArea3 = data['scoreArea3'];*/
+            scoreArea3 = data['scoreArea3'];
             if (!started)
             {
                 showTeamInfo(data['newLeader']);
