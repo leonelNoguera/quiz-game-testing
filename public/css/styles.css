@@ -1,17 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700);
 
 body {
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   font-weight: 300;
   font-size: 16px;
-  
+
   color: #333;
   background: #eee;
 }
 
 input,
 button {
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   font-weight: 300;
   font-size: 16px;
   border: 0;
@@ -41,7 +41,7 @@ button {
   width: 48%;
   height: 500px;
   margin: 10px 10px 10px 4%;
-  background: #fff;/*verde*/
+  background: #fff; /*verde*/
   /* Set the depth of the elements */
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
@@ -58,10 +58,7 @@ button {
 
 #card {
   width: 100%;
-  height: 100%;
   position: absolute;
-  /*background: black;*7
-  cursor: pointer;  
   /* Set the transition effects */
   -webkit-transition: -webkit-transform 0.4s;
   -moz-transition: -moz-transform 0.4s;
@@ -71,29 +68,37 @@ button {
   -moz-transform-style: preserve-3d;
   -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  padding: 35px 15px;
+  border-radius: 6px;
+  box-shadow: 3px 5px 10px 2px rgb(0 0 0 / 25%);
+}
+
+#card:hover {
+  box-shadow: 3px 5px 20px 2px rgba(0, 0, 0, 0.25);
+}
+
+#area3 .cards #card {
+  background-image: url("./../img/card back.jpg");
 }
 
 #card.flipped {
-  -webkit-transform: rotateY( 180deg );
-  -moz-transform: rotateY( 180deg );
-  -o-transform: rotateY( 180deg );
-  transform: rotateY( 180deg );
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  /* background-image: url("./../img/card back.jpg"); */
 }
 
 #card #front,
 #card #back {
   display: block;
-  margin-left: auto;
-  margin-right: 80%;
-  height: 100%;
-  width: 100%;
   text-align: center;
-  position: absolute;
+  padding-bottom: 20px;
+  /* position: absolute; */
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
-  box-shadow: 3px 5px 20px 2px rgba(0, 0, 0, 0.25);
 }
 .formItem:first-child {
   /*margin-top: 20px;*/
@@ -103,24 +108,32 @@ button {
   text-align: center;
 }
 #card #front {
+  display: block;
   cursor: pointer;
-  transition: 0.2s;
+  transition: o.2s;
+  padding: 35px 15px 50px;
+  border-radius: 6px;
+  font-size: 22px;
 }
-#front: hover {
+/*
+#card #front: hover {
   cursor: pointer;
   background: rgba(170, 0, 43, 0.5);
 }
+*/
 #card #back {
-  -webkit-transform: rotateY( 180deg );
-  -moz-transform: rotateY( 180deg );
-  -o-transform: rotateY( 180deg );
-  transform: rotateY( 180deg );
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 .container:first-child #card #front {
-  background: #eee;
+  transition: 0.2s;
+  /* background: #eee; */
 }
+
 .container:first-child #card #back {
-  background: #eee;
+  /* background-image: url("./../img/card back.jpg"); */
 }
 
 .content {
@@ -129,15 +142,17 @@ button {
   text-align: left;
 }
 
-#logo{
-  position: absolute;
+#logo {
+  /* position: absolute;
   bottom: 8px;
-  right: 16px;  
+  right: 16px; */
+  margin-top: 60px;
+  text-align: right;
 }
 
-#area1QuestionsDiv{
+#area1QuestionsDiv {
   text-align: center;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   width: 100%;
 }
@@ -151,24 +166,24 @@ button {
   width: 100%;
   text-align: left;
   margin: 10px;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
 }
 
-#area1Table{
+#area1Table {
   text-align: center;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   table-layout: fixed;
-  border:none !important;
+  border: none !important;
 }
 
-#area2Table{
+#area2Table {
   text-align: center;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   table-layout: fixed;
-  border:none !important;
+  border: none !important;
 }
 
 #area2QuestionColumn {
@@ -176,29 +191,33 @@ button {
   text-align: right;
   margin: 10px;
 }
-#area2LblQuestion {}
-#area2QuestionsDiv {}
+#area2LblQuestion {
+}
+#area2QuestionsDiv {
+}
 
 #area2AnswersColumn {
   width: 100%;
   text-align: left;
   margin: 10px;
 }
-#area2LblAnswers {}
-#area2AnswersDiv {}
+#area2LblAnswers {
+}
+#area2AnswersDiv {
+}
 
-#nameInput{
+#nameInput {
   text-align: center;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   border-radius: 15px;
   border: 2px solid #555555;
   transition: 0.3s;
   width: 180px;
 }
-#surnameInput{
+#surnameInput {
   text-align: center;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   border-radius: 15px;
   border: 2px solid #555555;
@@ -207,17 +226,17 @@ button {
 }
 
 #teamInfo {
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   display: none;
 }
 
 #teamInfo2 {
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   display: none;
   color: black;
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
   position: relative;
   z-index: 1;
@@ -229,17 +248,17 @@ button {
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
-#teamName{
+#teamName {
   text-align: center;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   border-radius: 15px;
   border: 2px solid #555555;
   transition: 0.3s;
   width: 180px;
 }
-#joinTeam{
-  font-family: 'Quicksand';
+#joinTeam {
+  font-family: "Quicksand";
   font-size: 16px;
   background-color: white;
   color: black;
@@ -250,7 +269,7 @@ button {
   width: 196px;
 }
 #joinTeam:hover {
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   background-color: #555555;
   color: white;
@@ -260,19 +279,19 @@ button {
   width: 90px;
 }
 
-#welcomeText{
+#welcomeText {
   text-align: center;
 }
-#teamsInfo{
+#teamsInfo {
   text-align: center;
 }
-#congratulationsText{
+#congratulationsText {
   text-align: center;
 }
 #area3 {
   text-align: center;
   font-color: #000;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
   display: none;
   position: relative;
@@ -282,45 +301,46 @@ button {
   width: 50%;
   /*background-color: #c43f56;*/
 }
-#spinner{
-  width:40%;
+#spinner {
+  width: 40%;
   cursor: pointer;
-  width:617px;
-  height:617px;
+  width: 617px;
+  height: 617px;
   transition: 0.3s;
 }
 /*------------------------------------*/
 
 #lblWheelInfo {
-text-transform: uppercase;
-color: #000;
-  margin-right: 2%;
-  padding-bottom: 70px;
+  text-transform: uppercase;
+  color: #000;
   border-width: 3px;
   border-color: #771929;
   background-color: rgba(255, 255, 255, 0.3);
-  z-index: -1;
+  width: 194px;
+  padding: 0 15px 15px;
+  display: inline-block;
+  margin-top: 15px;
+  line-height: 20px;
+  padding-bottom: 25px;
 }
 
 #gameInfo {
   background-color: white;
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   display: none;
   position: absolute;
   z-index: 1;
   left: 88%;
   text-align: right;
   opacity: 0.5;
-
-
 }
 #area1 {
   display: none;
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   color: black;
-  
+
   text-align: center;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
   position: relative;
   z-index: 1;
@@ -356,14 +376,18 @@ color: #000;
 #nextBtnDivArea1 {
   width: 100%;
 }
+#area2Info{
+  font-size: 120%;
+}
+
 
 #area2 {
   display: none;
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   color: black;
 
   text-align: center;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
   position: relative;
   z-index: 1;
@@ -385,7 +409,7 @@ button.btnSend {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  color: #03446A;
+  color: #03446a;
   background: #fff;
   border: 0;
   border-radius: 3;
@@ -401,22 +425,21 @@ button.btnSend {
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 #restartBtn {
   width: 20%;
 }
 
-
 #rulesLink {
   position: right;
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   color: #a48f8c;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .voteLeaderBtn {
-font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   background-color: white;
   color: black;
@@ -428,7 +451,7 @@ font-family: 'Quicksand';
 }
 
 .voteLeaderBtn:hover {
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: 16px;
   background-color: #555555;
   color: white;
@@ -445,7 +468,8 @@ font-family: 'Quicksand';
   padding-bottom: 5%;
 }
 
-.lblOption {}
+.lblOption {
+}
 .lblOptionFinal {
   color: white;
   background-color: black;
@@ -454,11 +478,9 @@ font-family: 'Quicksand';
 .topic {
   text-align: right;
   font-family: Quicksand, serif;
-  font-size: 100%;
+  font-size: 200%;
   color: black;
 }
-
-
 
 .inputRadioOption {
   cursor: pointer;
@@ -467,7 +489,6 @@ font-family: 'Quicksand';
 
 .inputRadioOption:hover {
   background: black;
-  
 }
 
 .otherAnswers {
@@ -475,15 +496,14 @@ font-family: 'Quicksand';
 }
 
 #question {
-
 }
 
 .lblScore {
   font-size: 300%;
 }
 
-.lblResponse {
-transform: italic;
+#label.lblResponse {
+  transform: italic;
 }
 
 #beforeBtnDivArea1 {
@@ -510,7 +530,6 @@ transform: italic;
   color: red;
 }
 
-
 #nextBtnDivArea3 {
   cursor: pointer;
   transition: 0.2s;
@@ -519,62 +538,181 @@ transform: italic;
   color: red;
 }
 
-.optionSelected {
-  transition: 0.2s;
-  color: red;
-  background-color: grba(255, 255, 255, 0.8);
+#lbl_question_option_0 {
+  border: 2px solid #fff;
+  padding: 4px;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 2px;
-}
-.optionSelected:hover {
-  color: red;
-}
-.optionNoSelected:hover {
-  color: red;
+  transition: 0.4s;
 }
 
-#lblArea{
+#lbl_question_option_1 {
+  border: 2px solid #fff;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+#lbl_question_option_2 {
+  border: 2px solid #fff;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+#lbl_question_option_3 {
+  border: 2px solid #fff;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+#lbl_question_option_4 {
+  border: 2px solid #fff;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+#lbl_question_option_5 {
+  border: 2px solid #fff;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+#lbl_question_option_0:hover {
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#lbl_question_option_1:hover {
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#lbl_question_option_2:hover {
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#lbl_question_option_3:hover {
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#lbl_question_option_4:hover {
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#lbl_question_option_5:hover {
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#lbl_question_option_6 {
+  display: none;
+}
+
+.optionSelected {
+  transition: 0.4s;
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.optionSelected:hover {
+  transition: 0.4s;
+  color: white;
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.optionNoSelected:hover {
+  transition: 0.4s;
+  color: black;
+  cursor: pointer;
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#lblArea {
   font-size: 300%;
   color: #000;
-  
+
   text-decoration: none;
   text-transform: uppercase;
-  
+
   display: inline-block;
   position: relative;
-  
-  -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.3) 30%, #000 50%, rgba(0,0,0,.3) 70%);
+
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    rgba(0, 0, 0, 0.3) 30%,
+    #000 50%,
+    rgba(0, 0, 0, 0.3) 70%
+  );
   -webkit-mask-size: 200%;
   animation: shine 2s linear infinite;
 }
 
 @keyframes shine {
-  from { -webkit-mask-position: 150%; }
-  to { -webkit-mask-position: -50%; }
+  from {
+    -webkit-mask-position: 150%;
+  }
+  to {
+    -webkit-mask-position: -50%;
+  }
 }
 
-
-
-
-
-#lblLightBoxArea1Header{
+#lblLightBoxArea1Header {
   text-decoration: none;
   text-transform: uppercase;
   padding-bottom: 10px;
   display: inline-block;
   position: relative;
-  
-  -webkit-mask-image: linear-gradient(-75deg, rgba(255,255,255,.4) 30%, #eee 50%, rgba(255,255,255,.4) 70%);
+
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    rgba(255, 255, 255, 0.4) 30%,
+    #eee 50%,
+    rgba(255, 255, 255, 0.4) 70%
+  );
   -webkit-mask-size: 200%;
   animation: shine 2s linear infinite;
 }
 
 @keyframes shine {
-  from { -webkit-mask-position: 150%; }
-  to { -webkit-mask-position: -50%; }
+  from {
+    -webkit-mask-position: 150%;
+  }
+  to {
+    -webkit-mask-position: -50%;
+  }
 }
-
-
 
 .area1 .tooltiptext {
   visibility: hidden;
@@ -584,7 +722,7 @@ transform: italic;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-  
+
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -592,21 +730,221 @@ transform: italic;
   right: 105%;
 }
 
-
-
-#circleText{
+#circleText {
   text-decoration: none;
   text-transform: uppercase;
-  
+
   display: inline-block;
   position: relative;
-  
-  -webkit-mask-image: linear-gradient(-75deg, rgba(255,255,255,.4) 30%, #eee 50%, rgba(255,255,255,.4) 70%);
+
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    rgba(255, 255, 255, 0.4) 30%,
+    #eee 50%,
+    rgba(255, 255, 255, 0.4) 70%
+  );
   -webkit-mask-size: 200%;
   animation: shine 2s linear infinite;
 }
 
 @keyframes shine {
-  from { -webkit-mask-position: 150%; }
-  to { -webkit-mask-position: -50%; }
+  from {
+    -webkit-mask-position: 150%;
+  }
+  to {
+    -webkit-mask-position: -50%;
+  }
+}
+
+/*New style*/
+.overInfo {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f9f9f9;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 6px 12px;
+  font-weight: 100;
+}
+
+div#right-sidebar {
+  position: absolute;
+  right: 0;
+}
+
+element.style {
+  display: block;
+}
+#gameInfo {
+  position: static;
+}
+
+#beforeBtnDivArea1,
+#beforeBtnDivArea2,
+#beforeBtnDivArea3,
+#nextBtnDivArea1,
+#nextBtnDivArea2,
+#nextBtnDivArea3 {
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  margin: 0px auto;
+  padding: 10px 4px;
+  border-radius: 6px;
+  /* background: #0f77ca; */
+  color: #000;
+  margin-top: 25px;
+}
+
+#beforeBtnDivArea1:hover,
+#beforeBtnDivArea2:hover,
+#beforeBtnDivArea3:hover,
+#nextBtnDivArea1:hover,
+#nextBtnDivArea2:hover,
+#nextBtnDivArea3:hover {
+  color: red;
+  /* background: #0f77ca; */
+}
+
+#beforeBtnDivArea1 i,
+#beforeBtnDivArea2 i,
+#beforeBtnDivArea3 i,
+#nextBtnDivArea1 i,
+#nextBtnDivArea2 i,
+#nextBtnDivArea3 i {
+  /* font-size: 24px; */
+}
+
+#beforeBtnDivArea1 span,
+#beforeBtnDivArea2 span,
+#beforeBtnDivArea3 span,
+#nextBtnDivArea1 span,
+#nextBtnDivArea2 span,
+#nextBtnDivArea3 span {
+  font-size: 24px;
+  margin-right: 8px;
+  position: relative;
+  top: -4px;
+}
+
+label.lblScore {
+  display: block;
+  width: 100%;
+}
+
+#score-wrapper {
+  display: block;
+  width: 100%;
+  margin: 25px 0;
+}
+
+.voteLeaderBtn:focus,
+input:focus {
+  outline: none;
+  border-color: #0f77ca;
+}
+
+.voteLeaderBtn {
+  display: inline-block !important;
+}
+
+#area1Table,
+#area2Table,
+#area3Table {
+  flex-wrap: wrap;
+}
+
+#area1QuestionColumn,
+#area2QuestionColumn,
+#area3QuestionColumn {
+  text-align: left;
+  background: #ccc;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#area1LblAnswers,
+#area2LblAnswers,
+#area3LblAnswers {
+  display: block;
+}
+
+#question {
+  color: #000;
+  font-weight: bold;
+}
+
+#area1AnswersDiv > div,
+#area2AnswersDiv > div,
+#area3AnswersDiv > div {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 8px 14px !important;
+  border-color: #ccc !important;
+  width: 96%;
+}
+
+#area1AnswersDiv > div:hover,
+#area2AnswersDiv > div:hover,
+#area3AnswersDiv > div:hover {
+  /* background: #2196f3;
+  color: #fff;
+  border-color: #167bcc !important; */
+  border-color: #000 !important;
+}
+
+.optionSelected {
+  background: #4caf50;
+}
+
+.lblScore {
+  color: #ff9800;
+}
+
+#area1,
+#area2,
+#area3 {
+  max-width: 800px;
+}
+
+#area1LblQuestion,
+#area2LblQuestion,
+#area3LblQuestionP{
+  text-align: left;
+  margin-top: 15px;
+}
+#area1LblAnswers,
+#area2LblAnswers,
+#area3LblAnswers {
+  text-align: left;
+  margin-left: 12px;
+  margin-top: 15px;
+}
+
+.personalEvaluation .lblOption,
+.personalEvaluation .lblOptionFinal {
+  text-align: left;
+  padding: 15px !important;
+  margin: 10px 0;
+}
+
+#area1AnswersColumn > div,
+#area2AnswersColumn > div,
+#area3AnswersColumn > div {
+  display: flex;
+  width: 100%;
+}
+
+#area3 .cards #card #back {
+  display: none;
+}
+
+#card.flipped #front {
+  display: none;
+}
+
+#area3 .cards #card.flipped #back {
+  display: block;
 }
