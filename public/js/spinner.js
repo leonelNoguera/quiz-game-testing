@@ -67,13 +67,12 @@ function sendArea()
     if ((!lockWheel) && (pickedArea != undefined))
     {
         lockWheel = true;
-        socket.emit('spin', JSON.stringify({
+        socket.emit('selectedArea', {
             userName: userName, 
             userSurname: userSurname, 
-            roomCode: roomCode, 
             teamName: teamName, 
             area: pickedArea
-        }));
+        });
         if (pickedArea == 1)
         {
             document.getElementById('lblArea').innerHTML = 'DILEMMAS';
@@ -97,13 +96,12 @@ function spin(randomSpin = Math.random())
         //var randomSpin = Math.random();
         if (!lockWheel)
         {
-            socket.emit('startSpin', JSON.stringify({
+            socket.emit('startSpin', {
                 userName: userName, 
                 userSurname: userSurname, 
-                roomCode: roomCode, 
                 teamName: teamName, 
                 randomSpin: randomSpin
-            }));
+            });
         }
         container.on("click", null);
         //all slices have been seen, all done
