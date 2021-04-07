@@ -4,6 +4,7 @@ var login = require('./lib/login.js');
 var voting = require('./lib/voting.js');
 var wheel = require('./lib/wheel.js');
 var disconnections = require('./lib/disconnections.js');
+var admin = require('./lib/admin.js');
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -17,20 +18,10 @@ server.listen(port, () => {
 app.use(express.static(path.join(__dirname, 'public')));
 io.on('connection', (socket) => {
   socket.on('adminLogin', (data) => {
-    if (data['password'] == 'Password123')
-    {
-      admin = socket.id;
-      data['password'] = undefined;
-      data['teams'] = game.teams;
-      data['questionsArea1'] = game.questions['area1'];
-      socket.emit('adminLogged', data);
-    }
+    admin.login(data, socket);
   });
-  socket.on('submitQuestionsArea1', (data) => {
-    if (data['password'] == 'Password123')
-    {
-      game.questions['area1'] = data['questionsArea1'];
-    }
+  socket.on('editQuestionsArea1', (data) => {
+    admin.editQuestionsArea1(data, socket);
   });
 	socket.on('update', (data) => {
 		login.update(data, socket);

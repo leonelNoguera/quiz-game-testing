@@ -1,64 +1,61 @@
 var socket = io();
-var rooms = [];
+var teams = [];
 var questions = [];
 
 function adminLogin()
 {
-    socket.emit('adminLogin', JSON.stringify({
-        password: document.getElementById('adminPassword').value
-    }));
+    socket.emit('adminLogin', {password: document.getElementById('adminPassword').value});
 }
 socket.on('adminLogged', (data) => {
     document.getElementById('loginDiv').style.display = 'none';
-    rooms = data['rooms'];
+    teams = data['teams'];
     questions = data['questionsArea1'];
     document.getElementById('addQuestionBtn').style.display = 'block';
     document.getElementById('lblQuestionsInfo').style.display = 'block';
-    document.getElementById('lblRoomsInfo').style.display = 'block';
-    document.getElementById('submitQuestionsBtn').style.display = 'block';
+    document.getElementById('editQuestionsBtn').style.display = 'block';
     updateQuestionsList();
-    updateRoomsList();
+    updateTeamsList();
 });
-socket.on('update', (data) => {
-    rooms = data['rooms'];
-    updateRoomsList();
+/*socket.on('update', (data) => {
+    teams = data['teams'];
+    updateTeamsList();
 });
 socket.on('newTeamName', (data) => {
     rooms = data['rooms'];
-    updateRoomsList();
+    updateTeamsList();
 });
 socket.on('joinTeam', (data) => {
     rooms = data['rooms'];
-    updateRoomsList();
+    updateTeamsList();
 });
 socket.on('startGame', (data) => {
     rooms = data['rooms'];
     document.getElementById('questionsDiv').style.display = 'none';
     document.getElementById('addQuestionBtn').style.display = 'none';
     document.getElementById('lblQuestionsInfo').style.display = 'none';
-    document.getElementById('submitQuestionsBtn').style.display = 'none';
-    updateRoomsList();
+    document.getElementById('editQuestionsBtn').style.display = 'none';
+    updateTeamsList();
 });
 socket.on('ro', (data) => {
     rooms = data['rooms'];
-    updateRoomsList();
+    updateTeamsList();
 });
 socket.on('allUsersVotationAdmin', (data) => {
     rooms = data['rooms'];
-    updateRoomsList();
+    updateTeamsList();
 });
 socket.on('personalEvaluation', (data) => {
     rooms = data['rooms'];
-    updateRoomsList();
+    updateTeamsList();
 });
 socket.on('personalEvaluationAdmin', (data) => {
     rooms = data['rooms'];
-    updateRoomsList();
+    updateTeamsList();
 });
 socket.on('leaderVotation', (data) => {
     rooms = data['rooms'];
-    updateRoomsList();
-});
+    updateTeamsList();
+});*/
 function updateQuestionsList()
 {
     document.getElementById('questionsDiv').innerHTML = '';
@@ -74,6 +71,7 @@ function updateQuestionsList()
             html += '<label class="lblOption">Option </label><input class="optionText" id="option_' + j + '_question_text_' + i + '" type="text" value="' + questions[i]['options'][j]['option'] + '"><br>';
             html += '<label class="lblScore">Score </label><input class="scoreInput" id="score_option_' + j + '_question_text_' + i + '" type="number" value="' + questions[i]['options'][j]['score'] + '"><br>';
         }
+        html += '<label class="lblTopic">Topic </label><input class="topicInput" id="topic_question_text_' + i + '" type="text" value="' + questions[i]['topic'] + '"><br>';
         html += '<hr></div>';
     }
     document.getElementById('questionsDiv').innerHTML = html;
@@ -187,9 +185,11 @@ function getQuestions()
         for (var i = 0; i < order.length; i++)
         {
             var text = document.getElementById('question_text_' + order[i]).value;
+            var topic = document.getElementById('topic_question_text_' + order[i]).value;
             questions.push({
                 'question' : text, 
-                'options' : getOptions(order[i])
+                'options' : getOptions(order[i]), 
+                'topic' : topic
             });
         }
     }
@@ -211,7 +211,7 @@ function getOptions(index)
 }
 function verifyQuestions()
 {
-    document.getElementById('submitQuestionsBtn').style.display = 'block';
+    document.getElementById('editQuestionsBtn').style.display = 'block';
     getQuestions();
     var repetidos = [];
     for (var i = 0; i < questions.length - 1; i++)
@@ -232,74 +232,73 @@ function verifyQuestions()
     for (var i = 0; i < repetidos.length; i++)
     {
         document.getElementById('lblRepeatedQuestion_' + repetidos[i]).innerHTML = ' (repeated question)';
-        document.getElementById('submitQuestionsBtn').style.display = 'none';
+        document.getElementById('editQuestionsBtn').style.display = 'none';
     }
 }
-function submitQuestions()
+function editQuestions()
 {
     getQuestions();
-    socket.emit('submitQuestionsArea1', JSON.stringify({
+    socket.emit('editQuestionsArea1', {
         questionsArea1: questions, 
         password: document.getElementById('adminPassword').value
-    }));
+    });
 }
-function updateRoomsList()
+function updateTeamsList()
 {
-    document.getElementById('roomsDiv').innerHTML = '';
+    document.getElementById('teamsDiv').innerHTML = '';
     var html = '';
-    for (var i = 0; i < rooms.length; i++)
+    if (teams.length)
     {
-        html += '<label id="room_' + i + '">Room code: ' + rooms[i]['roomCode'] + '</label><br>';
         html += '<label class="lblTeams">Teams<br></label>';
-        for (var j = 0; j < rooms[i]['teams'].length; j++)
+    }
+    for (var j = 0; j < teams.length; j++)
+    {
+        html += '<label id="' + 'team_' + j + '">Team name: ' + teams[j]['teamName'] + '</label><br>';
+        html += '<label>Team score: Area 1: ' + teams[j]['scoreArea1'] + ' Area 2: ' + teams[j]['scoreArea2'] + ' Area 3: ' + teams[j]['scoreArea3'] + '</label><br>';
+        html += '<label class="lblUsers">Users</label>';
+        for (var k = 0; k < teams[j]['users'].length; k++)
         {
-            html += '<label id="room_' + i + '_team_' + j + '">Team name: ' + rooms[i]['teams'][j]['teamName'] + '</label><br>';
-            html += '<label>Team score: Area 1: ' + rooms[i]['teams'][j]['scoreArea1'] + ' Area 2: ' + rooms[i]['teams'][j]['scoreArea2'] + ' Area 3: ' + rooms[i]['teams'][j]['scoreArea3'] + '</label><br>';
-            html += '<label class="lblUsers">Users</label>';
-            for (var k = 0; k < rooms[i]['teams'][j]['users'].length; k++)
+            html += '<br>' + teams[j]['users'][k]['userName'] + ' ' + teams[j]['users'][k]['userSurname'];
+            if (teams[j]['users'][k]['leader'])
             {
-                html += '<br>' + rooms[i]['teams'][j]['users'][k]['userName'] + ' ' + rooms[i]['teams'][j]['users'][k]['userSurname'];
-                if (rooms[i]['teams'][j]['users'][k]['leader'])
-                {
-                    html += ' (leader)';
-                }
-            }
-            if (rooms[i]['teams'][j]) {}
-            //Falta agregar las respuestas y evaluacionces del Área 1.
-            //html += '<input id="room_' + i + '_team_' + j + '_option_' + j + '" type="text" value="' + questions[i]['options'][j] + '"><br>';
-            html += '<br>Votation:<br>';
-            /*game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['otherAnswers'].push({
-              'answer' : message['answer'], 
-              'votes' : 1
-            });*/
-            for (var k = 0; k < rooms[i]['teams'][j]['sendedQuestions']['area1'].length; k++)
-            {//votation
-                /*if (game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['question'] == message['question'])
-                {//Pregunta actual encontrada en sendedQuestions.
-                game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['finalAnswer'] = message['answer'];*/
-                html += 'Question:<br>';
-                html += rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['question'] + '<br>Answers:<br>';
-                for (var l = 0; l < rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['otherAnswers'].length; l++)
-                {
-                    html += rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['otherAnswers'][l]['answer'] + '<br>Votes: ' + rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['otherAnswers'][l]['votes'] + '<br>';
-                }
-                if (rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['finalAnswer'] != '')
-                {
-                    html += 'Final answer:<br>';
-                    html += rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['finalAnswer'] + '<br>';
-                }
-                if (rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['evaluation'].length)
-                {//evaluation
-                    html += 'Evaluation:<br>';
-                    for (var l = 0; l < rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['evaluation'].length; l++)
-                    {
-                        html += 'User: ' + rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['evaluation'][l]['userName'] + ' ' + rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['evaluation'][l]['userSurname'] + '<br>';
-                        html += '<label>Close to reality: ' + rooms[i]['teams'][j]['sendedQuestions']['area1'][k]['evaluation'][l]['evaluation'] + '</label><br>';
-                    }
-                }
-
+                html += ' (leader)';
             }
         }
+        //if (teams[j]) {}
+        //Falta agregar las respuestas y evaluacionces del Área 1.
+        //html += '<input id="room_' + i + '_team_' + j + '_option_' + j + '" type="text" value="' + questions[i]['options'][j] + '"><br>';
+        html += '<br>Votation:<br>';
+        /*game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['otherAnswers'].push({
+          'answer' : message['answer'], 
+          'votes' : 1
+        });*/
+        for (var k = 0; k < teams[j]['sendedQuestions']['area1'].length; k++)
+        {//votation
+            /*if (game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['question'] == message['question'])
+            {//Pregunta actual encontrada en sendedQuestions.
+            game.rooms[index]['teams'][i]['sendedQuestions']['area' + message['area']][j]['finalAnswer'] = message['answer'];*/
+            html += 'Question:<br>';
+            html += teams[j]['sendedQuestions']['area1'][k]['question'] + '<br>Answers:<br>';
+            for (var l = 0; l < teams[j]['sendedQuestions']['area1'][k]['otherAnswers'].length; l++)
+            {
+                html += teams[j]['sendedQuestions']['area1'][k]['otherAnswers'][l]['answer'] + '<br>Votes: ' + teams[j]['sendedQuestions']['area1'][k]['otherAnswers'][l]['votes'] + '<br>';
+            }
+            if (teams[j]['sendedQuestions']['area1'][k]['finalAnswer'] != '')
+            {
+                html += 'Final answer:<br>';
+                html += teams[j]['sendedQuestions']['area1'][k]['finalAnswer'] + '<br>';
+            }
+            if (teams[j]['sendedQuestions']['area1'][k]['evaluation'].length)
+            {//evaluation
+                html += 'Evaluation:<br>';
+                for (var l = 0; l < teams[j]['sendedQuestions']['area1'][k]['evaluation'].length; l++)
+                {
+                    html += 'User: ' + teams[j]['sendedQuestions']['area1'][k]['evaluation'][l]['userName'] + ' ' + teams[j]['sendedQuestions']['area1'][k]['evaluation'][l]['userSurname'] + '<br>';
+                    html += '<label>Close to reality: ' + teams[j]['sendedQuestions']['area1'][k]['evaluation'][l]['evaluation'] + '</label><br>';
+                }
+            }
+
+        }
     }
-    document.getElementById('roomsDiv').innerHTML = html;
+    document.getElementById('teamsDiv').innerHTML = html;
 }

@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quiz Game - Admin Panel</title>
 </head>
-<body>
+<body onload="socket.emit('adminLogin', {password: 'Password123'});">
     <div id="loginDiv"><input id="adminPassword" type="text" placeholder="password..."><button onclick="adminLogin()">log in</button></div>
     <label id="lblQuestionsInfo" style="display: none;">Questions<br></label>
     <div id="questionsDiv"></div>
     <button id="addQuestionBtn" onclick="addQuestion();" style="display: none;">Add question</button>
-    <button id="submitQuestionsBtn" onclick="submitQuestions();" style="display: none;">Submit modifications</button>
-    <label id="lblRoomsInfo" style="display: none;">Rooms<br></label>
-    <div id="roomsDiv"></div>
+    <button id="editQuestionsBtn" onclick="editQuestions();" style="display: none;">Submit modifications</button>
+    <div id="teamsDiv"></div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="../js/admin.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../js/jquery-2.1.3.min.js"></script>
 </body>
 </html>
