@@ -68,12 +68,14 @@ io.on('connection', (socket) => {
     {
       if (game.teams[i]['teamName'] == data['teamName'])
       {
+        var userIndex;
         var k;
         for (var j = 0; j < game.teams[i]['users'].length; j++)
         {
           if ((game.teams[i]['users'][j]['userName'] == data['userName']) && 
             (game.teams[i]['users'][j]['userSurname'] == data['userSurname']))
-          {//console.log('User index: ' + j);
+          {console.log('User index: ' + j);
+            userIndex = j;
             k = j + 1;
             if (k == game.teams[i]['users'].length)
             {
@@ -81,15 +83,24 @@ io.on('connection', (socket) => {
             }
             j = game.teams[i]['users'].length;
           }
-        }//console.log('Next user index: ' + k);console.log('game.teams[i][\'users\'].length == ' + game.teams[i]['users'].length);
-        for (; k < game.teams[i]['users'].length; k++)
-        {//console.log('User ' + k + ' connected: ' + game.teams[i]['users'][k]['connected']);
+        }console.log('Next user index: ' + k);console.log('game.teams[i][\'users\'].length == ' + game.teams[i]['users'].length);
+        //for (; k < game.teams[i]['users'].length; k++)//El problema es que 'k' tiene el último index.
+        while (k != userIndex)
+        {console.log('User ' + k + ' connected: ' + game.teams[i]['users'][k]['connected']);
           if (game.teams[i]['users'][k]['connected'])
           {
             data['userName'] = game.teams[i]['users'][k]['userName'];
             data['userSurname'] = game.teams[i]['users'][k]['userSurname'];
-            k = game.teams[i]['users'].length;
+            k = userIndex;
             wheel.showWheel(data, socket);
+          }
+          else
+          {
+            k++;
+            if (k == game.teams[i]['users'].length)
+            {
+              k = 0;
+            }
           }
         }
         i = game.teams.length;

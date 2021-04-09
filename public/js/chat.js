@@ -76,11 +76,10 @@ socket.on('userConnected', (data) => {console.log(data);
 });
 socket.on('continueNewLeader', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
-    {
+    {console.log('data == ');console.log(data);//Pendiente solucionar cuando se desconecta algún usuario que no es el líder mientras votan en el área 1.
         $("#area1").prop('disabled', false);
         $("#area2").prop('disabled', false);
         $("#area3").prop('disabled', false);
-        //document.getElementById('teamInfo2').style.display = 'none';
         if (document.getElementById('spinner').style.display == 'block')
         {
             showSpinner(data);
