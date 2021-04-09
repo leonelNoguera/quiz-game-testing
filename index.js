@@ -18,16 +18,16 @@ server.listen(port, () => {
 app.use(express.static(path.join(__dirname, 'public')));
 io.on('connection', (socket) => {
   socket.on('adminLogin', (data) => {
-    admin.login(data, socket);
+    admin.login(data, socket);//Pendiente ver por qué no funciona bien con 2 teams
   });
   socket.on('editQuestionsArea1', (data) => {
     admin.editQuestionsArea1(data, socket);
   });
-	socket.on('update', (data) => {
-		login.update(data, socket);
+	socket.on('userConnected', (data) => {
+		login.userConnected(data, socket);
 	});
   socket.on('voteLeader', (data) => {
-    voting.voteLeader(socket, data);
+    voting.voteLeader(data, socket);
   });
   socket.on('selectedArea', (data) => {
     wheel.selectedArea(data, socket);
@@ -51,16 +51,49 @@ io.on('connection', (socket) => {
     voting.personalEvaluation(data, socket);
   });
   socket.on('questionArea2', (data) => {
-    area2.question(socket, data);
+    area2.question(data, socket);
   });
   socket.on('showTeamInfo', (data) => {
     socket.emit('showTeamInfo', data);
     socket.broadcast.emit('showTeamInfo', data);
   });
-  socket.on('disconnect', () => {//Pendiente reiniciar cuando se van todos los de un mismo equipo.
-    disconnections.disconnect(socket);
+  socket.on('disconnect', () => {
+    disconnections.userDisconnected(socket);
 	});
   socket.on('showSpinner', (data) => {
     wheel.showWheel(data, socket);
+  });
+  socket.on('nextUserWheel', (data) => {//console.log(data);
+    for (var i = 0; i < game.teams.length; i++)
+    {
+      if (game.teams[i]['teamName'] == data['teamName'])
+      {
+        var k;
+        for (var j = 0; j < game.teams[i]['users'].length; j++)
+        {
+          if ((game.teams[i]['users'][j]['userName'] == data['userName']) && 
+            (game.teams[i]['users'][j]['userSurname'] == data['userSurname']))
+          {//console.log('User index: ' + j);
+            k = j + 1;
+            if (k == game.teams[i]['users'].length)
+            {
+              k = 0;
+            }
+            j = game.teams[i]['users'].length;
+          }
+        }//console.log('Next user index: ' + k);console.log('game.teams[i][\'users\'].length == ' + game.teams[i]['users'].length);
+        for (; k < game.teams[i]['users'].length; k++)
+        {//console.log('User ' + k + ' connected: ' + game.teams[i]['users'][k]['connected']);
+          if (game.teams[i]['users'][k]['connected'])
+          {
+            data['userName'] = game.teams[i]['users'][k]['userName'];
+            data['userSurname'] = game.teams[i]['users'][k]['userSurname'];
+            k = game.teams[i]['users'].length;
+            wheel.showWheel(data, socket);
+          }
+        }
+        i = game.teams.length;
+      }
+    }
   });
 });

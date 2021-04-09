@@ -14,7 +14,7 @@ var options;
 var scoreArea1 = 0;
 var scoreArea2 = 0;
 var scoreArea3 = 0;
-socket.on('update', (data) => {console.log(data);
+socket.on('userConnected', (data) => {console.log(data);
     if ((data['userName'] != undefined) && (data['userSurname'] != undefined) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
         if ((data['userName'] == userName) && (data['userSurname'] == userSurname))
@@ -80,44 +80,18 @@ socket.on('continueNewLeader', (data) => {
         $("#area1").prop('disabled', false);
         $("#area2").prop('disabled', false);
         $("#area3").prop('disabled', false);
-        document.getElementById('teamInfo2').style.display = 'none';
+        //document.getElementById('teamInfo2').style.display = 'none';
+        if (document.getElementById('spinner').style.display == 'block')
+        {
+            showSpinner(data);
+        }
     }
 });
 var started = false;
 socket.on('showSpinner', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
-        step = 'wheel';
-        document.getElementById('lblWheelInfo').innerHTML = '<br>' + data['userName'] + ' ' + data['userSurname'] + ' spins the wheel';
-        pickedArea = undefined;
-        if ((data['userName'] == userName) && 
-            (data['userSurname'] == userSurname))
-        {
-            lockWheel = false;
-        }
-        else
-        {
-            if ((data['status'] == undefined) || (data['status'] != 'onlyWheel'))
-            {
-                lockWheel = true;
-            }
-        }
-        document.getElementById('divLogin').style.display = 'none';
-        document.getElementById('lblArea').innerHTML = '';
-        //document.getElementById('statusInfo').innerHTML = data['status'];
-        started = true;
-        //updateUsersInfo();
-        document.getElementById('restartPopup').style.display = 'none';
-        document.getElementById('body').style.backgroundColor = "#eee";
-        document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
-        
-        document.getElementById('area3').style.display = 'none';
-        document.getElementById('area2').style.display = 'none';
-        document.getElementById('area1').style.display = 'none';
-        document.getElementById('spinner').style.display = 'block';
-
-        document.getElementById('teamInfo').style.display = 'none';
-        showGameInfo();
+        showSpinner(data);
     }
 });
 socket.on('startSpin', (data) => {
@@ -418,7 +392,9 @@ function showNextStep()
             document.getElementById('nextBtnDivArea2').style.display = 'none';
         break;
         case 'showSpinner':
-            socket.emit('showSpinner', {
+            socket.emit('nextUserWheel', {
+                "userName" : userName, 
+                "userSurname" : userSurname, 
                 "teamName" : teamName
             });
             try
@@ -608,50 +584,6 @@ socket.on('showTeamInfo', (data) => {
         document.getElementById('restartPopup').style.display = 'none';
         vote = false;
         showTeamInfo(true);
-    }
-});
-socket.on('userDisconnected', (data) => {console.log(data);
-    if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
-    {
-        status = data['status'];
-        users = data['users'];
-        /*if (status == 'newLeader')
-        {
-            showTeamInfo(false, 'teamInfo2');
-        }*/
-        //if (status == 'newLeader')
-        {
-            if (started)
-            {
-                showTeamInfo((status == 'newLeader'), 'teamInfo2');
-            }
-            else
-            {
-                showTeamInfo((status == 'newLeader'), 'teamInfo');
-            }
-        }
-        /*if (status == 'oneUser')
-        {
-            if (started)
-            {
-                showTeamInfo(false, 'teamInfo2');
-            }
-            else
-            {
-                showTeamInfo(false, 'teamInfo');
-            }
-        }*/
-        /*data2 = data;
-        document.getElementById('teamInfo').style.display = 'none';
-        document.getElementById('gameInfo').style.display = 'none';
-        document.getElementById('spinner').style.display = 'none';
-        document.getElementById('area1').style.display = 'none';
-        document.getElementById('area2').style.display = 'none';
-        document.getElementById('area3').style.display = 'none';
-        document.getElementById('restartPopup').style.display = 'block';
-        document.getElementById('lblUserDisconnected').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' disconnected.';
-        document.getElementById('restartPopup').style.top = (document.documentElement.clientWidth * 0.3) + 'px';
-        document.getElementById('restartPopup').style.left = (document.documentElement.clientHeight * 0.4) + 'px';*/
     }
 });
 socket.on("connect_error", () => {

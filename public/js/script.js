@@ -5,6 +5,7 @@ function showTeamInfo(newLeader = false, element = 'teamInfo')
         document.getElementById('lblArea').innerHTML = '';
     }
     document.getElementById(element).style.display = 'block';
+    document.getElementById(element).innerHTML = '';
     var html = '';
     var tmp = [];
     console.log(users);
@@ -35,31 +36,30 @@ function showTeamInfo(newLeader = false, element = 'teamInfo')
         if ((users[k]['userName'] == userName) && 
             (users[k]['userSurname'] == userSurname))
         {
-            if (!users[k]['voteLeader'])
+            if (!users[k]['vote'])
             {
                 vote = false;
             }
             html += ' (you)';
         }
-        //if (k == indexLeaderElected)
         if (users[k]['leader'])
         {
             html += ' (leader)';
-        }
-        if ((users.length > 1) && (indexLeaderElected == -1) && (!vote))
+        }console.log(users.length, indexLeaderElected, users[k]['vote']);
+        if ((users.length > 1) && (indexLeaderElected == -1) && (!users[k]['vote']))
         {//Se debe habilitar la elección de lider.
             html += '<br><button class="voteLeaderBtn" id="vl_' + k + '" onclick="voteLeader(userName, userSurname, ' + k + ', \'' + users[k]['userName'] + '\', \'' + users[k]['userSurname'] + '\', ' + newLeader + ');">VOTE FOR LEADER</button>';
         }
     }
     html += '</div>';
     document.getElementById(element).innerHTML = html;
-    if (element == 'teamInfo2')
-    {
+    /*if (element == 'teamInfo2')
+    {//Pendiente ver si es necesario usar esto.
         $("#area1").prop('disabled', true);
         $("#area2").prop('disabled', true);
         $("#area3").prop('disabled', true);
         document.getElementById(element).innerHTML = '<br>PLEASE CHOOSE YOUR LEADER<br><br>' + document.getElementById(element).innerHTML;
-    }
+    }*/
 }
 function showGameInfo()
 {
@@ -110,11 +110,44 @@ function login()
         {
             userName = $('#nameInput').val().replace(regex, ' ').trim();
             userSurname = $('#surnameInput').val().replace(regex, ' ').trim();
-            socket.emit('update', {
+            socket.emit('userConnected', {
                 'userName' : userName, 
                 'userSurname' : userSurname, 
                 'teamName' : document.getElementById('teamName').value
             });
         }
     }
+}
+function showSpinner(data)
+{
+    step = 'wheel';
+    document.getElementById('lblWheelInfo').innerHTML = '<br>' + data['userName'] + ' ' + data['userSurname'] + ' spins the wheel';
+    pickedArea = undefined;
+    if ((data['userName'] == userName) && 
+        (data['userSurname'] == userSurname))
+    {
+        lockWheel = false;
+    }
+    else
+    {
+        if ((data['status'] == undefined) || (data['status'] != 'onlyWheel'))
+        {
+            lockWheel = true;
+        }
+    }
+    document.getElementById('divLogin').style.display = 'none';
+    document.getElementById('lblArea').innerHTML = '';
+    //document.getElementById('statusInfo').innerHTML = data['status'];
+    started = true;
+    //updateUsersInfo();
+    document.getElementById('restartPopup').style.display = 'none';
+    document.getElementById('body').style.backgroundColor = "#eee";
+    document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
+    document.getElementById('area3').style.display = 'none';
+    document.getElementById('area2').style.display = 'none';
+    document.getElementById('area1').style.display = 'none';
+    document.getElementById('spinner').style.display = 'block';
+
+    document.getElementById('teamInfo').style.display = 'none';
+    showGameInfo();
 }

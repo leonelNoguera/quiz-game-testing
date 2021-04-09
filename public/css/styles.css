@@ -78,7 +78,7 @@ button {
 }
 
 #area3 .cards #card {
-  background-image: url("./../img/card back.jpg");
+  /*background-image: url("./../img/card back.jpg");*/
 }
 
 #card.flipped {
