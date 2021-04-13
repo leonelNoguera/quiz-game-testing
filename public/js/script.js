@@ -1,3 +1,5 @@
+var newLeader;
+var element;
 function showTeamInfo(newLeader = false, element = 'teamInfo')
 {
     if (element == 'teamInfo')
@@ -73,10 +75,7 @@ function voteLeader(userNameVoting, userSurnameVoting, userIndex, userNameVoted,
     console.log(document.getElementById('vl_' + userIndex).innerHTML);
     if (document.getElementById('vl_' + userIndex).innerHTML.toLowerCase() != 'vote for leader')
     {
-        for (var i = 0; i < users.length; i++)
-        {
-            document.getElementById('vl_' + i).style.display = 'none';
-        }
+        document.getElementById('vl_' + userIndex).style.opacity = 0.5;
         vote = true;
         socket.emit('voteLeader', {
             newLeader: newLeader,
@@ -92,6 +91,7 @@ function voteLeader(userNameVoting, userSurnameVoting, userIndex, userNameVoted,
     {
         for (var i = 0; i < users.length; i++)
         {
+            document.getElementById('vl_' + i).style.opacity = 1;
             document.getElementById('vl_' + i).innerHTML = 'VOTE FOR LEADER';
             if (i == userIndex)
             {

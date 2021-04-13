@@ -64,7 +64,7 @@ socket.on('userConnected', (data) => {console.log(data);
             scoreArea2 = data['scoreArea2'];
             scoreArea3 = data['scoreArea3'];
             if (!started)
-            {
+            {//Pendiente ver si aparece data['newLeader'] en el backend antes de llegar a esta parte.
                 showTeamInfo(data['newLeader']);
             }
             else
@@ -473,7 +473,7 @@ socket.on('detailedExplanationOfAnswers', (data) => {
 });
 socket.on('leaderVotation', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
-    {
+    {console.log(data);
         document.getElementById('personalEvaluation').innerHTML = '';
         document.getElementById('area1Table').style.display = 'flex';
         document.getElementById('area1').style.display = 'block';
