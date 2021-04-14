@@ -9,10 +9,9 @@ socket.on('userDisconnected', (data) => {console.log(data);
         }*/
         if (started)
         {
-            /*if (users.length >= 2){}else{//Un sólo usuario}*/
             if (data['status'] == 'oneUser')
-            {//Pendiente ver qué hacer en este caso.
-                //window.location = window.location;
+            {
+                window.location = window.location;
             }
             else
             {
