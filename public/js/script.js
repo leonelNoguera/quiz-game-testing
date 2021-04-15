@@ -48,7 +48,8 @@ function showTeamInfo(newLeader = false, element = 'teamInfo')
         {
             html += ' (leader)';
         }console.log(users.length, indexLeaderElected, users[k]['vote']);
-        if ((users.length > 1) && (indexLeaderElected == -1) && (!users[k]['vote']))
+        //if ((users.length > 1) && (indexLeaderElected == -1) && (!users[k]['vote']))
+        if ((users.length > 1) && (indexLeaderElected == -1))
         {//Se debe habilitar la elección de lider.
             html += '<br><button class="voteLeaderBtn" id="vl_' + k + '" onclick="voteLeader(userName, userSurname, ' + k + ', \'' + users[k]['userName'] + '\', \'' + users[k]['userSurname'] + '\', ' + newLeader + ');">VOTE FOR LEADER</button>';
         }
@@ -137,9 +138,7 @@ function showSpinner(data)
     }
     document.getElementById('divLogin').style.display = 'none';
     document.getElementById('lblArea').innerHTML = '';
-    //document.getElementById('statusInfo').innerHTML = data['status'];
     started = true;
-    //updateUsersInfo();
     document.getElementById('restartPopup').style.display = 'none';
     document.getElementById('body').style.backgroundColor = "#eee";
     document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";

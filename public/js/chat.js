@@ -38,31 +38,20 @@ socket.on('userConnected', (data) => {console.log(data);
                 users = data['users'];
             }
         }
-        //for (var j = 0; j < teams.length; j++)
+        for (var k = 0; k < users.length; k++)
         {
-            //if ((teams[j]['teamName'] == data['teamName']) && (data['teamName'] == teamName))
-            {
-                //var leader = false;
-                //for (var k = 0; k < teams[j]['users'].length; k++)
-                for (var k = 0; k < users.length; k++)
-                {
-                    if ((users[k]['userName'] == userName) && 
-                        (users[k]['userSurname'] == userSurname) && 
-                        (!users[k]['vote']) && 
-                        (!users[k]['leader']))
-                    {//Ver que no sea el lider.
-                        vote = false;
-                    }
-                }
+            if ((users[k]['userName'] == userName) && 
+                (users[k]['userSurname'] == userSurname) && 
+                (!users[k]['vote']) && 
+                (!users[k]['leader']))
+            {//Ver que no sea el lider.
+                vote = false;
             }
         }
         if (((data['userName'] == userName) && (data['userSurname'] == userSurname)) || 
             ((teamName != undefined) && (data['teamName'] == teamName))
         )
         {
-            scoreArea1 = data['scoreArea1'];
-            scoreArea2 = data['scoreArea2'];
-            scoreArea3 = data['scoreArea3'];
             if (!started)
             {//Pendiente ver si aparece data['newLeader'] en el backend antes de llegar a esta parte.
                 showTeamInfo(data['newLeader']);
@@ -242,7 +231,7 @@ socket.on('area2Question', (data) => {
         document.getElementById('area2AnswersDiv').innerHTML = html;
     }
 });
-socket.on('area3Card', (data) => {
+socket.on('area3Card', (data) => {console.log(data);//Ver por qué no voltea para los otros usuarios.
     if ((data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
     {console.log(data['userName'] + ' ' + data['userSurname']);
         userPlay = true;
