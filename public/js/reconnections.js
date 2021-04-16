@@ -39,6 +39,33 @@ socket.on('userReconnected', (data) => {console.log(data);
                 //document.getElementById('teamInfo').style.display = 'none';
                 showGameInfo();
                 //Ver en qué etapa está.
+                if (data['status'] == 'wheel')
+                {
+                    var userUsingWheel;
+                    for (var i = 0; i < users.length; i++)
+                    {
+                        if (users[i]['status'] == 'useTheWheel')
+                        {
+                            userUsingWheel = users[i];
+                        }
+                    }
+                    document.getElementById('lblWheelInfo').innerHTML = '<br>' + userUsingWheel['userName'] + ' ' + userUsingWheel['userSurname'] + ' spins the wheel';
+                    pickedArea = undefined;
+                    lockWheel = true;
+                    document.getElementById('divLogin').style.display = 'none';
+                    document.getElementById('lblArea').innerHTML = '';
+                    started = true;
+                    document.getElementById('restartPopup').style.display = 'none';
+                    document.getElementById('body').style.backgroundColor = "#eee";
+                    document.getElementById('body').style.backgroundImage = "url('./img/3.2.png')";
+                    document.getElementById('area3').style.display = 'none';
+                    document.getElementById('area2').style.display = 'none';
+                    document.getElementById('area1').style.display = 'none';
+                    document.getElementById('spinner').style.display = 'block';
+
+                    document.getElementById('teamInfo').style.display = 'none';
+                    showGameInfo();
+                }
                 if (data['status'] == 'answeringQuestionArea1')
                 {
                     document.getElementById('area1').style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
@@ -110,6 +137,7 @@ socket.on('userReconnected', (data) => {console.log(data);
                     nextStep = 'showFinalAnswer';
                     finalAnswer = data['finalAnswer'];
                     score = data['score'];
+                    scoreArea1 -= score;//Pendiente ver si funciona para evitar la descordinación en el score.
                     scoreTotal = data['scoreTotal'];
                     bestAnswerScore = data['bestAnswerScore'];
                     options = data['options'];
@@ -142,7 +170,7 @@ socket.on('userReconnected', (data) => {console.log(data);
                     document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
                 }
                 if (data['status'] == 'answeringQuestionArea2')
-                {
+                {//Pendiente ver si es necesario uno para cuando el usuario en turno ya respondió la pregunta.
                     document.getElementById('lblWheelInfo').innerHTML = '';
                     document.getElementById('spinner').style.display = 'none';
                     document.getElementById('area2').style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';

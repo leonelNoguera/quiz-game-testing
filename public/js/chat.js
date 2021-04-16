@@ -151,7 +151,8 @@ socket.on('showResultArea2', (data) => {console.log('data == ' + JSON.stringify(
         {
             document.getElementById('area2Info').innerHTML = '<br><br>' + data['userName'] + ' ' + data['userSurname'] + ' ANSWER IS ' + r + '!<br>YOUR SCORE:<br><label class="lblScore">' + data['score'] + '</label>';
         }
-        scoreArea2 += data['score'];
+        //scoreArea2 += data['score'];
+        scoreArea2 += data['scoreArea2'];
         showGameInfo();
     }
 });
@@ -433,6 +434,7 @@ socket.on('detailedExplanationOfAnswers', (data) => {
         bestAnswerScore = data['bestAnswerScore'];
         options = data['options'];
         topic = data['topic'];
+        scoreArea1 = data['scoreArea1'];
 
         var html = '';
         for (var i = 0; i < data['options'].length; i++)
@@ -458,6 +460,7 @@ socket.on('detailedExplanationOfAnswers', (data) => {
         document.getElementById('personalEvaluation').innerHTML = html;
         document.getElementById('nextBtnDivArea1').style.display = 'block';
         document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
+        showGameInfo();
     }
 });
 socket.on('leaderVotation', (data) => {
@@ -574,11 +577,22 @@ socket.on('showTeamInfo', (data) => {
         showTeamInfo(true);
     }
 });
-socket.on("connect_error", () => {
-  document.getElementById('restartPopup').style.display = 'block';
-  setTimeout(() => {
-    socket.connect();
-    document.getElementById('restartPopup').style.display = 'none';
-  }, 1000);
-});
-socket.on("disconnect", () => {});
+/*socket.on("disconnect", () => {
+    document.getElementById('restartPopup').style.display = 'block';
+    $("#area1").prop('disabled', false);
+    $("#area2").prop('disabled', false);
+    $("#area3").prop('disabled', false);
+    setTimeout(() => {
+        socket.connect();
+        document.getElementById('restartPopup').style.display = 'none';
+    }, 1000);
+});*/
+socket.on("connect_error", () => {disconnected();});
+socket.on("disconnect", () => {disconnected();});
+function disconnected()
+{
+    document.getElementById('restartPopup').style.display = 'block';
+    $("#area1").prop('disabled', true);
+    $("#area2").prop('disabled', true);
+    $("#area3").prop('disabled', true);
+}
