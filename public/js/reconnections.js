@@ -194,7 +194,7 @@ socket.on('userReconnected', (data) => {console.log(data);
                         document.getElementById('area2Info').innerHTML = '<br><br>' + data['actualUserName'] + ' ' + data['actualUserSurname'] + ' WILL CHOOSE THE ANSWER';
                     }
                 }
-                if (data['status'] == 'area3Ro')
+                if ((data['status'] == 'area3Ro') || (data['status'] == 'area3Card'))
                 {//Actualiza el score antes de que el usuario de la tarjeta la voltee.
                     document.getElementById('lblWheelInfo').innerHTML = '';
                     document.getElementById('spinner').style.display = 'none';
@@ -203,19 +203,26 @@ socket.on('userReconnected', (data) => {console.log(data);
                     document.getElementById('area1').style.display = 'none';
                     document.getElementById('area2').style.display = 'none';
                     document.getElementById('area3').style.display = 'block';
-                    text = data['ro']['text'];
+                    text = data['ro']['text'];//here
                     score = data['ro']['score'];
                     if ((data['userNameWithCard'] == userName) && (data['userSurnameWithCard'] == userSurname))
-                    {
+                    {//Pendiente ver si llega a este punto.
                         userPlay = true;
                         document.getElementById('front').innerHTML = '<br><br>NOW OPEN THE CARD<br>&<br>SEE THE RESULT';
                         flip('front');
                     }
                     else
                     {
-                        userPlay = true;
-                        flip('front');
-                        userPlay = false;
+                        if (data['status'] == 'area3Card')
+                        {
+                            userPlay = true;
+                            flip('back', false);
+                            userPlay = false;
+                        }
+                        else
+                        {
+                            flip('front');
+                        }
                         document.getElementById('front').innerHTML = '<br><br>' + data['userNameWithCard'] + ' ' + data['userSurnameWithCard'] + ' WILL OPEN THE<br>CARD<br>&<br>SEE THE RESULT';
                     }
                     showGameInfo();

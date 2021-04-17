@@ -45,6 +45,13 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('area2Question', data);
   });
   socket.on('area3Card', (data) => {
+    for (var i = 0; i < game.teams.length; i++)
+    {
+      if (game.teams[i]['teamName'] == data['teamName'])
+      {
+        game.teams[i]['status'] = 'area3Card';
+      }
+    }
     socket.broadcast.emit('area3Card', data);
   });
   socket.on('personalEvaluation', (data) => {

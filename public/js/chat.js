@@ -218,7 +218,7 @@ socket.on('question', (data) => {
     }
 });
 socket.on('area2Question', (data) => {
-    if ((data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
+    if ((data['teamName'] == teamName) && ((data['userName'] != userName) || (data['userSurname'] != userSurname)) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
         document.getElementById('area2Info').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' IS ANSWERING THE QUESTION :';
         document.getElementById('area2Table').style.display = 'flex';
@@ -233,7 +233,7 @@ socket.on('area2Question', (data) => {
     }
 });
 socket.on('area3Card', (data) => {console.log(data);//Ver por qué no voltea para los otros usuarios.
-    if ((data['teamName'] == teamName) && (data['userName'] != userName) && (data['userSurname'] != userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
+    if ((data['teamName'] == teamName) && ((data['userName'] != userName) || (data['userSurname'] != userSurname)) && (document.getElementById('divGameFinished').style.display == 'none'))
     {console.log(data['userName'] + ' ' + data['userSurname']);
         userPlay = true;
         flip('back', false);

@@ -1,5 +1,5 @@
 var cardStatus = 'front';
-var showBtn = false;
+//var showBtn = false;
 function flip(next = 'back', showBtn = true)
 {//Pendiente ver por qué no muetra el back para los otros usuarios.
   if (userPlay)
@@ -11,26 +11,28 @@ function flip(next = 'back', showBtn = true)
 
       if (showBtn)
       {
-        socket.emit('area3Card', JSON.stringify({
+        socket.emit('area3Card', {
           "userName" : userName, 
           "userSurname" : userSurname, 
           "teamName" : teamName, 
           "text" : text, 
           "score" : score
-        }));
+        });
         document.getElementById('nextBtnDivArea3').style.display = 'block';
-        document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
         nextStep = 'showSpinner';
         scoreArea3 += score;
-        showGameInfo();
       }
       else
       {
+        //scoreArea3 += score;
+        //document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
         document.getElementById('nextBtnDivArea3').style.display = 'none';
       }
+      document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
+      showGameInfo();
     }
     if ((cardStatus == 'back') && (next == 'front'))
-    {
+    {//Pendiente ver si será necesario usarlo.
       $('#card').toggleClass('flipped');
       cardStatus = 'front';
     }
