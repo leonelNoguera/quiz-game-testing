@@ -203,7 +203,7 @@ socket.on('userReconnected', (data) => {console.log(data);
                     document.getElementById('area1').style.display = 'none';
                     document.getElementById('area2').style.display = 'none';
                     document.getElementById('area3').style.display = 'block';
-                    text = data['ro']['text'];//here
+                    text = data['ro']['text'];
                     score = data['ro']['score'];
                     if ((data['userNameWithCard'] == userName) && (data['userSurnameWithCard'] == userSurname))
                     {//Pendiente ver si llega a este punto.
@@ -233,11 +233,11 @@ socket.on('userReconnected', (data) => {console.log(data);
                 vote = false;
                 if (data['status'] == 'starting')
                 {
-                    showTeamInfo(false, 'teamInfo');
+                    showTeamInfo(false, true);
                 }
                 else
                 {
-                    showTeamInfo(false, 'teamInfo2');
+                    showTeamInfo(false);
                 }
             }
         }
@@ -258,11 +258,11 @@ socket.on('userReconnected', (data) => {console.log(data);
                 {//Se reconectó cuando faltaba un líder.
                     if (data['status'] == 'starting')
                     {
-                        showTeamInfo(false, 'teamInfo');
+                        showTeamInfo(false, true);
                     }
                     else
                     {
-                        showTeamInfo(false, 'teamInfo2');
+                        showTeamInfo(false);
                     }
                 }
             }

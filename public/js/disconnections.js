@@ -17,7 +17,7 @@ socket.on('userDisconnected', (data) => {console.log(data);
             {
                 if (data['newLeader'])
                 {
-                    showTeamInfo(true, 'teamInfo');
+                    showTeamInfo(true, true);
                 }
                 else
                 {//Se desconectó uno que no es el líder y quedan 2 o más.
@@ -28,7 +28,7 @@ socket.on('userDisconnected', (data) => {console.log(data);
         }
         else
         {
-            showTeamInfo(false, 'teamInfo');
+            showTeamInfo(false, true);
         }
         /*if (status == 'oneUser')
         {

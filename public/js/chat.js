@@ -58,7 +58,7 @@ socket.on('userConnected', (data) => {console.log(data);
             }
             else
             {
-                showTeamInfo(data['newLeader'], 'teamInfo2');
+                showTeamInfo(data['newLeader'], true);
             }
         }
     }
@@ -79,6 +79,7 @@ var started = false;
 socket.on('showSpinner', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('teamInfo').style.display = 'none';
         showSpinner(data);
     }
 });
@@ -97,6 +98,7 @@ socket.on('showArea1PartialResult', (data) => {//console.log(data);
         area = data['area'];
         if ((data['teamName'] == teamName) && (data['area'] == 1))
         {
+            document.getElementById('teamInfo').style.display = 'none';
             document.getElementById('area3').style.display = 'none';
             document.getElementById('area2').style.display = 'none';
             document.getElementById('area1').style.display = 'block';
@@ -135,6 +137,7 @@ var beforeStep;
 socket.on('showResultArea2', (data) => {console.log('data == ' + JSON.stringify(data));
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('teamInfo').style.display = 'none';
         document.getElementById('area2Table').style.display = 'none';
         var r = 'INCORRECT';
         if (data['score']> 0)
@@ -161,6 +164,7 @@ var dataUserSurname;
 socket.on('question', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('teamInfo').style.display = 'none';
         document.getElementById('lblWheelInfo').innerHTML = '';
         document.getElementById('spinner').style.display = 'none';
         document.getElementById('area' + data['area']).style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';
@@ -220,6 +224,7 @@ socket.on('question', (data) => {
 socket.on('area2Question', (data) => {
     if ((data['teamName'] == teamName) && ((data['userName'] != userName) || (data['userSurname'] != userSurname)) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('teamInfo').style.display = 'none';
         document.getElementById('area2Info').innerHTML = data['userName'] + ' ' + data['userSurname'] + ' IS ANSWERING THE QUESTION :';
         document.getElementById('area2Table').style.display = 'flex';
         document.getElementById('area2QuestionsDiv').innerHTML = '<label id="question">' + data['question'] + '</label>';
@@ -235,6 +240,7 @@ socket.on('area2Question', (data) => {
 socket.on('area3Card', (data) => {console.log(data);//Ver por qué no voltea para los otros usuarios.
     if ((data['teamName'] == teamName) && ((data['userName'] != userName) || (data['userSurname'] != userSurname)) && (document.getElementById('divGameFinished').style.display == 'none'))
     {console.log(data['userName'] + ' ' + data['userSurname']);
+        document.getElementById('teamInfo').style.display = 'none';
         userPlay = true;
         flip('back', false);
         userPlay = false;
@@ -423,6 +429,7 @@ var bestAnswerScore;
 socket.on('detailedExplanationOfAnswers', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('teamInfo').style.display = 'none';
         document.getElementById('lblLightBoxArea1Header').innerHTML = 'DETAILED EXPLANATION OF ANSWERS';
         document.getElementById('area1Table').style.display = 'none';
         document.getElementById('area1LabelsTable').style.display = 'none';
@@ -466,6 +473,7 @@ socket.on('detailedExplanationOfAnswers', (data) => {
 socket.on('leaderVotation', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {console.log(data);
+        document.getElementById('teamInfo').style.display = 'none';
         document.getElementById('personalEvaluation').innerHTML = '';
         document.getElementById('area1Table').style.display = 'flex';
         document.getElementById('area1').style.display = 'block';
@@ -519,6 +527,7 @@ var userPlay = false;
 socket.on('area3Ro', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
+        document.getElementById('teamInfo').style.display = 'none';
         document.getElementById('lblWheelInfo').innerHTML = '';
         document.getElementById('spinner').style.display = 'none';
         document.getElementById('area3').style.top = (parseInt(document.getElementById('lblArea').offsetTop) + 35) + 'px';

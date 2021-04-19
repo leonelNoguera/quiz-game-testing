@@ -228,11 +228,7 @@ button {
 #teamInfo {
   font-family: "Quicksand", serif;
   display: none;
-}
-
-#teamInfo2 {
-  font-family: "Quicksand", serif;
-  display: none;
+  /**/
   color: black;
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;

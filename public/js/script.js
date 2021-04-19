@@ -1,13 +1,9 @@
 var newLeader;
 var element;
-function showTeamInfo(newLeader = false, element = 'teamInfo')
+function showTeamInfo(newLeader = false, init = false)
 {
-    if (element == 'teamInfo')
-    {
-        document.getElementById('lblArea').innerHTML = '';
-    }
-    document.getElementById(element).style.display = 'block';
-    document.getElementById(element).innerHTML = '';
+    document.getElementById('teamInfo').style.display = 'block';
+    document.getElementById('teamInfo').innerHTML = '';
     var html = '';
     var tmp = [];
     console.log(users);
@@ -20,8 +16,9 @@ function showTeamInfo(newLeader = false, element = 'teamInfo')
             indexLeaderElected = k;
         }
     }
-    if (element == 'teamInfo')
+    if (init)
     {
+        document.getElementById('lblArea').innerHTML = '';
         if (users.length == 1)
         {
             document.getElementById('lblPlease').innerHTML = '<br><br><br>';
@@ -55,7 +52,7 @@ function showTeamInfo(newLeader = false, element = 'teamInfo')
         }
     }
     html += '</div>';
-    document.getElementById(element).innerHTML = html;
+    document.getElementById('teamInfo').innerHTML = html;
     /*if (element == 'teamInfo2')
     {//Pendiente ver si es necesario usar esto.
         $("#area1").prop('disabled', true);
