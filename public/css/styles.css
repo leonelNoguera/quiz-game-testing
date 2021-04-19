@@ -57,8 +57,7 @@ button {
 }
 
 #restartPopup {
-
-  background-color: #555555;
+  background: #555555;
   border-radius: 15px;
   border: 2px solid #555555;
 }
