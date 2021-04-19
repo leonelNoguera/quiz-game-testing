@@ -104,15 +104,39 @@ function login()
     {
         auxUserName = document.getElementById('nameInput').value;
         auxUserSurname = document.getElementById('surnameInput').value;
-        if (auxUserName.length && auxUserSurname.length)
+        auxTeamName = document.getElementById('teamName').value;
+        if (auxUserName.length && auxUserSurname.length && auxTeamName.length)
         {
+            document.getElementById('loginErrorLbl').innerHTML = '';
             userName = $('#nameInput').val().replace(regex, ' ').trim();
             userSurname = $('#surnameInput').val().replace(regex, ' ').trim();
             socket.emit('userConnected', {
                 'userName' : userName, 
                 'userSurname' : userSurname, 
-                'teamName' : document.getElementById('teamName').value
+                'teamName' : auxTeamName
             });
+        }
+        else
+        {
+            if ((!auxUserName.length) && (!auxUserSurname.length))
+            {
+                document.getElementById('loginErrorLbl').innerHTML = 'Name and surname empty.';
+            }
+            else
+            {
+                if (!auxUserName.length)
+                {
+                    document.getElementById('loginErrorLbl').innerHTML = 'Name empty.';
+                }
+                if (!auxUserSurname.length)
+                {
+                    document.getElementById('loginErrorLbl').innerHTML = 'Surname empty.';
+                }
+            }
+            if (!auxTeamName.length)
+            {
+                document.getElementById('loginErrorLbl').innerHTML = 'Team name empty.';
+            }
         }
     }
 }
@@ -128,7 +152,7 @@ function showSpinner(data)
     }
     else
     {
-        if ((data['status'] == undefined) || (data['status'] != 'onlyWheel'))
+        if (data['status'] == undefined)
         {
             lockWheel = true;
         }

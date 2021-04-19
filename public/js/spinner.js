@@ -86,8 +86,8 @@ function sendArea()
             document.getElementById('lblArea').innerHTML = 'RISKS & OPPORTUNITIES';
         }
         document.getElementById('spinner').style.display = 'none';
-        pickedArea = undefined;
     }
+    pickedArea = undefined;
 }
 function spin(randomSpin = Math.random())
 {
@@ -105,9 +105,9 @@ function spin(randomSpin = Math.random())
         }
         container.on("click", null);
         //all slices have been seen, all done
-        console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+        //console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
         if(oldpick.length == data.length){
-            console.log("done");
+            //console.log("done");
             container.on("click", null);
             return;
         }

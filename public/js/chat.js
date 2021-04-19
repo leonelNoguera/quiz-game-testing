@@ -14,7 +14,9 @@ var options;
 var scoreArea1 = 0;
 var scoreArea2 = 0;
 var scoreArea3 = 0;
-socket.on('userConnected', (data) => {console.log(data);
+//socket.on('userConnected', (data) => {console.log(data);
+function newUserConnected(data)
+{console.log(data);    
     if ((data['userName'] != undefined) && (data['userSurname'] != undefined) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
         if ((data['userName'] == userName) && (data['userSurname'] == userSurname))
@@ -62,6 +64,15 @@ socket.on('userConnected', (data) => {console.log(data);
             }
         }
     }
+}
+socket.on('loginError', (data) => {console.log(data);
+    if ((data['teamName'] == teamName) && (data['userName'] == userName) && (data['userSurname'] == userSurname) && (document.getElementById('divGameFinished').style.display == 'none'))
+    {
+        document.getElementById('loginErrorLbl').innerHTML = data['msg'];
+        userName = '';
+        userSurname = '';
+        teamName = '';
+    }
 });
 socket.on('continueNewLeader', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
@@ -83,7 +94,7 @@ socket.on('showSpinner', (data) => {
         showSpinner(data);
     }
 });
-socket.on('startSpin', (data) => {
+socket.on('startSpin', (data) => {//console.log(data);
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
         if ((data['userName'] != userName) || (data['userSurname'] != userSurname))
