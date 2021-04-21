@@ -464,7 +464,6 @@ button.btnSend {
 
 #scores {
   z-index: 1;
-  display: block;
   width: 100%;
   padding-right: 5%;
   padding-left: 5%;
