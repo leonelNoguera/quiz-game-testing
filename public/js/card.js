@@ -19,6 +19,7 @@ function flip(next = 'back', showBtn = true)
           "score" : score
         });
         document.getElementById('nextBtnDivArea3').style.display = 'block';
+        document.getElementById('nextBtnDivArea3').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
         nextStep = 'showSpinner';
         scoreArea3 += score;
       }
@@ -26,7 +27,7 @@ function flip(next = 'back', showBtn = true)
       {
         //scoreArea3 += score;
         //document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
-        document.getElementById('nextBtnDivArea3').style.display = 'none';
+        document.getElementById('nextBtnDivArea3').innerHTML = '';
       }
       document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
       showGameInfo();

@@ -99,9 +99,8 @@ socket.on('userConnected', (data) => {console.log(data);//socket.on('userReconne
                             html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '" onclick="optionSelected(1, ' + j + ');">' + data['question']['options'][j]['option'] + '<br></div><br>';
                         }
                         document.getElementById('area1AnswersColumn').innerHTML = html;
-                        //document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
-                        document.getElementById('nextBtnDivArea1').style.display = 'none';
-                        document.getElementById('beforeBtnDivArea1').style.display = 'none';
+                        document.getElementById('nextBtnDivArea1').innerHTML = '';
+                        document.getElementById('beforeBtnDivArea1').innerHTML = '';
                         document.getElementById('lblArea').innerHTML = 'DILEMMAS';
                         document.getElementById('lblLightBoxArea1Header').innerHTML = 'READ THE DILEMMA & CHOOSE THE BEST ANSWER INDIVIDUALLY.';
                         nextStep = 'allUsersVotation';
@@ -131,10 +130,8 @@ socket.on('userConnected', (data) => {console.log(data);//socket.on('userReconne
                         if ((data['leader']['userName'] == userName) && (data['leader']['userSurname'] == userSurname))
                         {//Pendiente ver si funciona o si se puede optimizar optionSelected.
                             html += '<div class="optionNoSelected" id="lbl_question_option_' + j + '" onclick="optionSelected(1, ' + j + ');">no mutual agreement</div><br>';
-                            document.getElementById('nextBtnDivArea1').style.display = 'none';
-                            document.getElementById('nextBtnDivArea1').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
-                            document.getElementById('beforeBtnDivArea1').style.display = 'none';
-                            document.getElementById('beforeBtnDivArea1').innerHTML = '<i class="fas fa-angle-left fa-2x" onclick="showBeforeStep();"></i>';
+                            document.getElementById('nextBtnDivArea1').innerHTML = '';
+                            document.getElementById('beforeBtnDivArea1').innerHTML = '';
                         }
                         document.getElementById('area1AnswersColumn').innerHTML = html;
                         nextStep = 'leaderVotation';
@@ -147,7 +144,7 @@ socket.on('userConnected', (data) => {console.log(data);//socket.on('userReconne
                         document.getElementById('lblLightBoxArea1Header').innerHTML = 'DETAILED EXPLANATION OF ANSWERS';
                         document.getElementById('area1Table').style.display = 'none';
                         document.getElementById('area1LabelsTable').style.display = 'none';
-                        document.getElementById('beforeBtnDivArea1').style.display = 'none';
+                        document.getElementById('beforeBtnDivArea1').innerHTML = '';
                         
                         nextStep = 'showFinalAnswer';
                         finalAnswer = data['finalAnswer'];
@@ -200,12 +197,13 @@ socket.on('userConnected', (data) => {console.log(data);//socket.on('userReconne
                         if ((data['actualUserName'] == userName) && (data['actualUserSurname'] == userSurname))
                         {
                             document.getElementById('nextBtnDivArea2').style.display = 'block';
+                            document.getElementById('nextBtnDivArea2').innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
                             document.getElementById('area2Info').innerHTML = '<br><br>NOW PLEASE CHOOSE THE RIGHT ANSWER';
                             nextStep = 'area2Question';
                         }
                         else
                         {
-                            document.getElementById('nextBtnDivArea2').style.display = 'none';
+                            document.getElementById('nextBtnDivArea2').innerHTML = '';
                             document.getElementById('area2Info').innerHTML = '<br><br>' + data['actualUserName'] + ' ' + data['actualUserSurname'] + ' WILL CHOOSE THE ANSWER';
                         }
                     }

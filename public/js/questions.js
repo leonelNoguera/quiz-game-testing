@@ -20,11 +20,12 @@ function optionSelected(area, index)
     if (answer == aux)
     {
     	answer = '';
-    	document.getElementById('nextBtnDivArea' + area).style.display = 'none';
+    	document.getElementById('nextBtnDivArea' + area).innerHTML = '';
     }
     else
     {
-		document.getElementById('nextBtnDivArea' + area).style.display = 'block';
+        document.getElementById('nextBtnDivArea' + area).style.display = 'block';
+		document.getElementById('nextBtnDivArea' + area).innerHTML = '<i class="fas fa-angle-right fa-2x" onclick="showNextStep();"></i>';
     	//document.getElementById('lbl_question_option_' + index).style.backgroundColor = '#0000ff';
     	/*if (step == 'selectingFinalAnswer')
     	{
