@@ -61,6 +61,7 @@ socket.on('userConnected', (data) => {console.log(data);//socket.on('userReconne
                         }
                         document.getElementById('lblWheelInfo').innerHTML = '<br>' + userUsingWheel['userName'] + ' ' + userUsingWheel['userSurname'] + ' spins the wheel';
                         pickedArea = undefined;
+                        spinStarted = false;
                         lockWheel = true;
                         document.getElementById('divLogin').style.display = 'none';
                         document.getElementById('lblArea').innerHTML = '';

@@ -142,6 +142,8 @@ function login()
 }
 function showSpinner(data)
 {
+    pickedArea = undefined;
+    spinStarted = false;
     step = 'wheel';
     document.getElementById('lblWheelInfo').innerHTML = '<br>' + data['userName'] + ' ' + data['userSurname'] + ' spins the wheel';
     pickedArea = undefined;

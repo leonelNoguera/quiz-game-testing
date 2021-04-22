@@ -66,6 +66,7 @@ function sendArea()
 {
     if ((!lockWheel) && (pickedArea != undefined))
     {
+        spinStarted = false;
         lockWheel = true;
         socket.emit('selectedArea', {
             userName: userName, 
@@ -89,11 +90,12 @@ function sendArea()
     }
     pickedArea = undefined;
 }
+var spinStarted = false;
 function spin(randomSpin = Math.random())
-{
-    if (pickedArea == undefined)
+{console.log();
+    if ((pickedArea == undefined) && !spinStarted)
     {
-        //var randomSpin = Math.random();
+        spinStarted = true;
         if (!lockWheel)
         {
             socket.emit('startSpin', {
