@@ -332,7 +332,7 @@ button {
   display: none;
   position: absolute;
   z-index: 1;
-  left: 88%;
+  width: 300px;
   text-align: right;
   opacity: 0.5;
 }
