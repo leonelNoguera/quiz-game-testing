@@ -9,6 +9,13 @@ body {
   background: #eee;
 }
 
+.hr{
+  height:2px;
+  border-width:0;
+  color:white;
+  background-color:white
+}
+
 input,
 button {
   font-family: "Quicksand", serif;
