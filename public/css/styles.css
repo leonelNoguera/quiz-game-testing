@@ -327,7 +327,7 @@ button {
 }
 
 #gameInfo {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
   font-family: "Quicksand", serif;
   display: none;
   position: absolute;
@@ -336,6 +336,7 @@ button {
   z-index: 1;
   width: 300px;
   text-align: right;
+  border-radius: 0px 0px 0px 20px;
   
 }
 #area1 {
@@ -471,7 +472,7 @@ button.btnSend {
   padding-left: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-radius: 0px 0px 0px 20px;
+  
  
 }
 
