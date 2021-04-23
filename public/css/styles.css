@@ -547,6 +547,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
+  max-width: 780px;
 }
 
 #lbl_question_option_1 {
@@ -555,6 +556,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
+  max-width: 780px;
 }
 
 #lbl_question_option_2 {
@@ -563,6 +565,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
+  max-width: 780px;
 }
 
 #lbl_question_option_3 {
@@ -571,6 +574,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
+  max-width: 780px;
 }
 
 #lbl_question_option_4 {
@@ -579,6 +583,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
+  max-width: 780px;
 }
 
 #lbl_question_option_5 {
@@ -587,6 +592,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
+  max-width: 780px;
 }
 
 #lbl_question_option_0:hover {
@@ -595,6 +601,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 
 #lbl_question_option_1:hover {
@@ -603,6 +610,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 
 #lbl_question_option_2:hover {
@@ -611,6 +619,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 
 #lbl_question_option_3:hover {
@@ -619,6 +628,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 
 #lbl_question_option_4:hover {
@@ -627,6 +637,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 
 #lbl_question_option_5:hover {
@@ -635,6 +646,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 
 #lbl_question_option_6 {
@@ -645,11 +657,11 @@ button.btnSend {
   transition: 0.4s;
   color: green;
   background-color: black;
-  
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 .optionSelected:hover {
   transition: 0.4s;
@@ -659,6 +671,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 .optionNoSelected:hover {
   transition: 0.4s;
@@ -669,6 +682,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  max-width: 780px;
 }
 
 #lblArea {
