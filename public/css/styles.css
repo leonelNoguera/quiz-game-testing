@@ -642,29 +642,32 @@ button.btnSend {
 
 .optionSelected {
   transition: 0.4s;
-  color: white;
+  color: black;
   background-color: black;
-  border: 2px solid black;
+  
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 .optionSelected:hover {
   transition: 0.4s;
-  color: white;
-  border: 2px solid black;
+  color: black;
+ 
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 .optionNoSelected:hover {
   transition: 0.4s;
   color: black;
   cursor: pointer;
-  border: 2px solid black;
+  
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #lblArea {
