@@ -495,13 +495,7 @@ button.btnSend {
  
 }
 
-.lblOption {
-  
-}
-.lblOptionFinal {
-  color: white;
-  background-color: black;
-}
+
 
 .topic {
   text-align: right;
@@ -991,9 +985,7 @@ input:focus {
 
 .personalEvaluation .lblOption,
 .personalEvaluation .lblOptionFinal {
-  text-align: left;
-  padding: 15px !important;
-  margin: 10px 0;
+  
   background: white;
   padding: 4px;
   border-radius: 10px;
