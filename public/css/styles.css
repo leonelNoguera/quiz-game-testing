@@ -446,6 +446,13 @@ button.btnSend {
   font-family: "Quicksand", serif;
   color: #a48f8c;
   text-decoration: none;
+  transition: 0.2s;
+}
+#rulesLink:hover{
+  position: right;
+  font-family: "Quicksand", serif;
+  color: black;
+  text-decoration: none;
 }
 
 .voteLeaderBtn {
