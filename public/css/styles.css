@@ -317,18 +317,19 @@ button {
   color: #000;
   border-width: 3px;
   border-color: #771929;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
   width: 194px;
   padding: 0 15px 15px;
   display: inline-block;
   margin-top: 15px;
+  margin-right: 55%;
   line-height: 20px;
   padding-bottom: 25px;
   border-radius: 20px;
 }
 
 #gameInfo {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
   font-family: "Quicksand", serif;
   display: none;
   position: absolute;
