@@ -642,7 +642,7 @@ button.btnSend {
 
 .optionSelected {
   transition: 0.4s;
-  color: black;
+  color: green;
   background-color: black;
   
   padding: 4px;
@@ -652,7 +652,7 @@ button.btnSend {
 }
 .optionSelected:hover {
   transition: 0.4s;
-  color: black;
+  color: green;
  
   padding: 4px;
   border-radius: 10px;
@@ -661,7 +661,7 @@ button.btnSend {
 }
 .optionNoSelected:hover {
   transition: 0.4s;
-  color: black;
+  color: green;
   cursor: pointer;
   
   padding: 4px;
