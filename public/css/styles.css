@@ -315,9 +315,8 @@ button {
 #lblWheelInfo {
   text-transform: uppercase;
   color: #000;
-  border-width: 3px;
-  border-color: #771929;
-  background-color: rgba(255, 255, 255, 0.5);
+  
+  background-color: white;
   width: 194px;
   padding: 0 15px 15px;
   display: inline-block;
