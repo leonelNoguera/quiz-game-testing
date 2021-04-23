@@ -385,6 +385,7 @@ button {
 #area2 {
   display: none;
   font-family: "Quicksand", serif;
+  top: 0px;
   color: black;
 
   text-align: center;
