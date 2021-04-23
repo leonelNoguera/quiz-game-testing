@@ -557,7 +557,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_1 {
@@ -566,7 +566,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_2 {
@@ -575,7 +575,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_3 {
@@ -584,7 +584,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_4 {
@@ -593,7 +593,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_5 {
@@ -602,7 +602,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_0:hover {
@@ -611,7 +611,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_1:hover {
@@ -620,7 +620,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_2:hover {
@@ -629,7 +629,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_3:hover {
@@ -638,7 +638,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_4:hover {
@@ -647,7 +647,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_5:hover {
@@ -656,7 +656,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lbl_question_option_6 {
@@ -671,7 +671,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 .optionSelected:hover {
   transition: 0.4s;
@@ -681,7 +681,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 .optionNoSelected:hover {
   transition: 0.4s;
@@ -692,7 +692,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 780px;
+  max-width: 770px;
 }
 
 #lblArea {
@@ -766,10 +766,10 @@ button.btnSend {
   right: 105%;
 }
 #circle{
-  animation: circle 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
-@-webkit-keyframes circle {
+@-webkit-keyframes glow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
   }
