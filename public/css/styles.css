@@ -116,10 +116,14 @@ button {
 #card #front {
   display: block;
   cursor: pointer;
-  transition: o.2s;
+  transition: 0.2s;
   padding: 35px 15px 50px;
   border-radius: 20px;
   font-size: 22px;
+}
+#front #back {
+width: 100%;
+  heigh: 100%;
 }
 /*
 #card #front: hover {
@@ -139,8 +143,7 @@ button {
 }
 
 .container:first-child #card #back {
-  width: 100%;
-  heigh: 100%;
+  
   background-image: url("./../img/card back.jpg");
 }
 
