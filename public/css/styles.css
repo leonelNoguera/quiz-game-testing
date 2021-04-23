@@ -369,10 +369,10 @@ width: 100%;
 }
 
 #area1LblQuestion {
-  width: 100%;
+  display: none;
 }
 #area1LblAnswers {
-  width: 100%;
+  display: none;
 }
 
 #area1BtnsTable {
