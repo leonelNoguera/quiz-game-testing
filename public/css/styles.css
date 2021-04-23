@@ -540,7 +540,7 @@ button.btnSend {
 }
 
 #lbl_question_option_0 {
-  border: 2px solid #fff;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
@@ -548,7 +548,7 @@ button.btnSend {
 }
 
 #lbl_question_option_1 {
-  border: 2px solid #fff;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
@@ -556,7 +556,7 @@ button.btnSend {
 }
 
 #lbl_question_option_2 {
-  border: 2px solid #fff;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
@@ -564,7 +564,7 @@ button.btnSend {
 }
 
 #lbl_question_option_3 {
-  border: 2px solid #fff;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
@@ -572,7 +572,7 @@ button.btnSend {
 }
 
 #lbl_question_option_4 {
-  border: 2px solid #fff;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
@@ -580,7 +580,7 @@ button.btnSend {
 }
 
 #lbl_question_option_5 {
-  border: 2px solid #fff;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
@@ -588,45 +588,51 @@ button.btnSend {
 }
 
 #lbl_question_option_0:hover {
-  border: 2px solid black;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #lbl_question_option_1:hover {
-  border: 2px solid black;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #lbl_question_option_2:hover {
-  border: 2px solid black;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #lbl_question_option_3:hover {
-  border: 2px solid black;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #lbl_question_option_4:hover {
-  border: 2px solid black;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #lbl_question_option_5:hover {
-  border: 2px solid black;
+  background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 #lbl_question_option_6 {
@@ -863,7 +869,7 @@ input:focus {
   text-align: left;
   background: #ccc;
   padding: 15px;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 #area1LblAnswers,
