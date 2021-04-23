@@ -843,12 +843,12 @@ element.style {
 
 label.lblScore {
   display: block;
-  width: 100%;
+  
 }
 
 #score-wrapper {
   display: block;
-  width: 100%;
+  
   margin: 25px 0;
 }
 
