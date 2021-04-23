@@ -135,11 +135,11 @@ button {
 }
 .container:first-child #card #front {
   transition: 0.2s;
-  /* background: #eee; */
+  background: #eee;
 }
 
 .container:first-child #card #back {
-  /* background-image: url("./../img/card back.jpg"); */
+  background-image: url("./../img/card back.jpg");
 }
 
 .content {
@@ -149,11 +149,9 @@ button {
 }
 
 #logo {
-  /* position: absolute;
+  position: absolute;
   bottom: 8px;
-  right: 16px; */
-  margin-top: 60px;
-  text-align: right;
+  right: 16px;
 }
 
 #area1QuestionsDiv {
