@@ -803,9 +803,7 @@ div#right-sidebar {
 element.style {
   display: block;
 }
-#gameInfo {
-  position: static;
-}
+
 
 #beforeBtnDivArea1,
 #beforeBtnDivArea2,
