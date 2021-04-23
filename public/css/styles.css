@@ -449,7 +449,7 @@ button.btnSend {
   text-decoration: none;
   transition: 0.2s;
 }
-#rulesLink:hover{
+#rulesLink:hover {
   position: right;
   font-family: "Quicksand", serif;
   color: black;
