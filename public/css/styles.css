@@ -561,112 +561,32 @@ button.btnSend {
   color: red;
 }
 
-#lbl_question_option_0 {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.4s;
-  max-width: 770px;
-}
-
-#lbl_question_option_1 {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.4s;
-  max-width: 770px;
-}
-
-#lbl_question_option_2 {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.4s;
-  max-width: 770px;
-}
-
-#lbl_question_option_3 {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.4s;
-  max-width: 770px;
-}
-
-#lbl_question_option_4 {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.4s;
-  max-width: 770px;
-}
-
+#lbl_question_option_0,
+#lbl_question_option_1,
+#lbl_question_option_2,
+#lbl_question_option_3,
+#lbl_question_option_4,
 #lbl_question_option_5 {
   background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  max-width: 770px;
+  width: 70 %;
 }
 
-#lbl_question_option_0:hover {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 770px;
-}
-
-#lbl_question_option_1:hover {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 770px;
-}
-
-#lbl_question_option_2:hover {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 770px;
-}
-
-#lbl_question_option_3:hover {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 770px;
-}
-
-#lbl_question_option_4:hover {
-  background: white;
-  padding: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 770px;
-}
-
+#lbl_question_option_0:hover,
+#lbl_question_option_1:hover,
+#lbl_question_option_2:hover,
+#lbl_question_option_3:hover,
+#lbl_question_option_4:hover,
 #lbl_question_option_5:hover {
   background: white;
   padding: 4px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  max-width: 770px;
+  width: 70 %;
 }
 
 #lbl_question_option_6 {
