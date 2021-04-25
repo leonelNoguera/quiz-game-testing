@@ -504,7 +504,7 @@ button.btnSend {
   color: black;
 }
 
-.inputRadioOption {
+.inputRadio{
   cursor: pointer;
   transition: 0.2s;
 }
@@ -965,7 +965,7 @@ input:focus {
 #area1,
 #area2,
 #area3 {
-  max-width: 800px;
+  max-width: 1000px;
   
 }
 
