@@ -146,7 +146,6 @@ function showSpinner(data)
     spinStarted = false;
     step = 'wheel';
     document.getElementById('lblWheelInfo').innerHTML = '<br>' + data['userName'] + ' ' + data['userSurname'] + ' spins the wheel';
-    pickedArea = undefined;
     if ((data['userName'] == userName) && 
         (data['userSurname'] == userSurname))
     {
@@ -171,5 +170,20 @@ function showSpinner(data)
     document.getElementById('spinner').style.display = 'block';
 
     document.getElementById('teamInfo').style.display = 'none';
+    showGameInfo();
+}
+function finishGame()
+{
+    document.getElementById('body').style.backgroundColor = "white";
+    document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
+    document.getElementById('teamInfo').style.display = 'none';
+    document.getElementById('divLogin').style.display = 'none';
+    document.getElementById('gameInfo').style.display = 'none';
+    document.getElementById('lblWheelInfo').innerHTML = '';
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('area1').style.display = 'none';
+    document.getElementById('area2').style.display = 'none';
+    document.getElementById('area3').style.display = 'none';
+    document.getElementById('divGameFinished').style.display = 'block';
     showGameInfo();
 }

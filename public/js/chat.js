@@ -562,18 +562,7 @@ socket.on('area3Ro', (data) => {
 socket.on('finishGame', (data) => {
     if ((data['teamName'] == teamName) && (document.getElementById('divGameFinished').style.display == 'none'))
     {
-        document.getElementById('body').style.backgroundColor = "white";
-        document.getElementById('body').style.backgroundImage = "url('./img/2.png')";
-        teams = getTeams(data['rooms']);
-        document.getElementById('teamInfo').style.display = 'none';
-        document.getElementById('gameInfo').style.display = 'none';
-        document.getElementById('lblWheelInfo').innerHTML = '';
-        document.getElementById('spinner').style.display = 'none';
-        document.getElementById('area1').style.display = 'none';
-        document.getElementById('area2').style.display = 'none';
-        document.getElementById('area3').style.display = 'none';
-        document.getElementById('divGameFinished').style.display = 'block';
-        showGameInfo();
+        finishGame();
     }
 });
 socket.on('showTeamInfo', (data) => {
