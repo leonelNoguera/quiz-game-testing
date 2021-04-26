@@ -171,6 +171,7 @@ width: 100%;
   position: fixed;
   bottom: 8px;
   right: 16px;
+  width: 10%;
 }
 
 #area1QuestionsDiv {
@@ -579,7 +580,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  width: 90%;
+  width: 100%;
   
 }
 
@@ -594,7 +595,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 90%;
+  width: 100%;
   
 }
 
@@ -610,7 +611,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.5);
-  width: 90%;
+  width: 100%;
   
 }
 .optionSelected:hover {
@@ -620,7 +621,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.7);
-  width: 90%;
+  width: 100%;
   
 }
 .optionNoSelected:hover {
@@ -631,7 +632,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 90%;
+  width: 100%;
   
 }
 
