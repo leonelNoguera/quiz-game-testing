@@ -290,11 +290,11 @@ function showBeforeStep()
             }
             if ('no mutual agreement' == finalAnswer)
             {
-                html += '<div class="lblOptionFinal" id="lbl_question_option_' + (options.length) + '">no mutual agreement<br>' + '<label class="lblScore">-600</label><br>(final answer)<br></div>';
+                html += '<div class="lblOptionFinal" id="lbl_question_option_' + (options.length) + '">' + '<label class="lblScore">-600</label><br>(final answer)<br></div>';
             }
             else
             {
-                html += '<div class="lblOption" id="lbl_question_option_' + (options.length) + '">no mutual agreement<br>' + '<label class="lblScore">-600</label><br></div>';
+                html += '<div class="lblOption" id="lbl_question_option_' + (options.length) + '">' + '<label class="lblScore">-600</label><br></div>';
             }
             html += '<label class="topic">' + topic + '<br><br></label>';
             document.getElementById('personalEvaluation').innerHTML = html;
