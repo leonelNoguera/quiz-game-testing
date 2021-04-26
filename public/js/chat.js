@@ -482,7 +482,7 @@ socket.on('leaderVotation', (data) => {
         document.getElementById('area1Table').style.display = 'flex';
         document.getElementById('area1').style.display = 'block';
         document.getElementById('area1').style.backgroundColor = "#fff";
-        document.getElementById('lblLightBoxArea1Header').innerHTML = '<label class="reddot">•</label>' + 'NOW DISCUSS THE BEST MOST APPROPIATE ANSWER WITH THE TEAM & LEADER WILL SUBMIT THE FINAL DECISSION.';
+        document.getElementById('lblLightBoxArea1Header').innerHTML = '<div class="reddot"> • </div>' + 'NOW DISCUSS THE BEST MOST APPROPIATE ANSWER WITH THE TEAM & LEADER WILL SUBMIT THE FINAL DECISSION.';
         step = 'selectingFinalAnswer';
         document.getElementById('area1QuestionColumn').innerHTML = '<label id="question">' + data['question']['question'] + '</label>';
         question = data['question']['question'];
