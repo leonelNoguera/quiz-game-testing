@@ -7,6 +7,9 @@ body {
 
   color: #333;
   background: #eee;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .hr{
@@ -572,7 +575,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  width: 60%;
+  width: 70%;
 }
 
 #lbl_question_option_0:hover,
@@ -586,7 +589,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 60%;
+  width: 70%;
 }
 
 #lbl_question_option_6 {
@@ -601,7 +604,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 60%;
+  width: 70%;
 }
 .optionSelected:hover {
   transition: 0.4s;
@@ -611,7 +614,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 60%;
+  width: 70%;
 }
 .optionNoSelected:hover {
   transition: 0.4s;
@@ -622,7 +625,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 60%;
+  width: 70%;
 }
 
 #lblArea {
@@ -918,7 +921,7 @@ input:focus {
 #area2AnswersColumn > div,
 #area3AnswersColumn > div {
   display: flex;
-  width: 100%;
+  width: 95%;
 }
 
 #area3 .cards #card #back {
