@@ -29,7 +29,7 @@ function flip(next = 'back', showBtn = true)
         //document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
         document.getElementById('nextBtnDivArea3').innerHTML = '';
       }
-      document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
+      document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: <br>' + '<label class="lblScore">' + score + '</label>';
       showGameInfo();
     }
     if ((cardStatus == 'back') && (next == 'front'))
