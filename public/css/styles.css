@@ -603,7 +603,7 @@ button.btnSend {
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.5);
   width: 80%;
 }
 .optionSelected:hover {
@@ -612,7 +612,7 @@ button.btnSend {
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.7);
   width: 80%;
 }
 .optionNoSelected:hover {
