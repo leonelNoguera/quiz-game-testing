@@ -576,6 +576,8 @@ button.btnSend {
   cursor: pointer;
   transition: 0.4s;
   width: 90%;
+  margin: auto;
+  text-align: center;
 }
 
 #lbl_question_option_0:hover,
@@ -590,6 +592,8 @@ button.btnSend {
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
   width: 90%;
+  margin: auto;
+  text-align: center;
 }
 
 #lbl_question_option_6 {
@@ -605,6 +609,8 @@ button.btnSend {
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.5);
   width: 90%;
+  margin: auto;
+  text-align: center;
 }
 .optionSelected:hover {
   transition: 0.4s;
@@ -614,6 +620,8 @@ button.btnSend {
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.7);
   width: 90%;
+  margin: auto;
+  text-align: center;
 }
 .optionNoSelected:hover {
   transition: 0.4s;
@@ -624,6 +632,8 @@ button.btnSend {
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
   width: 90%;
+  margin: auto;
+  text-align: center;
 }
 
 #lblArea {
