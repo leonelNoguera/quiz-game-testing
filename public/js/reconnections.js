@@ -1,6 +1,7 @@
 socket.on('userConnected', (data) => {console.log(data);//socket.on('userReconnected', (data) => {console.log(data);
     if (document.getElementById('divGameFinished').style.display == 'none')
     {
+        lastArea = data['lastArea'];
         if (data['status'] == 'starting')
         {
             newUserConnected(data);

@@ -142,6 +142,7 @@ function login()
 }
 function showSpinner(data)
 {
+    lastArea = data['lastArea'];
     pickedArea = undefined;
     spinStarted = false;
     step = 'wheel';

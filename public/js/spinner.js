@@ -66,35 +66,62 @@ function sendArea()
 {
     if ((!lockWheel) && (pickedArea != undefined))
     {
-        spinStarted = false;
-        lockWheel = true;
-        socket.emit('selectedArea', {
-            userName: userName, 
-            userSurname: userSurname, 
-            teamName: teamName, 
-            area: pickedArea
-        });
-        if (pickedArea == 1)
+        //if (pickedArea != lastArea)
         {
-            document.getElementById('lblArea').innerHTML = 'DILEMMAS';
+            spinStarted = false;
+            lockWheel = true;
+            socket.emit('selectedArea', {
+                userName: userName, 
+                userSurname: userSurname, 
+                teamName: teamName, 
+                area: pickedArea
+            });
+            if (pickedArea == 1)
+            {
+                document.getElementById('lblArea').innerHTML = 'DILEMMAS';
+            }
+            if (pickedArea == 2)
+            {
+                document.getElementById('lblArea').innerHTML = 'KNOWLEDGE ABOUT US';
+            }
+            if (pickedArea == 3)
+            {
+                document.getElementById('lblArea').innerHTML = 'RISKS & OPPORTUNITIES';
+            }
+            document.getElementById('spinner').style.display = 'none';
         }
-        if (pickedArea == 2)
-        {
-            document.getElementById('lblArea').innerHTML = 'KNOWLEDGE ABOUT US';
-        }
-        if (pickedArea == 3)
-        {
-            document.getElementById('lblArea').innerHTML = 'RISKS & OPPORTUNITIES';
-        }
-        document.getElementById('spinner').style.display = 'none';
+        /*else
+        {console.log('...');
+            pickedArea = undefined;
+            spinStarted = false;
+            spin();
+        }*/
     }
     pickedArea = undefined;
 }
 var spinStarted = false;
 function spin(randomSpin = Math.random())
-{console.log();
+{
     if ((pickedArea == undefined) && !spinStarted)
     {
+        var  ps       = 360/data.length,
+             pieslice = Math.round(1440/data.length),
+             rng      = Math.floor((randomSpin * 1440) + 360);
+        rotation = (Math.round(rng / ps) * ps);
+        picked = Math.round(data.length - (rotation % 360)/ps);
+        picked = picked >= data.length ? (picked % data.length) : picked;
+        rotation += 90 - Math.round(ps/2);
+
+        while (data[picked].value == lastArea)
+        {
+            randomSpin = Math.random();
+            rng = Math.floor((randomSpin * 1440) + 360);
+            rotation = (Math.round(rng / ps) * ps);
+            picked = Math.round(data.length - (rotation % 360)/ps);
+            picked = picked >= data.length ? (picked % data.length) : picked;
+            rotation += 90 - Math.round(ps/2);console.log(data[picked].value);
+        }
+        
         spinStarted = true;
         if (!lockWheel)
         {
@@ -105,21 +132,6 @@ function spin(randomSpin = Math.random())
                 randomSpin: randomSpin
             });
         }
-        container.on("click", null);
-        //all slices have been seen, all done
-        //console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
-        if(oldpick.length == data.length){
-            //console.log("done");
-            container.on("click", null);
-            return;
-        }
-        var  ps       = 360/data.length,
-             pieslice = Math.round(1440/data.length),
-             rng      = Math.floor((randomSpin * 1440) + 360);
-        rotation = (Math.round(rng / ps) * ps);
-        picked = Math.round(data.length - (rotation % 360)/ps);
-        picked = picked >= data.length ? (picked % data.length) : picked;
-        rotation += 90 - Math.round(ps/2);
         vis.transition()
             .duration(3000)
             .attrTween("transform", rotTween)
@@ -130,6 +142,10 @@ function spin(randomSpin = Math.random())
                 oldrotation = rotation;
                 /* Get the result value from object "data" */
                 pickedArea = data[picked].value;
+                if (lockWheel)
+                {
+                    pickedArea = undefined;
+                }
                 try{document.getElementById('circleInfo').innerHTML = 'CLICK TO OPEN "' + ['DILEMMAS', 'KNOWLEDGE ABOUT US', 'RISKS & OPPORTUNITIES'][pickedArea - 1] + '"'}catch{}
                 /* Comment the below line for restrict spin to sngle time */
                 //container.on("click", spin);
