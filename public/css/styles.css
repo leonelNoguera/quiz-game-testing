@@ -12,6 +12,10 @@ body {
   background-attachment: fixed;
 }
 
+.reddot{
+color: red;
+}
+
 .hr{
   height:2px;
   border-width:0;
