@@ -919,7 +919,7 @@ input:focus {
 #area2AnswersColumn > div,
 #area3AnswersColumn > div {
   display: flex;
-  width: 98%;
+  width: 96.5%;
 }
 
 #area3 .cards #card #back {
