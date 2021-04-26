@@ -571,11 +571,11 @@ button.btnSend {
 #lbl_question_option_4,
 #lbl_question_option_5 {
   background: white;
-  padding: 4px;
+  padding: 5px;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  width: 70%;
+  width: 80%;
 }
 
 #lbl_question_option_0:hover,
@@ -585,11 +585,11 @@ button.btnSend {
 #lbl_question_option_4:hover,
 #lbl_question_option_5:hover {
   background: white;
-  padding: 4px;
+  padding: 5px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 70%;
+  width: 80%;
 }
 
 #lbl_question_option_6 {
@@ -600,32 +600,30 @@ button.btnSend {
   transition: 0.4s;
   color: green;
   background-color: black;
-  padding: 4px;
+  padding: 5px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 70%;
+  width: 80%;
 }
 .optionSelected:hover {
   transition: 0.4s;
   color: green;
- 
-  padding: 4px;
+  padding: 5px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 70%;
+  width: 80%;
 }
 .optionNoSelected:hover {
   transition: 0.4s;
   color: green;
   cursor: pointer;
-  
-  padding: 4px;
+  padding: 5px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 70%;
+  width: 80%;
 }
 
 #lblArea {
@@ -921,7 +919,7 @@ input:focus {
 #area2AnswersColumn > div,
 #area3AnswersColumn > div {
   display: flex;
-  width: 95%;
+  width: 98%;
 }
 
 #area3 .cards #card #back {
