@@ -75,6 +75,7 @@ function showInfo(elementId, eventName)
 				mouseOverSpinner = true;
 			}
 		}
+		/*---
 		if ((elementId == 'area1AnswersColumn') && (!mouseOverArea1AnswersColumn))
 		{
 			var top = document.getElementById('area1AnswersColumn').offsetTop + (document.getElementById('area1AnswersColumn').offsetWidth / 2);
@@ -82,7 +83,7 @@ function showInfo(elementId, eventName)
 			var text = '<h1>•</h1>';
 			$("#body").append('<div class="overInfo" id="area1AnswersColumnInfo" style="position: absolute; top: 20%;' + top + 'px; z-index: 5; color: red;' + left + 'px;">' + text + '</div>');
 		    mouseOverArea1AnswersColumn = true;
-		}
+		}*/
 	}
 
 	
