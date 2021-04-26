@@ -79,8 +79,8 @@ function showInfo(elementId, eventName)
 		{
 			var top = document.getElementById('area1AnswersColumn').offsetTop + (document.getElementById('area1AnswersColumn').offsetWidth / 2);
 			var left = document.getElementById('area1AnswersColumn').offsetLeft + document.getElementById('area1AnswersColumn').offsetHeight;
-			var text = 'CLICK TO VOTE ON THE ANSWER AND CLICK THE ARROW FOR THE NEXT STEP';
-			$("#body").append('<div class="overInfo" id="area1AnswersColumnInfo" style="position: absolute; top: 20%;' + top + 'px; z-index: 5;' + left + 'px;">' + text + '</div>');
+			var text = '<h1>•</h1>';
+			$("#body").append('<div class="overInfo" id="area1AnswersColumnInfo" style="position: absolute; top: 20%;' + top + 'px; z-index: 5; color: red;' + left + 'px;">' + text + '</div>');
 		    mouseOverArea1AnswersColumn = true;
 		}
 	}
