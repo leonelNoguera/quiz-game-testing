@@ -575,7 +575,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.4s;
-  width: 80%;
+  width: 90%;
 }
 
 #lbl_question_option_0:hover,
@@ -589,7 +589,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 80%;
+  width: 90%;
 }
 
 #lbl_question_option_6 {
@@ -604,7 +604,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.5);
-  width: 80%;
+  width: 90%;
 }
 .optionSelected:hover {
   transition: 0.4s;
@@ -613,7 +613,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.7);
-  width: 80%;
+  width: 90%;
 }
 .optionNoSelected:hover {
   transition: 0.4s;
@@ -623,7 +623,7 @@ button.btnSend {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.3);
-  width: 80%;
+  width: 90%;
 }
 
 #lblArea {
