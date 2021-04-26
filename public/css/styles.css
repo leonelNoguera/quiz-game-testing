@@ -915,11 +915,14 @@ input:focus {
   max-width: 770px;
 }
 
-#area1AnswersColumn > div,
+#area1AnswersColumn > div {
+  display: flex;
+  width: 97%;
+}
 #area2AnswersColumn > div,
 #area3AnswersColumn > div {
   display: flex;
-  width: 96.5%;
+  width: 100%;
 }
 
 #area3 .cards #card #back {
