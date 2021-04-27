@@ -157,8 +157,7 @@ width: 100%;
 }
 
 .container:first-child #card #back {
-  
-  background-image: url("./../img/card back.jpg");
+  /*background-image: url("./../img/card back.jpg");*/
 }
 
 .content {

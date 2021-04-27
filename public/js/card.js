@@ -9,6 +9,8 @@ function flip(next = 'back', showBtn = true)
       $('#card').toggleClass('flipped');
       cardStatus = 'back';
 
+      document.getElementById('card').style.backgroundImage = 'url("./../img/card back.jpg")';
+
       if (showBtn)
       {
         socket.emit('area3Card', {
@@ -29,11 +31,12 @@ function flip(next = 'back', showBtn = true)
         //document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
         document.getElementById('nextBtnDivArea3').innerHTML = '';
       }
-      document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: <br>' + '<label class="lblScore">' + score + '</label>';
+      document.getElementById('backContent').innerHTML = '<br><br>' + text + '<br>' + 'SCORE: ' + '<label class="lblScore">' + score + '</label>';
       showGameInfo();
     }
     if ((cardStatus == 'back') && (next == 'front'))
     {//Pendiente ver si será necesario usarlo.
+      document.getElementById('card').style.backgroundImage = '';
       $('#card').toggleClass('flipped');
       cardStatus = 'front';
     }
